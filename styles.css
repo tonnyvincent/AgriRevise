@@ -153,7 +153,7 @@ nav {
   text-shadow: 0 2px 16px rgba(0,0,0,0.25);
   margin-bottom: 10px;
 }
-.t-agri   { color: var(--white); }
+.t-agri   { color: var(--text-dark); }
 .t-revise { color: #ffdd57; }
 
 .hero-subtitle {
