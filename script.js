@@ -29,3 +29,19 @@ heroEls.forEach((el, i) => {
     });
   });
 });
+
+// Nav toggle
+const navToggle = document.getElementById('nav-toggle');
+const navDropdown = document.getElementById('nav-dropdown');
+
+navToggle.addEventListener('click', () => {
+  const isVisible = navDropdown.style.display === 'block';
+  navDropdown.style.display = isVisible ? 'none' : 'block';
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!navToggle.contains(e.target) && !navDropdown.contains(e.target)) {
+    navDropdown.style.display = 'none';
+  }
+});
