@@ -231,36 +231,6 @@ nav {
 }
 .hero-btn:hover { background: #1b5e2f; transform: translateY(-2px); }
 
-/* ── Character images (absolute, right side) ── */
-.hero-characters {
-  position: absolute;
-  right: 52px;
-  bottom: 0;
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
-  z-index: 6;
-  /* height will be controlled so chars don't overflow into cards */
-  height: calc(100% - 10px);
-}
-
-.char-wrap {
-  border: 2px dashed rgba(255,255,255,0.4);
-  border-radius: 14px;
-  background: rgba(255,255,255,0.1);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: flex-end;
-  overflow: hidden;
-  font-size: 0.58rem; font-weight: 700;
-  color: rgba(255,255,255,0.8); text-align: center;
-  padding-bottom: 8px;
-}
-.char-wrap img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; }
-.char-wrap .ph-icon { font-size: 2rem; margin-bottom: 4px; }
-
-.char-farmer { width: 165px; height: 82%; }
-.char-woman  { width: 178px; height: 90%; }
-
 /* ══════════════════════════
    BOTTOM CARDS
    — pinned to bottom of viewport
