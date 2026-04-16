@@ -189,12 +189,12 @@ nav {
 /* ── Center text block ── */
 .hero-text {
   position: absolute;
-  top: 20px;
+  top: 55px;
   left: 50%;
   transform: translateX(-50%);
   display: flex; flex-direction: column;
   align-items: center; text-align: center;
-  max-width: 460px;
+  max-width: 620px;
   width: min(90%, 460px);
   margin-top: 0;
 }
@@ -208,7 +208,7 @@ nav {
 
 .hero-title {
   font-family: 'Fredoka One', cursive;
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-size: clamp(3.2rem, 4.5vw, 4.2rem);
   line-height: 1.05;
   margin-bottom: 10px;
 }
@@ -311,9 +311,9 @@ nav {
   .nav-links a { color: #1a2e1a; }
   .nav-toggle { color: #1a2e1a; }
   .nav-links { display: none; }
-  .hero-text { max-width: 420px; width: min(92%, 420px); top: 18px; }
-  .hero-title { font-size: 2rem; }
-  .hero-subtitle { font-size: 0.84rem; margin-bottom: 16px; }
+  .hero-text { max-width: 620px; width: min(92%, 620px); top: 165px; }
+  .hero-title { font-size: 3.8rem; }
+  .hero-subtitle { font-size: 1.2rem; margin-bottom: 16px; }
   .hero-btn { padding: 10px 26px; }
   .hero-characters { display: none; }
   .feat-card { width: 24vw; min-width: 90px; }
@@ -326,7 +326,7 @@ nav {
 
 /* For HP view */
 @media (max-width: 480px) {
-  .hero-text { max-width: 100%; width: min(96%, 100%); top: 95px; }
+  .hero-text { max-width: 100%; width: min(96%, 100%); top: 45px; }
   .hero-title { font-size: 1.75rem; }
   .hero-subtitle { font-size: 0.8rem; margin-bottom: 14px; }
   .hero-btn { padding: 9px 22px; }
