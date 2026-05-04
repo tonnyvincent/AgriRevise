@@ -123,6 +123,7 @@ nav {
 .nav-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .nav-cta {
@@ -254,6 +255,8 @@ nav {
 .cards-row {
   display: flex;
   gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .feat-card {
@@ -296,40 +299,298 @@ nav {
   color: var(--text-dark);
 }
 
+/* ══════════════════════════════════════════════
+   LATIHAN PENGUKUHAN PAGE
+   All classes prefixed with "lp-" to avoid
+   conflicts with the main landing page styles.
+══════════════════════════════════════════════ */
+
+/* 1. Default State: Hide the mobile image, show desktop */
+.mobile-bg {
+  display: none;
+}
+
+.desktop-bg {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* 2. Small Screen State: Hide desktop, show mobile */
+@media (max-width: 480px) {
+  .desktop-bg {
+    display: none;
+  }
+  
+  .mobile-bg {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
+}
+
+/* ── Page title banner ── */
+.lp-title-bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: 28px 0 0;
+  flex-shrink: 0;
+}
+
+.lp-title-pill {
+  background: color-mix(in srgb, #D9D9D9, transparent 80%);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(160, 200, 100, 0.4);
+  border-radius: 16px;
+  padding: 14px 56px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.55rem;
+  color: var(--green-mid);
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--green-mid), transparent 0%);
+}
+
+/* ── Cards area (fills remaining space, centered) ── */
+.lp-cards-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 40px 48px 100px;
+  gap: 35px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+/* ── Individual topic card ── */
+.lp-card {
+  position: relative;
+  width: 280px;
+  height: 350px;
+  background-color: #9ab47d;
+  border-radius: 30px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.25s ease;
+  border: 4px solid var(--green-mid);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+}
+
+.lp-card-label:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+}
+
+/* Card image / illustration placeholder */
+.lp-card-img, .lp-card-img-3 {
+  position: relative;
+  width: 86%; 
+  flex: 1;
+  background: white;
+  margin: -15px 0 5px 0;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 3px;
+  z-index: 2;
+  /* Soft inner glow to separate from image */
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3); 
+}
+
+.lp-card-img img {
+  position: relative;
+  top: -15px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lp-card-img-3 img {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.lp-card-img .lp-ph-icon { font-size: 3rem; }
+.lp-card-img .lp-ph-text { font-size: 0.62rem; opacity: 0.8; }
+
+/* Green label bar at bottom */
+.lp-card-label {
+  width: 90%;
+  background-color: #2b6a2e;
+  color: #ffffff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.84rem;
+  text-align: center;
+  padding: 14px 10px;
+  border-radius: 20px;
+  box-shadow: 0 8px 12px rgba(26, 66, 28, 0.4);
+  line-height: 1.2;
+  position: relative;
+  bottom: 10px;
+}
+
 /* ══════════════════════════
    RESPONSIVE (scale down, still no scroll)
 ══════════════════════════ */
 
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+  nav { padding: 10px 18px; }
+  .hero-body { padding: 0 18px; }
+  .hero-text { top: 60px; }
+  .hero-title { font-size: 2.4rem; }
+  .hero-subtitle { font-size: 0.9rem; }
+  
+  .cards-bar { padding: 0 14px 45px; }
+  .cards-row { gap: 18px; }
+  .feat-card { width: 110px; height: 130px; padding: 9px 8px; }
+  .feat-card-icon { width: 75px; height: 75px; }
+  .feat-card-label { font-size: 0.7rem; }
+  
+  .lp-title-pill { font-size: 1.2rem; padding: 11px 36px; }
+  .lp-cards-area { padding: 28px 22px 75px; gap: 20px; }
+  .lp-card { width: 165px; height: 240px; }
+  .lp-card-label { font-size: 0.8rem; }
+}
+
 /* For IPAD view */
 @media (max-width: 900px) {
-  nav { padding: 12px 24px; }
-  .hero-body { padding: 0 24px; }
-
-  .cards-bar { padding: 0 20px 20px; position: fixed; width: 100%; bottom: 0; }
-  .feat-card { width: 135px; height: 135px; padding: 16px 14px 12px; }
+  nav { padding: 10px 20px; }
+  .hero-body { padding: 0 20px; }
 
   .nav-links a { color: #1a2e1a; }
   .nav-toggle { color: #1a2e1a; }
   .nav-links { display: none; }
-  .hero-text { max-width: 620px; width: min(92%, 620px); top: 165px; }
-  .hero-title { font-size: 3.8rem; }
-  .hero-subtitle { font-size: 1.2rem; margin-bottom: 16px; }
-  .hero-btn { padding: 10px 26px; }
-  .hero-characters { display: none; }
-  .feat-card { width: 24vw; min-width: 90px; }
-  .feat-card-icon { width: 75px; height: 75px; }
-  .feat-card-label { font-size: 0.9rem; font-weight: 800; }
   .nav-toggle { display: block; }
-  .cards-bar { padding: 0 15px 20px; position: fixed; width: 100%; bottom: 0; }
-  .cards-row { gap: 25px; }
+  
+  .hero-text { max-width: 100%; width: min(92%, 600px); top: 80px; }
+  .hero-title { font-size: 2.8rem; }
+  .hero-subtitle { font-size: 0.95rem; margin-bottom: 14px; }
+  .hero-btn { padding: 9px 24px; }
+  
+  .cards-bar { padding: 0 16px 50px; position: fixed; width: 100%; bottom: 0; }
+  .cards-row { gap: 20px; flex-wrap: wrap; }
+  .feat-card { width: 28vw; min-width: 100px; height: 120px; padding: 10px 8px; }
+  .feat-card-icon { width: 80px; height: 80px; }
+  .feat-card-label { font-size: 0.75rem; font-weight: 700; }
+  
+  /* Latihan Pengukuhan */
+  .lp-title-pill { font-size: 1.3rem; padding: 12px 40px; }
+  .lp-cards-area { padding: 30px 24px 80px; gap: 24px; }
+  .lp-card { width: 200px; height: 280px; }
+  .lp-card-label { font-size: 0.78rem; }
 }
 
-/* For HP view */
+/* For HP view (very small mobile) */
 @media (max-width: 480px) {
-  .hero-text { max-width: 100%; width: min(96%, 100%); top: 45px; }
-  .hero-title { font-size: 1.75rem; }
-  .hero-subtitle { font-size: 0.8rem; margin-bottom: 14px; }
-  .hero-btn { padding: 9px 22px; }
-  .feat-card-label { font-size: 0.7rem; font-weight: 600; }
+  /* Navigation */
+  nav { padding: 6px 12px; }
+  .nav-logo { display: flex; align-items: center; gap: 6px; width: 36px; height: 36px; }
+  .nav-logo-img { width: 100%; height: 100%; border-radius: 5px; }
+  .nav-logo-text { display: none; }
+  
+  /* Hero section - make it compact */
+  .hero-text { top: 20px; width: min(94%, 100%); }
+  .hero-welcome { font-size: 0.8rem; margin-bottom: 1px; }
+  .hero-title { font-size: 1.4rem; line-height: 1.15; margin-bottom: 6px; }
+  .hero-subtitle { font-size: 0.72rem; margin-bottom: 8px; }
+  .hero-btn { padding: 7px 16px; font-size: 0.8rem; }
+  
+  /* Bottom cards on homepage */
+  .cards-bar { 
+    padding: 0 8px 50px; 
+    bottom: 0;
+  }
+  .cards-row { 
+    gap: 12px; 
+    justify-content: center;
+  }
+  .feat-card { 
+    width: 80px; 
+    height: 100px; 
+    padding: 6px 8px 2px; 
+    gap: 5px;
+    border-radius: 12px;
+  }
+  .feat-card-icon { 
+    width: 60px; 
+    height: 60px;
+    border-radius: 10px;
+  }
+  .feat-card-label { 
+    font-size: 0.6rem; 
+    font-weight: 600;
+    padding: 3px 4px;
+  }
+  
+  /* Latihan Pengukuhan page - most important improvements */
+  .lp-title-bar { 
+    padding: 10px 0; 
+  }
+  .lp-title-pill { 
+    padding: 8px 20px; 
+    font-size: 1rem; 
+    border-radius: 10px;
+    border: 2px solid rgba(160, 200, 100, 0.3);
+  }
+  
+  .lp-cards-area { 
+    padding: 16px 12px 70px; 
+    gap: 12px; 
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .lp-card { 
+    width: 150px; 
+    height: 180px; 
+    border-radius: 18px; 
+    border: 2px solid var(--green-mid);
+    flex-shrink: 0;
+  }
+  
+  .lp-card-img, .lp-card-img-3 {
+    width: 82%;
+    border-radius: 14px;
+    margin: -10px 0 3px 0;
+  }
+  
+  .lp-card-img img, .lp-card-img-3 img {
+    top: -12px;
+  }
+  
+  .lp-card-label { 
+    font-size: 0.58rem; 
+    padding: 8px 6px;
+    border-radius: 14px;
+    bottom: 4px;
+    width: 90%;
+    line-height: 1.1;
+  }
+}
 
+/* Extra small mobile (under 360px) */
+@media (max-width: 360px) {
+  .hero-title { font-size: 1.2rem; }
+  .hero-subtitle { font-size: 0.65rem; }
+  .hero-btn { padding: 6px 14px; font-size: 0.75rem; }
+  
+  .lp-card { width: 115px; height: 170px; }
+  .lp-card-label { font-size: 0.65rem; }
+  .feat-card { width: 70px; height: 90px; }
+  .feat-card-icon { width: 50px; height: 50px; }
+  .feat-card-label { font-size: 0.55rem; }
 }
