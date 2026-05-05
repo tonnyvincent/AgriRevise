@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgriRevise</title>
+  <title>+AgriRevise</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -11,8 +11,9 @@
 
   <div class="page">
 
-    <!-- BACKGROUND IMAGES -->
-    <img src="images/background-tanpa-tulisan-depan.png" alt="Farm" class="bg-img" />
+   <!-- BACKGROUND IMAGES -->
+    <img src="images/background-tanpa-tulisan-depan.png" alt="Farm" class="bg-img desktop-bg" />
+    <img src="images/background-tanpa-tulisan-depan-mobile.png" alt="Farm Mobile" class="bg-img mobile-bg" />
     <div class="bg-overlay"></div>
 
     <!-- ═══ NAVBAR ═══ -->
@@ -21,14 +22,14 @@
 
         <img src="images/agrirevise-logo.png" alt="AgriRevise" class="nav-logo-img" />
         <span class="nav-logo-text">
-          <span class="logo-agri">Agri</span><span class="logo-revise">Revise</span>
+          <span class="logo-agri">+Agri</span><span class="logo-revise">Revise</span>
         </span>
       </a>
 
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#">Manual Penggunaan</a></li>
-          <li><a href="LatihanPengukuhan.html">Latihan Pengukuhan</a></li>        
+          <li><a href="latihan-pengukuhan.html">Latihan Pengukuhan</a></li>        
           <li><a href="#">Papan Prestasi</a></li>
         </ul>
 
@@ -38,7 +39,7 @@
 
           <div class="nav-dropdown" id="nav-dropdown">
             <a href="#">Manual Penggunaan</a>
-            <a href="LatihanPengukuhan.html">Latihan Pengukuhan</a>
+            <a href="latihan-pengukuhan.html">Latihan Pengukuhan</a>
             <a href="#">Papan Prestasi</a>
           </div>
         </div>
@@ -52,7 +53,7 @@
       <div class="hero-text">
         <p class="hero-welcome">Selamat Datang di</p>
         <h1 class="hero-title">
-          <span class="t-agri">Agri</span><span class="t-revise">Revise</span>
+          <span class="t-agri">+Agri</span><span class="t-revise">Revise</span>
         </h1>
         <p class="hero-subtitle">Mari Kita Ulang Kaji Bab Sains Tanah</p>
         <a href="#" class="hero-btn">Jelajahi Sekarang</a>
@@ -65,7 +66,8 @@
       <div class="cards-row">
 
         <!-- Card 1 -->
-        <div class="feat-card">
+        <a href="manual-penggunaan.html">
+          <div class="feat-card">
           <!--
             icon for first card: <img src="manual-penggunaan.png" alt="Manual Penggunaan" />
           -->
@@ -74,9 +76,11 @@
           </div>
           <div class="feat-card-label">Manual Penggunaan</div>
         </div>
+        </a>
 
         <!-- Card 2 -->
-        <div class="feat-card">
+        <a href="latihan-pengukuhan.html">
+          <div class="feat-card">
           <!--
             icon for second card: <img src="latihan-pengukuhan.png" alt="Latihan Pengukuhan" />
           -->
@@ -85,17 +89,20 @@
           </div>
           <div class="feat-card-label">Latihan Pengukuhan</div>
         </div>
+        </a>
 
         <!-- Card 3 -->
-        <div class="feat-card">
-          <!--
-            icon for third card: <img src="papan-prestasi.png" alt="Papan Prestasi" />
-          -->
-          <div class="feat-card-icon">
-            <img src="images/icon-leaderboard-depan.png" alt="Papan Prestasi" />
+        <a href="papan-prestasi.html">
+          <div class="feat-card">
+            <!--
+              icon for third card: <img src="papan-prestasi.png" alt="Papan Prestasi" />
+            -->
+            <div class="feat-card-icon">
+              <img src="images/icon-leaderboard-depan.png" alt="Papan Prestasi" />
+            </div>
+            <div class="feat-card-label">Papan Prestasi</div>
           </div>
-          <div class="feat-card-label">Papan Prestasi</div>
-        </div>
+        </a>
 
       </div>
     </div>

@@ -62,6 +62,8 @@ html, body {
   z-index: 1;
 }
 
+a { text-decoration: none; color: inherit; }
+
 /* ══════════════════════════
    NAVBAR
 ══════════════════════════ */
@@ -203,8 +205,7 @@ nav {
 .hero-welcome {
   font-size: 0.95rem; font-weight: 700;
   color: var(--green-mid);
-  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
-  margin-bottom: 2px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6);  margin-bottom: 2px;
 }
 
 .hero-title {
@@ -212,6 +213,8 @@ nav {
   font-size: clamp(3.2rem, 4.5vw, 4.2rem);
   line-height: 1.05;
   margin-bottom: 10px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+
 }
 .t-agri   { color: var(--green-mid); }
 .t-revise { color: #dd9e59; }
@@ -219,8 +222,7 @@ nav {
 .hero-subtitle {
   font-size: 0.86rem; font-weight: 500;
   color: var(--green-mid);
-  text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-  margin-bottom: 18px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);  margin-bottom: 18px;
 }
 
 .hero-btn {
@@ -378,12 +380,15 @@ nav {
   align-items: center;
   transition: transform 0.25s ease;
   border: 4px solid var(--green-mid);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+  /* box-shadow: 0 20px 50px rgba(0,0,0,0.28); */
+  box-shadow: 
+  0 10px 30px rgba(0, 0, 0, 0.1), /* Soft drop shadow for depth */
+  0 0 15px rgba(255, 255, 255, 0.8); /* Inner white glow */
 }
 
-.lp-card-label:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+.lp-card-label:hover  {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 /* Card image / illustration placeholder */
@@ -411,6 +416,7 @@ nav {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.65));
 }
 
 .lp-card-img-3 img {
@@ -419,6 +425,7 @@ nav {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.65));
 }
 
 .lp-card-img .lp-ph-icon { font-size: 3rem; }
@@ -500,13 +507,23 @@ nav {
   .nav-logo { display: flex; align-items: center; gap: 6px; width: 36px; height: 36px; }
   .nav-logo-img { width: 100%; height: 100%; border-radius: 5px; }
   .nav-logo-text { display: none; }
-  
-  /* Hero section - make it compact */
-  .hero-text { top: 20px; width: min(94%, 100%); }
-  .hero-welcome { font-size: 0.8rem; margin-bottom: 1px; }
-  .hero-title { font-size: 1.4rem; line-height: 1.15; margin-bottom: 6px; }
-  .hero-subtitle { font-size: 0.72rem; margin-bottom: 8px; }
-  .hero-btn { padding: 7px 16px; font-size: 0.8rem; }
+
+  .hero-text {
+    z-index: 5;
+  }
+
+  .hero-text::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 680px;
+    height: 480px;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.5) 30%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(15px);
+  }
   
   /* Bottom cards on homepage */
   .cards-bar { 
@@ -570,6 +587,7 @@ nav {
   
   .lp-card-img img, .lp-card-img-3 img {
     top: -12px;
+    width: 100%;
   }
   
   .lp-card-label { 
@@ -584,9 +602,6 @@ nav {
 
 /* Extra small mobile (under 360px) */
 @media (max-width: 360px) {
-  .hero-title { font-size: 1.2rem; }
-  .hero-subtitle { font-size: 0.65rem; }
-  .hero-btn { padding: 6px 14px; font-size: 0.75rem; }
   
   .lp-card { width: 115px; height: 170px; }
   .lp-card-label { font-size: 0.65rem; }
