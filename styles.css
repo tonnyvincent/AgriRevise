@@ -42,15 +42,7 @@ html, body {
   z-index: 0;
 }
 
-/* Gradient fallback */
-.bg-fallback {
-  position: absolute; inset: 0;
-  background: linear-gradient(150deg,
-    #b8e0a0 0%, #78c878 18%,
-    #3daa50 42%, #2a7a3a 68%,
-    #1b5e2f 100%);
-  z-index: 0;
-}
+
 
 /* Readability overlay */
 .bg-overlay {
@@ -222,22 +214,8 @@ nav {
 .hero-subtitle {
   font-size: 0.86rem; font-weight: 500;
   color: var(--green-mid);
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);  margin-bottom: 18px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);  margin-bottom: 0;
 }
-
-.hero-btn {
-  display: inline-block;
-  background: var(--green-btn);
-  color: var(--white);
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800; font-size: 0.95rem;
-  padding: 10px 28px; border-radius: 50px;
-  text-decoration: none;
-  border: 2px solid rgba(255,255,255,0.28);
-  box-shadow: 0 4px 18px rgba(30,100,40,0.45);
-  transition: background 0.2s, transform 0.15s;
-}
-.hero-btn:hover { background: #1b5e2f; transform: translateY(-2px); }
 
 /* ══════════════════════════
    BOTTOM CARDS
@@ -259,46 +237,6 @@ nav {
   gap: 40px;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.feat-card {
-  background: var(--card-bg);
-  border-radius: 20px;
-  padding: 10px 12px 6px;
-  text-align: center;
-  box-shadow: var(--shadow);
-  border: 1.5px solid rgba(255,255,255,0.85);
-  backdrop-filter: blur(10px);
-  display: flex; flex-direction: column;
-  align-items: center; gap: 10px;
-  height: 170px;
-  width: 170px;
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-.feat-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 12px rgba(46, 125, 50, 0.3);
-  cursor: pointer;
-}
-
-.feat-card-icon {
-  width: 120px; height: 120px;
-  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-  border-radius: 14px;
-  border: none;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  font-size: 0.56rem; font-weight: 800;
-  color: var(--green-mid); text-align: center; line-height: 1.3;
-  overflow: hidden;
-}
-.feat-card-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-.feat-card-icon .icon-ph { font-size: 1.5rem; margin-bottom: 2px; }
-
-.feat-card-label {
-  font-family: 'Fredoka One', cursive;
-  font-size: 0.98rem; font-weight: 800;
-  color: var(--text-dark);
 }
 
 /* ══════════════════════════════════════════════
@@ -386,11 +324,6 @@ nav {
   0 0 15px rgba(255, 255, 255, 0.8); /* Inner white glow */
 }
 
-.lp-card-label:hover  {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-}
-
 /* Card image / illustration placeholder */
 .lp-card-img, .lp-card-img-3 {
   position: relative;
@@ -413,7 +346,7 @@ nav {
 .lp-card-img img {
   position: relative;
   top: -15px;
-  width: 100%;
+  width: 90%;
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.65));
@@ -421,15 +354,13 @@ nav {
 
 .lp-card-img-3 img {
   position: relative;
-  top: 0;
-  width: 100%;
+  top: -5px;
+  width: 90%;
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.65));
 }
 
-.lp-card-img .lp-ph-icon { font-size: 3rem; }
-.lp-card-img .lp-ph-text { font-size: 0.62rem; opacity: 0.8; }
 
 /* Green label bar at bottom */
 .lp-card-label {
@@ -446,6 +377,11 @@ nav {
   line-height: 1.2;
   position: relative;
   bottom: 10px;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.lp-card-label:hover  {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 /* ══════════════════════════
@@ -462,9 +398,6 @@ nav {
   
   .cards-bar { padding: 0 14px 45px; }
   .cards-row { gap: 18px; }
-  .feat-card { width: 110px; height: 130px; padding: 9px 8px; }
-  .feat-card-icon { width: 75px; height: 75px; }
-  .feat-card-label { font-size: 0.7rem; }
   
   .lp-title-pill { font-size: 1.2rem; padding: 11px 36px; }
   .lp-cards-area { padding: 28px 22px 75px; gap: 20px; }
@@ -484,14 +417,10 @@ nav {
   
   .hero-text { max-width: 100%; width: min(92%, 600px); top: 80px; }
   .hero-title { font-size: 2.8rem; }
-  .hero-subtitle { font-size: 0.95rem; margin-bottom: 14px; }
-  .hero-btn { padding: 9px 24px; }
+  .hero-subtitle { font-size: 0.95rem; margin-bottom: 0; }
   
   .cards-bar { padding: 0 16px 50px; position: fixed; width: 100%; bottom: 0; }
   .cards-row { gap: 20px; flex-wrap: wrap; }
-  .feat-card { width: 28vw; min-width: 100px; height: 120px; padding: 10px 8px; }
-  .feat-card-icon { width: 80px; height: 80px; }
-  .feat-card-label { font-size: 0.75rem; font-weight: 700; }
   
   /* Latihan Pengukuhan */
   .lp-title-pill { font-size: 1.3rem; padding: 12px 40px; }
@@ -510,6 +439,21 @@ nav {
 
   .hero-text {
     z-index: 5;
+    top: 55px;
+    width: min(90%, 380px);
+  }
+
+  .hero-welcome {
+    font-size: 1rem;
+  }
+
+  .hero-title {
+    font-size: 2.7rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 0;
   }
 
   .hero-text::before {
@@ -533,23 +477,6 @@ nav {
   .cards-row { 
     gap: 12px; 
     justify-content: center;
-  }
-  .feat-card { 
-    width: 80px; 
-    height: 100px; 
-    padding: 6px 8px 2px; 
-    gap: 5px;
-    border-radius: 12px;
-  }
-  .feat-card-icon { 
-    width: 60px; 
-    height: 60px;
-    border-radius: 10px;
-  }
-  .feat-card-label { 
-    font-size: 0.6rem; 
-    font-weight: 600;
-    padding: 3px 4px;
   }
   
   /* Latihan Pengukuhan page - most important improvements */
@@ -605,7 +532,4 @@ nav {
   
   .lp-card { width: 115px; height: 170px; }
   .lp-card-label { font-size: 0.65rem; }
-  .feat-card { width: 70px; height: 90px; }
-  .feat-card-icon { width: 50px; height: 50px; }
-  .feat-card-label { font-size: 0.55rem; }
 }
