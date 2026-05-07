@@ -31,6 +31,18 @@ html, body {
   flex-direction: column;
 }
 
+/* Game page needs scrolling — applied via JS or a body class */
+body.game-page {
+  overflow: auto;
+  height: auto;
+}
+
+body.game-page .page {
+  height: auto;
+  min-height: 100vh;
+  overflow: visible;
+}
+
 /* ══════════════════════════
    BACKGROUND FARM IMAGE
 ══════════════════════════ */
@@ -179,6 +191,12 @@ nav {
   align-items: center;
   justify-content: center;
   padding: 0 52px;
+}
+
+/* On game pages the title bar is inside hero-body; don't let it expand */
+body.game-page .hero-body {
+  flex: 0 0 auto;
+  padding: 0;
 }
 
 /* ── Center text block ── */
@@ -525,7 +543,9 @@ nav {
     width: 90%;
     line-height: 1.1;
   }
+
 }
+ 
 
 /* Extra small mobile (under 360px) */
 @media (max-width: 360px) {
@@ -537,28 +557,67 @@ nav {
 /* ══════════════════════════════════════════════
    GAME PAGE STYLES - JENIS DAN SIFAT TANAH
 ══════════════════════════════════════════════ */
+.jdst-hero-body {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 52px;
+}
+
+.jdst-title-bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: 28px 0 0;
+  flex-shrink: 0;
+}
+
+.jdst-title-pill {
+  background: color-mix(in srgb, #D9D9D9, transparent 80%);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(160, 200, 100, 0.4);
+  border-radius: 16px;
+  padding: 5px 25px;
+  width: 90vw;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.55rem;
+  color: var(--green-mid);
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--green-mid), transparent 0%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 .game-container {
   position: relative;
   z-index: 5;
   flex: 1;
   display: flex;
+  flex-direction: row;
   gap: 40px;
-  padding: 60px 52px 28px;
-  align-items: flex-start;
-  justify-content: center;
+  padding: 20px;
+  align-items: center; /* This centers the items vertically */
+  justify-content: center; /* This centers the group horizontally */
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  height: calc(100vh - 150px); /* Adjust based on your nav height */
 }
 
 /* Soil Profile Section */
 .game-profile {
-  flex: 0 0 280px;
+  flex: 0 0 220px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
+  position: sticky;
+  top: 20px;
 }
 
 .soil-profile {
@@ -577,7 +636,7 @@ nav {
   border: none;
   border-radius: 0;
   padding: 0;
-  height: 70px;
+  height: 56px;
   display: block;
   font-weight: 700;
   color: var(--green-dark);
@@ -790,12 +849,13 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 8px 12px;
 }
 
 .progress-text {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--green-mid);
+  color: var(--white);
   text-align: center;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
@@ -820,24 +880,24 @@ nav {
 /* Question Area */
 .game-question {
   flex: 1;
-  min-width: 300px;
-  max-width: 600px;
+  min-width: 0;
+  max-width: 620px;
 }
 
 .question-card {
   background: rgba(255, 255, 255, 0.93);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  padding: 40px;
+  padding: 28px;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  min-height: 380px;
+  gap: 12px;
+  min-height: 280px;
 }
 
 .question-text {
-  font-size: 1.15rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--green-dark);
   line-height: 1.8;
@@ -862,8 +922,8 @@ nav {
   background: rgba(46, 125, 50, 0.1);
   border: 2px solid rgba(46, 125, 50, 0.3);
   border-radius: 12px;
-  padding: 16px;
-  font-size: 0.95rem;
+  padding: 10px;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--green-dark);
   cursor: pointer;
@@ -908,12 +968,13 @@ nav {
 
 /* Feedback */
 .feedback {
-  min-height: 30px;
+  min-height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .feedback-correct {
@@ -932,8 +993,8 @@ nav {
   color: var(--white);
   border: none;
   border-radius: 12px;
-  padding: 14px 28px;
-  font-size: 1rem;
+  padding: 12px 24px;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -989,7 +1050,7 @@ nav {
   display: inline-block;
   background: var(--orange-btn);
   color: var(--white);
-  padding: 14px 32px;
+  padding: 12px 24px;
   border-radius: 12px;
   font-weight: 700;
   text-decoration: none;
@@ -1007,58 +1068,170 @@ nav {
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
+
+  .jdst-title-pill {
+    font-size: 1.0rem;
+  }
+
+  .progress-text {
+    font-size: 0.7rem;
+  }
+
+  .question-text {
+    font-size: 0.8rem;
+    line-height: 1.0;
+  }
+  
+  .option-button {
+    padding: 6px 7px;
+    font-size: 0.7rem;
+  }
+
   .game-container {
-    flex-direction: column;
-    padding: 40px 28px 28px;
-    gap: 30px;
+    flex-direction: row;
+    align-items: center;
   }
-  
+
   .game-profile {
+    flex: 0 0 60px; /* Narrow width for a vertical standing profile */
+    height: 350px; /* Fixed height for the profile stack */
+    justify-content: center;
+  }
+
+  .soil-profile {
+    flex-direction: column; /* Forces it to stand up bottom-to-top */
+    height: 100%;
+    width: 100%;
+  }
+
+  .soil-layer {
     flex: 1;
-    max-width: 100%;
+    width: 100%;
+    height: auto;
   }
-  
+
+  .layer-label {
+    font-size: 0.5rem;
+    transform: translate(-50%, -50%) rotate(-90deg); /* Rotates text to fit narrow column */
+    display: none; /* Optional: Hide labels if it looks too cluttered on small screens */
+  }
+
   .game-question {
-    max-width: 100%;
+    flex: 1;
   }
-  
+
   .question-card {
     min-height: auto;
-    padding: 32px;
+    padding: 24px;
+    gap: 18px;
+  }
+
+  .game-progress {
+    width: 95%;
+    gap: 10px;
+    padding: 8px 12px;
+  }
+
+  .btn-next {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+
+  .feedback {
+    font-weight: 700;
+    font-size: 0.9rem;
   }
 }
 
+
 @media (max-width: 600px) {
   .game-container {
-    padding: 30px 16px 28px;
+    padding: 12px 14px 40px;
+    gap: 14px;
   }
-  
+
+  .soil-profile {
+    height: 100%;
+  }
+
+  .soil-layer {
+    height: 100%;
+  }
+
+  .layer-label {
+    font-size: 0.48rem;
+    letter-spacing: 0;
+  }
+
   .question-card {
-    padding: 24px;
-    gap: 20px;
+    padding: 15px;
+    gap: 0;
+    border-radius: 16px;
   }
   
   .question-text {
-    font-size: 1rem;
+    font-size: 0.85rem;
     line-height: 1.6;
   }
   
   .options-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
   
   .option-button {
-    padding: 14px;
-    font-size: 0.9rem;
-  }
-  
-  .soil-layer {
-    min-height: 60px;
-    padding: 12px;
+    padding: 12px 14px;
+    font-size: 0.88rem;
   }
   
   .completion-content h2 {
     font-size: 2rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .game-progress {
+    width: 95%;
+    gap: 10px;
+    padding: 8px 12px;
+  }
+  
+  .progress-text {
+    font-size: 0.75rem;
+  }
+
+  .game-profile {
+    flex: 0 0 45px;
+    height: 250px;
+  }
+  
+  .question-card {
+    padding: 15px;
+  }
+
+  .question-text {
+    font-size: 0.8rem;
+  }
+
+  .option-button {
+    padding: 6px 7px;
+    font-size: 0.6rem;
+  }
+
+  .btn-next {
+    padding: 8px 20px;
+    font-size: 0.7rem;
+  }
+
+  .feedback {
+    font-weight: 700;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .layer-label {
+    display: none; /* hide labels on very tiny screens, layers still visible */
   }
 }

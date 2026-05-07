@@ -102,7 +102,7 @@ let gameState = {
   currentQuestion: 0,
   score: 0,
   answeredQuestions: new Set(),
-  unlockedLayers: new Set([1]) // Start with bedrock visible
+  unlockedLayers: new Set() // Start with bedrock visible
 };
 
 // Initialize game
@@ -166,8 +166,8 @@ function selectOption(selectedIndex) {
     buttons[selectedIndex].classList.add('correct');
     
     // Unlock soil layer every 3 correct answers (from bottom to top)
-    const layerToUnlock = Math.ceil(gameState.score / 3);
-    if (layerToUnlock <= 5) {
+    const layerToUnlock = Math.floor((gameState.score - 1) / 3) + 1;
+    if (gameState.score % 3 === 0 && layerToUnlock <= 5) {
       unlockLayer(layerToUnlock);
     }
     
