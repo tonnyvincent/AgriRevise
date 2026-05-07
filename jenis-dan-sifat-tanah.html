@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jenis dan Sifat Tanah - AgriRevise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- BACKGROUND IMAGES -->
+    <img src="images/background-latihan-pengukuhan.png" alt="Farm" class="bg-img desktop-bg" />
+    <img src="images/background-latihan-pengukuhan-mobile.png" alt="Farm Mobile" class="bg-img mobile-bg" />
+    <div class="bg-overlay"></div>
+
+    <!-- ═══ NAVBAR ═══ -->
+    <nav>
+      <a href="#" class="nav-logo">
+        <img src="images/agrirevise-logo.png" alt="AgriRevise" class="nav-logo-img" />
+        <span class="nav-logo-text">
+          <span class="logo-agri">+Agri</span><span class="logo-revise">Revise</span>
+        </span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#">Manual Penggunaan</a></li>
+          <li><a href="latihan-pengukuhan.html">Latihan Pengukuhan</a></li>        
+          <li><a href="#">Papan Prestasi</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="index.html" class="nav-cta">Laman Utama</a>
+          <button class="nav-toggle" id="nav-toggle">☰</button>
+
+          <div class="nav-dropdown" id="nav-dropdown">
+            <a href="#">Manual Penggunaan</a>
+            <a href="latihan-pengukuhan.html">Latihan Pengukuhan</a>
+            <a href="#">Papan Prestasi</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ═══ HERO BODY ═══ -->
+    <div class="hero-body">
+
+      <!-- ═══ PAGE TITLE ═══ -->
+      <div class="lp-title-bar">
+        <div class="lp-title-pill">Jenis dan Sifat Tanah</div>
+      </div>
+
+    </div>
+
+    <!-- ═══ GAME CONTAINER ═══ -->
+    <div class="game-container">
+
+      <!-- Left: Soil Profile Visualization -->
+      <div class="game-profile">
+        <div class="soil-profile">
+          <!-- Plant Layer (Stage 5) - TOP -->
+          <div class="soil-layer layer-plants" id="layer-5">
+            <div class="layer-visual">
+              <div class="plants-ground"></div>
+              <div class="plant-item">🌱</div>
+              <div class="plant-item">🌿</div>
+              <div class="plant-item">🌱</div>
+              <div class="roots"></div>
+            </div>
+            <span class="layer-label">Tanaman</span>
+          </div>
+
+          <!-- Humus Layer (Stage 4) -->
+          <div class="soil-layer layer-humus" id="layer-4">
+            <div class="layer-visual">
+              <div class="humus-texture"></div>
+            </div>
+            <span class="layer-label">Humus</span>
+          </div>
+
+          <!-- Topsoil Layer (Stage 3) -->
+          <div class="soil-layer layer-topsoil" id="layer-3">
+            <div class="layer-visual">
+              <div class="topsoil-texture"></div>
+            </div>
+            <span class="layer-label">Topsoil</span>
+          </div>
+
+          <!-- Subsoil Layer (Stage 2) -->
+          <div class="soil-layer layer-subsoil" id="layer-2">
+            <div class="layer-visual">
+              <div class="subsoil-texture"></div>
+            </div>
+            <span class="layer-label">Subsoil</span>
+          </div>
+
+          <!-- Bedrock Layer (Stage 1) - BOTTOM -->
+          <div class="soil-layer layer-bedrock" id="layer-1">
+            <div class="layer-visual">
+              <div class="bedrock-texture"></div>
+            </div>
+            <span class="layer-label">Batuan Induk</span>
+          </div>
+        </div>
+
+        <!-- Progress indicator -->
+        <div class="game-progress">
+          <div class="progress-text">Soalan <span id="question-num">1</span> / 15</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Question Area -->
+      <div class="game-question">
+        <div class="question-card">
+          <div class="question-text" id="question-text">
+            Loading...
+          </div>
+
+          <div class="options-grid" id="options-grid">
+            <!-- Options will be inserted here -->
+          </div>
+
+          <div class="feedback" id="feedback"></div>
+
+          <button class="btn-next" id="btn-next" style="display: none;">Soalan Seterusnya</button>
+        </div>
+
+        <!-- Completion Screen -->
+        <div class="completion-screen" id="completion-screen" style="display: none;">
+          <div class="completion-content">
+            <h2>🎉 Tahniah!</h2>
+            <p>Anda telah menyelesaikan permainan dengan jayanya!</p>
+            <p class="final-score">Markah: <span id="final-score">0</span>/15</p>
+            <a href="jenis-tanah.html" class="btn-restart">Kembali ke Topik</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.game-container -->
+
+  </div><!-- /.page -->
+
+  <script src="game-jenis-tanah.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
