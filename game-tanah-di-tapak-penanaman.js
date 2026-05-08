@@ -2,6 +2,15 @@
 let expeditionState = {
   currentStation: 1,
   stationsCompleted: new Set(),
+
+  scores: {
+    station1: null,
+    station2: null,
+    station3: null
+  },
+
+  sessionLog: [], // full attempt log
+
   answers: {
     station1: {},
     station2: {},
@@ -31,10 +40,108 @@ function initializeDragAndDrop() {
     zone.addEventListener('drop', handleDrop);
     zone.addEventListener('dragleave', handleDragLeave);
   });
+
+  document.querySelectorAll('.drag-item').forEach(item => {
+
+  item.addEventListener('touchstart', handleTouchStart, { passive: false });
+  item.addEventListener('touchmove', handleTouchMove, { passive: false });
+  item.addEventListener('touchend', handleTouchEnd);
+
+  });
+}
+
+function handleTouchStart(e) {
+  touchDraggedElement = this;
+
+  this.classList.add('dragging');
+
+  // create preview
+  dragPreview = this.cloneNode(true);
+  dragPreview.classList.add('drag-preview');
+
+  document.body.appendChild(dragPreview);
+
+  movePreview(e.touches[0]);
+}
+
+function movePreview(touch) {
+  if (!dragPreview) return;
+
+  const offsetX = 0;
+  const offsetY = -60; // move ABOVE finger
+
+  dragPreview.style.position = 'fixed';
+  dragPreview.style.left = (touch.clientX + offsetX) + 'px';
+  dragPreview.style.top = (touch.clientY + offsetY) + 'px';
+  dragPreview.style.transform = 'translate(-50%, -50%) scale(1.05)';
+  dragPreview.style.pointerEvents = 'none';
+  dragPreview.style.zIndex = '9999';
+  dragPreview.style.opacity = '0.95';
+}
+
+function handleTouchMove(e) {
+  e.preventDefault();
+
+  const touch = e.touches[0];
+
+  // move preview
+  movePreview(touch);
+
+  const elementBelow = document.elementFromPoint(
+    touch.clientX,
+    touch.clientY
+  );
+
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.classList.remove('drag-over');
+  });
+
+  const dropZone = elementBelow?.closest('.drop-zone');
+
+  if (dropZone) {
+    dropZone.classList.add('drag-over');
+  }
+}
+
+function handleTouchEnd(e) {
+  const touch = e.changedTouches[0];
+
+  const elementBelow = document.elementFromPoint(
+    touch.clientX,
+    touch.clientY
+  );
+
+  const dropZone = elementBelow?.closest('.drop-zone');
+
+  if (dropZone && touchDraggedElement) {
+    draggedElement = touchDraggedElement;
+
+    handleDrop.call(dropZone, {
+      preventDefault: () => {}
+    });
+  }
+
+  if (touchDraggedElement) {
+    touchDraggedElement.classList.remove('dragging');
+  }
+
+  // remove preview
+  if (dragPreview) {
+    dragPreview.remove();
+    dragPreview = null;
+  }
+
+  document.querySelectorAll('.drop-zone').forEach(zone => {
+    zone.classList.remove('drag-over');
+  });
+
+  touchDraggedElement = null;
 }
 
 // Current dragging element
 let draggedElement = null;
+let touchDraggedElement = null;
+let dragPreview = null;
 
 function handleDragStart(e) {
   draggedElement = this;
@@ -89,7 +196,13 @@ function handleDrop(e) {
   itemClone.classList.add('dropped-item');
   itemClone.classList.remove('dragging');
 
-  dropZone.appendChild(itemClone);
+const slot = dropZone.querySelector('.zone-slot');
+
+  if (slot) {
+    slot.innerHTML = ""; // clear previous
+    slot.appendChild(itemClone);
+  }
+  
   expeditionState.answers[`station${currentStation}`][expectedAnswer] = draggedValue;
 
   checkStationCompletion(currentStation);
@@ -108,16 +221,24 @@ function getDraggedValue(element, station) {
 
 function clearPreviousPlacement(station, draggedValue, currentZone) {
   const answers = expeditionState.answers[`station${station}`];
+
   Object.keys(answers).forEach(answerKey => {
     if (answerKey !== currentZone && answers[answerKey] === draggedValue) {
-      const oldZone = document.querySelector(`#station-${station} .drop-zone[data-answer="${answerKey}"]`);
+
+      const oldZone = document.querySelector(
+        `#station-${station} .drop-zone[data-answer="${answerKey}"]`
+      );
+
       if (oldZone) {
-        const oldItem = oldZone.querySelector('.dropped-item');
-        if (oldItem) {
-          oldItem.remove();
-        }
+        // clear slot (NEW STRUCTURE)
+        const slot = oldZone.querySelector('.zone-slot');
+        if (slot) slot.innerHTML = "";
+
+        // remove styling states
         oldZone.classList.remove('correct', 'incorrect');
       }
+
+      // clean state
       delete answers[answerKey];
     }
   });
@@ -125,63 +246,152 @@ function clearPreviousPlacement(station, draggedValue, currentZone) {
 
 function checkStationCompletion(station) {
   const dropZones = document.querySelectorAll(`#station-${station} .drop-zone`);
-  let isComplete = true;
+
+  let allFilled = true;
 
   dropZones.forEach(zone => {
     if (!zone.querySelector('.dropped-item')) {
-      isComplete = false;
+      allFilled = false;
     }
   });
 
-  if (isComplete) {
-    // Validate answers
+  if (allFilled) {
     validateStation(station);
   }
 }
 
 function validateStation(station) {
   const dropZones = document.querySelectorAll(`#station-${station} .drop-zone`);
-  let allCorrect = true;
+
+  let correctCount = 0;
+  let total = dropZones.length;
+
+  let detailLog = [];
 
   dropZones.forEach(zone => {
     zone.classList.remove('correct', 'incorrect');
+
     const expectedAnswer = zone.getAttribute('data-answer');
     const droppedItem = zone.querySelector('.dropped-item');
-    
-    if (droppedItem) {
-      let droppedValue = null;
-      
-      if (station === 1) {
-        droppedValue = droppedItem.getAttribute('data-color');
-      } else if (station === 2) {
-        droppedValue = droppedItem.getAttribute('data-soil');
-      } else if (station === 3) {
-        droppedValue = droppedItem.getAttribute('data-step');
-      }
 
-      if (droppedValue === expectedAnswer) {
-        zone.classList.add('correct');
-        droppedItem.classList.add('correct');
-      } else {
-        zone.classList.add('incorrect');
-        droppedItem.classList.add('incorrect');
-        allCorrect = false;
-      }
-    } else {
-      allCorrect = false;
+    let droppedValue = null;
+
+    if (station === 1) {
+      droppedValue = droppedItem?.getAttribute('data-color');
+    } else if (station === 2) {
+      droppedValue = droppedItem?.getAttribute('data-soil');
+    } else if (station === 3) {
+      droppedValue = droppedItem?.getAttribute('data-step');
     }
+
+    const isCorrect = droppedValue === expectedAnswer;
+
+    if (isCorrect) {
+      zone.classList.add('correct');
+      droppedItem?.classList.add('correct');
+      correctCount++;
+    } else {
+      zone.classList.add('incorrect');
+      droppedItem?.classList.add('incorrect');
+    }
+
+    // 🔥 record per question
+    detailLog.push({
+      question: expectedAnswer,
+      selected: droppedValue,
+      correct: isCorrect
+    });
   });
 
-  if (allCorrect) {
-    const nextBtn = document.getElementById(`btn-station-${station}-next`);
-    if (nextBtn) {
-      setTimeout(() => {
-        nextBtn.style.display = 'block';
-      }, 500);
-    }
+  const scoreData = {
+    station,
+    correct: correctCount,
+    total,
+    percentage: Math.round((correctCount / total) * 100),
+    details: detailLog,
+    timestamp: new Date().toISOString()
+  };
 
-    expeditionState.stationsCompleted.add(station);
+  expeditionState.scores[`station${station}`] = scoreData;
+
+  // 🔥 store full session log
+  expeditionState.sessionLog.push(scoreData);
+
+  // 🔥 CLEAN CONSOLE OUTPUT (VERY IMPORTANT FOR DEBUGGING)
+  console.log("========== STATION RESULT ==========");
+  console.log("Station:", station);
+  console.log("Score:", `${correctCount}/${total}`);
+  console.log("Percentage:", `${scoreData.percentage}%`);
+  console.table(detailLog);
+  console.log("Full Score Object:", scoreData);
+  console.log("====================================");
+
+  // always continue
+  setTimeout(() => {
+    showStationModal(station);
+  }, 400);
+}
+
+// printing the final result in a clean format for easy debugging and review
+
+function printFinalResult() {
+  const totalCorrect =
+    expeditionState.scores.station1.correct +
+    expeditionState.scores.station2.correct +
+    expeditionState.scores.station3.correct;
+
+  const totalQuestions =
+    expeditionState.scores.station1.total +
+    expeditionState.scores.station2.total +
+    expeditionState.scores.station3.total;
+
+  const finalPercent = Math.round((totalCorrect / totalQuestions) * 100);
+
+  console.log("######## FINAL RESULT ########");
+  console.log("Total Correct:", totalCorrect);
+  console.log("Total Questions:", totalQuestions);
+  console.log("Final Score:", finalPercent + "%");
+  console.log("SESSION LOG:", expeditionState.sessionLog);
+  console.log("FULL STATE:", expeditionState);
+  console.log("##############################");
+}
+
+function showStationModal(station) {
+  const modal = document.getElementById('station-complete-modal');
+  modal.classList.remove('hidden');
+
+  const score = expeditionState.scores[`station${station}`];
+  const message = modal.querySelector('p');
+
+  message.textContent =
+    `Anda mendapat ${score.correct}/${score.total} betul (${score.percentage}%)`;
+
+  const nextBtn = document.getElementById('next-station-btn');
+
+  // 🔥 IMPORTANT: remove old handlers
+  nextBtn.onclick = null;
+
+  if (station === 3) {
+    nextBtn.textContent = "Selesai";
+
+    nextBtn.onclick = () => {
+      modal.classList.add('hidden');
+      showFinalCompletion(); // FINAL SCREEN
+    };
+
+  } else {
+    nextBtn.textContent = "Lanjut ke Stesen " + (station + 1);
+
+    nextBtn.onclick = () => {
+      modal.classList.add('hidden');
+      goToStation(station + 1);
+    };
   }
+
+  document.getElementById('restart-expedition-btn').onclick = () => {
+    modal.classList.add('hidden');
+    resetExpedition();
+  };
 }
 
 // Next station buttons
@@ -194,6 +404,7 @@ document.getElementById('btn-station-2-next')?.addEventListener('click', functio
 });
 
 document.getElementById('btn-station-3-next')?.addEventListener('click', function() {
+  printFinalResult(); // call to print final result in console
   showCompletion();
 });
 
@@ -260,22 +471,67 @@ function showCompletion() {
   document.getElementById('completion-screen').style.display = 'flex';
 }
 
+function showFinalCompletion() {
+  const s1 = expeditionState.scores.station1;
+  const s2 = expeditionState.scores.station2;
+  const s3 = expeditionState.scores.station3;
+
+  const totalCorrect = s1.correct + s2.correct + s3.correct;
+  const totalQuestions = s1.total + s2.total + s3.total;
+
+  const percentage = Math.round((totalCorrect / totalQuestions) * 100);
+
+  // create modal content
+  const modal = document.getElementById('station-complete-modal');
+  modal.classList.remove('hidden');
+
+  modal.querySelector('.complete-box').innerHTML = `
+    <h2>🎉 Eksperimen Selesai!</h2>
+
+    <p>Jumlah Markah Anda:</p>
+
+    <div style="font-size: 18px; font-weight: 700; margin: 10px 0;">
+      ${totalCorrect} / ${totalQuestions}
+    </div>
+
+    <div style="font-size: 16px; margin-bottom: 15px;">
+      Skor: ${percentage}%
+    </div>
+
+    <div class="complete-actions">
+      <button id="complete-btn">Selesai</button>
+    </div>
+  `;
+
+  document.getElementById('complete-btn').onclick = () => {
+    window.location.href = "latihan-pengukuhan.html";
+  };
+
+  // log for later DB usage
+  console.log("FINAL SCORE:", {
+    totalCorrect,
+    totalQuestions,
+    percentage,
+    session: expeditionState.sessionLog
+  });
+}
+
 // Add CSS animations
 const style = document.createElement('style');
 style.textContent = `
-  .drag-item {
-    cursor: move;
-    padding: 8px 12px;
-    margin: 4px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    user-select: none;
-    display: inline-block;
-    font-size: 0.92rem;
-  }
+.drag-item { 
+  cursor: move; 
+  padding: 6px 10px; 
+  margin: 12px 1px 1px 1px; 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+  color: white; 
+  border-radius: 8px; 
+  font-weight: 600; 
+  transition: all 0.2s ease; 
+  user-select: none; 
+  display: inline-block; 
+  font-size: 11px; 
+}
 
   .drag-item:hover {
     transform: translateY(-1px);
@@ -301,18 +557,51 @@ style.textContent = `
     margin: 10px 0;
   }
 
-  .drop-zone {
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    padding: 12px;
-    background: #fafafa;
-    min-height: 60px;
-    transition: all 0.2s ease;
-    cursor: drop;
+.drop-zone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  padding: 12px;
+
+  background: #fafafa;
+
+  min-height: 80px;
+  box-sizing: border-box;
+}
+
+  .zone-content {
+    flex: 1;
+    width: 70%;
+    min-width: 0;
+
+    font-size: 11px;
+    color: #333;
+
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-start;
+    align-items: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+  }
+
+  .zone-slot {
+    flex: 0 0 80px;
+    width: 100px;
+    height: 40px;
+
+    border: 2px dashed #bbb;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    overflow: hidden; /* prevents weird overflow */
   }
 
   .drop-zone.drag-over {
@@ -328,13 +617,12 @@ style.textContent = `
   .zone-label {
     font-weight: 700;
     color: var(--green-mid);
-    margin-bottom: 8px;
-    font-size: 14px;
+    font-size: 11px;
     text-transform: uppercase;
   }
 
   .zone-content {
-    font-size: 13px;
+    font-size: 11px;
     color: #555;
     min-height: 40px;
     display: flex;
@@ -343,21 +631,25 @@ style.textContent = `
   }
 
   .zone-note {
-    font-size: 12px;
+    font-size: 11px;
     color: #999;
     display: block;
-    margin-top: 4px;
   }
 
   .dropped-item {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 8px 12px;
+    padding: 6px 10px;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
-    display: inline-block;
-    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: 1px;
   }
 
   .dropped-item.correct {
@@ -386,7 +678,7 @@ style.textContent = `
 
   .instruction-text {
     display: block;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 500;
     color: #666;
     margin-top: 8px;

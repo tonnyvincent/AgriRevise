@@ -52,7 +52,7 @@
       <!-- ═══ PAGE TITLE ═══ -->
       <div class="jdst-title-bar">
         <div class="jdst-title-pill">
-          Modul 1.1.2 — Misi Ekspedisi Tanah
+          Tanah di Tapak Penanaman
 
           <!-- Progress indicator -->
             <div class="game-progress">
@@ -75,31 +75,35 @@
         <div class="question-card">
           <div class="question-text">
             Stesen 1: Ujian Warna Tanah<br>
-            <span class="instruction-text">Seret warna tanah dan lepaskan ke dalam kotak ciri tanah yang betul</span>
+            <span class="instruction-text">Seret warna tanah dan lepaskan ke dalam kotak ciri tanah yang betul.</span>
           </div>
 
           <!-- Drag options -->
           <div class="drag-options station-1-options">
-            <div class="drag-item" draggable="true" data-color="putih">PUTIH</div>
-            <div class="drag-item" draggable="true" data-color="merah">MERAH</div>
-            <div class="drag-item" draggable="true" data-color="kelabu">KELABU</div>
+            <div class="drag-item" draggable="true" data-color="putih" style="width: 80px; text-align: center;">PUTIH</div>
+            <div class="drag-item" draggable="true" data-color="merah" style="width: 80px; text-align: center;">MERAH</div>
+            <div class="drag-item" draggable="true" data-color="kelabu" style="width: 80px; text-align: center;">KELABU</div>
           </div>
 
           <!-- Drop zones -->
           <div class="drop-zones">
             <div class="drop-zone" data-answer="putih">
               <div class="zone-content">Tanah ini mempunyai banyak kandungan liat dikenali sebagai kaolinit</div>
+                <div class="zone-slot"></div>
+
             </div>
             <div class="drop-zone" data-answer="merah">
               <div class="zone-content">Kandungan ferum oksida<br>Terdapat di lereng bukit</div>
+                <div class="zone-slot"></div>
+
             </div>
             <div class="drop-zone" data-answer="kelabu">
               <div class="zone-content">Saliran kurang baik dan menakung air</div>
+                <div class="zone-slot"></div>
+
             </div>
           </div>
 
-          <button class="btn-next" id="btn-station-1-next" style="display: none;">Lanjut ke Stesen 2</button>
-          <button class="btn-restart btn-restart-expedition">Mula Semula Eksperimen</button>
         </div>
       </div>
 
@@ -108,34 +112,32 @@
         <div class="question-card">
           <div class="question-text">
             Stesen 2: Segi Tiga Tekstur Tanah<br>
-            <span class="instruction-text">Rujuk imej Soil Triangle dan seret jenis tanah yang betul ke setiap sampel peratusan tekstur.</span>
+            <span class="instruction-text">Rujuk imej Segi Tiga Tanah dan seret jenis tanah yang betul ke setiap sampel peratusan tekstur.</span>
           </div>
 
           <!-- Drag options -->
           <div class="drag-options station-2-options">
-            <div class="drag-item" draggable="true" data-soil="tanah-liat">Tanah Liat</div>
-            <div class="drag-item" draggable="true" data-soil="pasir">Pasir</div>
-            <div class="drag-item" draggable="true" data-soil="loam">Loam</div>
+            <div class="drag-item" draggable="true" data-soil="tanah-liat" style="width: 80px; text-align: center;">Tanah Liat</div>
+            <div class="drag-item" draggable="true" data-soil="pasir" style="width: 80px; text-align: center;">Pasir</div>
+            <div class="drag-item" draggable="true" data-soil="loam" style="width: 80px; text-align: center;">Loam</div>
           </div>
 
           <!-- Drop zones -->
           <div class="drop-zones">
             <div class="drop-zone" data-answer="pasir">
-              <div class="zone-label">Sampel 1</div>
-              <div class="zone-content">90% Pasir, 5% Kelodak, 5% Liat<br><span class="zone-note">(Sifat: Sangat berpasir dan kasar)</span></div>
+              <div class="zone-content">90% Pasir, 05% Kelodak, 05% Liat<br><span class="zone-note">(Sifat: Sangat berpasir dan kasar)</span></div>
+                <div class="zone-slot"></div>
+              </div>
             </div>
             <div class="drop-zone" data-answer="tanah-liat">
-              <div class="zone-label">Sampel 2</div>
               <div class="zone-content">70% Liat, 15% Pasir, 15% Kelodak<br><span class="zone-note">(Sifat: Kandungan liat yang sangat tinggi)</span></div>
+                <div class="zone-slot"></div>
             </div>
             <div class="drop-zone" data-answer="loam">
-              <div class="zone-label">Sampel 3</div>
               <div class="zone-content">20% Liat, 40% Pasir, 40% Kelodak<br><span class="zone-note">(Sifat: Campuran komponen yang paling seimbang)</span></div>
-            </div>
+                <div class="zone-slot"></div>
           </div>
 
-          <button class="btn-next" id="btn-station-2-next" style="display: none;">Lanjut ke Stesen 3</button>
-          <button class="btn-restart btn-restart-expedition">Mula Semula Eksperimen</button>
         </div>
       </div>
 
@@ -149,30 +151,32 @@
 
           <!-- Drag options (unordered steps) -->
           <div class="drag-options station-3-options">
-            <div class="drag-item" draggable="true" data-step="1">Timbang 50 gram sampel enam jenis tanah di dalam bekas.</div>
-            <div class="drag-item" draggable="true" data-step="2">Lembapkan 50 gm tanah tersebut dengan air yang secukupnya.</div>
-            <div class="drag-item" draggable="true" data-step="3">Bentukkan tanah menjadi seperti cincin.</div>
-            <div class="drag-item" draggable="true" data-step="4">Hasil tanah yang telah dibentuk diletakkan mengikut label untuk tujuan pemerhatian.</div>
+            <div class="drag-item" draggable="true" data-step="1">Langkah 1</div>
+            <div class="drag-item" draggable="true" data-step="2">Langkah 2</div>
+            <div class="drag-item" draggable="true" data-step="3">Langkah 3</div>
+            <div class="drag-item" draggable="true" data-step="4">Langkah 4</div>
           </div>
 
           <!-- Drop zones (ordered sequence) -->
           <div class="drop-zones ordered-sequence">
-            <div class="drop-zone" data-answer="1">
-              <div class="zone-label">Langkah 1</div>
+            <div class="drop-zone" data-answer="3">
+              <div class="zone-content">Bentukkan tanah menjadi seperti cincin.</div>
+                <div class="zone-slot"></div>
             </div>
             <div class="drop-zone" data-answer="2">
-              <div class="zone-label">Langkah 2</div>
-            </div>
-            <div class="drop-zone" data-answer="3">
-              <div class="zone-label">Langkah 3</div>
+              <div class="zone-content">Lembapkan 50 gm tanah tersebut dengan air yang secukupnya.</div>
+                <div class="zone-slot"></div>
             </div>
             <div class="drop-zone" data-answer="4">
-              <div class="zone-label">Langkah 4</div>
+              <div class="zone-content">Hasil tanah yang telah dibentuk diletakkan mengikut content untuk tujuan pemerhatian.</div>
+                <div class="zone-slot"></div>
+            </div>
+            <div class="drop-zone" data-answer="1">
+              <div class="zone-content">Timbang 50 gram sampel enam jenis tanah di dalam bekas.</div>
+                <div class="zone-slot"></div>
             </div>
           </div>
 
-          <button class="btn-next" id="btn-station-3-next" style="display: none;">Selesai</button>
-          <button class="btn-restart btn-restart-expedition">Mula Semula Eksperimen</button>
         </div>
       </div>
 
@@ -186,6 +190,17 @@
         <p>Anda telah menyelesaikan Misi Ekspedisi Tanah dengan jayanya!</p>
         <p class="final-score">Semua Stesen Selesai ✓</p>
         <a href="jenis-tanah.html" class="btn-restart">Kembali ke Jenis Tanah</a>
+      </div>
+    </div>
+
+    <div id="station-complete-modal" class="complete-modal hidden">
+      <div class="complete-box">
+        <h2>Stesen Selesai 🎉</h2>
+        <p>Anda telah melengkapkan semua jawapan dengan betul!</p>
+
+        <div class="complete-actions">
+          <button id="next-station-btn">Lanjut ke Stesen Seterusnya</button>
+        </div>
       </div>
     </div>
 

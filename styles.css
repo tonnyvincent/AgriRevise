@@ -289,6 +289,16 @@ body.game-page .hero-body {
   }
 }
 
+.lp-hero-body {
+  position: relative;
+  z-index: 5;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 52px;
+}
+
 /* ── Page title banner ── */
 .lp-title-bar {
   position: relative;
@@ -336,14 +346,13 @@ body.game-page .hero-body {
   align-items: center;
   transition: transform 0.25s ease;
   border: 4px solid var(--green-mid);
-  /* box-shadow: 0 20px 50px rgba(0,0,0,0.28); */
   box-shadow: 
   0 10px 30px rgba(0, 0, 0, 0.1), /* Soft drop shadow for depth */
   0 0 15px rgba(255, 255, 255, 0.8); /* Inner white glow */
 }
 
 /* Card image / illustration placeholder */
-.lp-card-img, .lp-card-img-3 {
+.lp-card-img {
   position: relative;
   width: 86%; 
   flex: 1;
@@ -509,7 +518,7 @@ body.game-page .hero-body {
   }
   
   .lp-cards-area { 
-    padding: 16px 12px 70px; 
+    padding: 16px 12px 200px; 
     gap: 12px; 
     align-items: center;
     justify-content: center;
@@ -517,8 +526,8 @@ body.game-page .hero-body {
   }
   
   .lp-card { 
-    width: 150px; 
-    height: 180px; 
+    width: 130px; 
+    height: 170px; 
     border-radius: 18px; 
     border: 2px solid var(--green-mid);
     flex-shrink: 0;
@@ -550,7 +559,7 @@ body.game-page .hero-body {
 /* Extra small mobile (under 360px) */
 @media (max-width: 360px) {
   
-  .lp-card { width: 115px; height: 170px; }
+  .lp-card { width: 90px; height: 120px; }
   .lp-card-label { font-size: 0.65rem; }
 }
 
@@ -596,7 +605,6 @@ body.game-page .hero-body {
 .game-container {
   position: relative;
   z-index: 5;
-  flex: 1;
   display: flex;
   flex-direction: row;
   gap: 40px;
@@ -606,7 +614,7 @@ body.game-page .hero-body {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  height: calc(100vh - 150px); /* Adjust based on your nav height */
+  height: calc(100vh - 350px);
 }
 
 .tdtp-game-container {
@@ -1253,5 +1261,80 @@ body.game-page .hero-body {
 @media (max-width: 380px) {
   .layer-label {
     display: none; /* hide labels on very tiny screens, layers still visible */
+  }
+}
+
+.drag-preview {
+  position: fixed;
+  transform: scale(1.05);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.complete-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+}
+
+.complete-modal.hidden {
+  display: none;
+}
+
+.complete-box {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  width: 300px;
+
+  animation: popIn 0.25s ease;
+}
+
+.complete-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.complete-actions button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#next-station-btn {
+  background: #667eea;
+  color: white;
+}
+
+#restart-expedition-btn {
+  background: #eb3349;
+  color: white;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
