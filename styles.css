@@ -609,6 +609,22 @@ body.game-page .hero-body {
   height: calc(100vh - 150px); /* Adjust based on your nav height */
 }
 
+.tdtp-game-container {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: block;
+  flex-direction: row;
+  gap: 40px;
+  padding: 20px;
+  align-items: center; /* This centers the items vertically */
+  justify-content: center; /* This centers the group horizontally */
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  height: calc(100vh - 150px); /* Adjust based on your nav height */
+}
+
 /* Soil Profile Section */
 .game-profile {
   flex: 0 0 220px;
@@ -1017,6 +1033,11 @@ body.game-page .hero-body {
   min-height: 380px;
 }
 
+#completion-screen {
+  position: relative;
+  z-index: 999;
+}
+
 .completion-content {
   text-align: center;
   padding: 40px;
@@ -1054,7 +1075,6 @@ body.game-page .hero-body {
   border-radius: 12px;
   font-weight: 700;
   text-decoration: none;
-  margin-top: 24px;
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
