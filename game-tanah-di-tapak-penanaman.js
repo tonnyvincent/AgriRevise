@@ -504,7 +504,7 @@ function showFinalCompletion() {
   `;
 
   document.getElementById('complete-btn').onclick = () => {
-    window.location.href = "latihan-pengukuhan.html";
+    window.location.href = "../latihan-pengukuhan.html";
   };
 
   // log for later DB usage
