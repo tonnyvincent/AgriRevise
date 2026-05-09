@@ -3,24 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgriRevise</title>
+  <title>Papan Prestasi - +AgriRevise</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <div class="page">
+  <div class="page leaderboard-page">
 
-    <!-- BACKGROUND IMAGES -->
+    <!-- BACKGROUND -->
     <img src="images/background-latihan-pengukuhan.png" alt="Farm" class="bg-img desktop-bg" />
     <img src="images/background-latihan-pengukuhan-mobile.png" alt="Farm Mobile" class="bg-img mobile-bg" />
     <div class="bg-overlay"></div>
 
-    <!-- ═══ NAVBAR ═══ -->
+    <!-- NAVBAR -->
     <nav>
       <a href="#" class="nav-logo">
-
         <img src="images/agrirevise-logo.png" alt="AgriRevise" class="nav-logo-img" />
+
         <span class="nav-logo-text">
           <span class="logo-agri">+Agri</span><span class="logo-revise">Revise</span>
         </span>
@@ -29,65 +31,49 @@
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#">Manual Penggunaan</a></li>
-          <li><a href="latihan-pengukuhan.html">Latihan Pengukuhan</a></li>        
-          <li><a href="#">Papan Prestasi</a></li>
+          <li><a href="latihan-pengukuhan.html">Latihan Pengukuhan</a></li>
+          <li><a href="papan-prestasi.html">Papan Prestasi</a></li>
         </ul>
 
         <div class="nav-actions">
           <a href="index.html" class="nav-cta">Laman Utama</a>
+
           <button class="nav-toggle" id="nav-toggle">☰</button>
 
           <div class="nav-dropdown" id="nav-dropdown">
             <a href="#">Manual Penggunaan</a>
             <a href="latihan-pengukuhan.html">Latihan Pengukuhan</a>
-            <a href="#">Papan Prestasi</a>
+            <a href="papan-prestasi.html">Papan Prestasi</a>
           </div>
         </div>
       </div>
     </nav>
 
-    <!-- ═══ HERO BODY ═══ -->
-    <div class="hero-body">
-
-    <!-- ═══ PAGE TITLE ═══ -->
+    <!-- TITLE -->
     <div class="lp-title-bar">
-      <div class="lp-title-pill">1.1 Jenis Tanah</div>
+      <div class="lp-title-pill">🏆 Papan Prestasi</div>
     </div>
 
-    </div>
+    <!-- LEADERBOARD -->
+    <div class="leaderboard-wrapper">
 
-    <!-- ═══ TOPIC CARDS ═══ -->
-    <div class="lp-cards-area">
+      <div class="leaderboard-card">
 
-      <!-- Card 1 — Jenis dan Sifat Tanah -->
-       
-      <a href="games/jenis-dan-sifat-tanah.html" class="lp-card">
-            <div class="lp-card-img">
-                <img src="images/icon-jenis-dan-sifat-tanah.png" alt="Jenis dan Sifat Tanah"/>
-            
-                <div class="lp-card-label">Jenis dan Sifat Tanah</div>
-            </div>
-      </a>
+        <div class="leaderboard-header">
+          <div>Kedudukan</div>
+          <div>Nama</div>
+          <div>Skor</div>
+        </div>
 
-      <!-- Card 2 — Tanah di Tapak Penanaman -->
-      <a href="games/tanah-di-tapak-penanaman.html" class="lp-card locked-card" id="tapak-card">
-            
-            <div class="lock-overlay" id="lock-overlay">
-              🔒
-            </div>
+        <div id="leaderboard-list"></div>
 
-            <div class="lp-card-img">
-                <img src="images/icon-jenis-jenis-tanah.png" alt="Tanah di Tapak Penanaman"/>
-            
-                <div class="lp-card-label">Tanah di Tapak Penanaman</div>
-            </div>
-      </a>
+      </div>
 
     </div>
-    <!-- /.lp-cards-area -->
 
-  </div><!-- /.lp-page -->
+  </div>
 
   <script src="script.js"></script>
+  <script src="leaderboard.js"></script>
 </body>
 </html>

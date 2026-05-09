@@ -216,6 +216,10 @@ function updateProgress() {
 
 // Show completion screen
 function showCompletion() {
+
+  // SAVE COMPLETION
+  localStorage.setItem('jenisTanahCompleted', 'true');
+
   document.querySelector('.question-card').style.display = 'none';
   document.getElementById('completion-screen').style.display = 'flex';
   document.getElementById('final-score').textContent = gameState.score;

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.2.1 Struktur Tanah — +AgriRevise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../struktur-tanah.css" />
+</head>
+<body>
+
+  <div class="page st-page">
+
+    <!-- BACKGROUND -->
+    <img src="../images/background-latihan-pengukuhan.png" alt="Farm" class="bg-img desktop-bg" />
+    <img src="../images/background-latihan-pengukuhan-mobile.png" alt="Farm Mobile" class="bg-img mobile-bg" />
+    <div class="bg-overlay"></div>
+
+    <!-- ═══ NAVBAR ═══ -->
+    <nav>
+      <a href="#" class="nav-logo">
+        <img src="../images/agrirevise-logo.png" alt="AgriRevise" class="nav-logo-img" />
+        <span class="nav-logo-text">
+          <span class="logo-agri">+Agri</span><span class="logo-revise">Revise</span>
+        </span>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#">Manual Penggunaan</a></li>
+          <li><a href="../latihan-pengukuhan.html">Latihan Pengukuhan</a></li>
+          <li><a href="#">Papan Prestasi</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="../index.html" class="nav-cta">Laman Utama</a>
+          <button class="nav-toggle" id="nav-toggle">☰</button>
+          <div class="nav-dropdown" id="nav-dropdown">
+            <a href="#">Manual Penggunaan</a>
+            <a href="../latihan-pengukuhan.html">Latihan Pengukuhan</a>
+            <a href="#">Papan Prestasi</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ═══ GAME SHELL ═══ -->
+    <div class="st-shell">
+
+      <!-- Progress Bar + Score -->
+      <div class="st-topbar">
+        <button class="st-back-btn" onclick="window.location.href='pemuliharaan-tanah.html'">← Kembali</button>
+        <div class="st-progress-wrap">
+          <div class="st-progress-track">
+            <div class="st-progress-fill" id="progress-fill"></div>
+          </div>
+          <span class="st-step-label" id="step-label">Fasa 1 / 3</span>
+        </div>
+        <!-- <div class="st-score-pill">⭐ <span id="score-display">0</span></div> -->
+      </div>
+
+      <!-- ═══════════════════════════════════════
+           FASA 1 — Pengecaman Visual (Drag & Drop)
+      ════════════════════════════════════════════ -->
+      <div class="st-fasa" id="fasa-1">
+        <div class="st-fasa-header">
+          <div class="st-fasa-badge">Fasa 1</div>
+          <h2 class="st-fasa-title">Makmal Geologi — Bilik Pengasingan Sampel</h2>
+          <p class="st-fasa-desc">Seret label nama ke dulang bentuk tanah yang betul.</p>
+        </div>
+
+        <!-- Drag labels bank -->
+        <div class="st-drag-bank" id="drag-bank-1">
+          <div class="st-drag-chip" draggable="true" data-label="KOLUMNAR">KOLUMNAR</div>
+          <div class="st-drag-chip" draggable="true" data-label="PRISMATIK">PRISMATIK</div>
+          <div class="st-drag-chip" draggable="true" data-label="BERLAPIS">BERLAPIS</div>
+          <div class="st-drag-chip" draggable="true" data-label="BUTIR RAPUH">BUTIR RAPUH</div>
+          <div class="st-drag-chip" draggable="true" data-label="BERBLOK">BERBLOK</div>
+        </div>
+
+        <!-- Drop trays -->
+        <div class="st-trays">
+
+          <div class="st-tray" data-answer="KOLUMNAR">
+            <div class="st-tray-visual">
+              <!-- Kolumnar: tall columns with rounded tops -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8"  y="20" width="14" height="50" rx="7" fill="#8B7355" stroke="#5C4A2A" stroke-width="1.5"/>
+                <rect x="27" y="14" width="14" height="56" rx="7" fill="#9B8265" stroke="#5C4A2A" stroke-width="1.5"/>
+                <rect x="46" y="18" width="14" height="52" rx="7" fill="#8B7355" stroke="#5C4A2A" stroke-width="1.5"/>
+                <rect x="65" y="22" width="12" height="48" rx="6" fill="#7A6245" stroke="#5C4A2A" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="st-drop-zone" data-answer="KOLUMNAR">
+              <span class="st-drop-hint">Lepaskan di sini</span>
+            </div>
+          </div>
+
+          <div class="st-tray" data-answer="PRISMATIK">
+            <div class="st-tray-visual">
+              <!-- Prismatik: tall prisms with flat tops -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8"  y="12" width="14" height="58" rx="2" fill="#7A6B4A" stroke="#4A3A1A" stroke-width="1.5"/>
+                <rect x="26" y="8"  width="14" height="62" rx="2" fill="#8A7B5A" stroke="#4A3A1A" stroke-width="1.5"/>
+                <rect x="44" y="12" width="14" height="58" rx="2" fill="#7A6B4A" stroke="#4A3A1A" stroke-width="1.5"/>
+                <rect x="62" y="16" width="12" height="54" rx="2" fill="#6A5B3A" stroke="#4A3A1A" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="st-drop-zone" data-answer="PRISMATIK">
+              <span class="st-drop-hint">Lepaskan di sini</span>
+            </div>
+          </div>
+
+          <div class="st-tray" data-answer="BERBLOK">
+            <div class="st-tray-visual">
+              <!-- Berblok: irregular cube shapes -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5"  y="35" width="28" height="30" rx="4" fill="#9B8B6B" stroke="#5A4A2A" stroke-width="1.5"/>
+                <rect x="22" y="20" width="26" height="28" rx="4" fill="#8B7B5B" stroke="#5A4A2A" stroke-width="1.5"/>
+                <rect x="44" y="38" width="30" height="24" rx="4" fill="#AB9B7B" stroke="#5A4A2A" stroke-width="1.5"/>
+                <rect x="10" y="10" width="22" height="22" rx="4" fill="#7B6B4B" stroke="#5A4A2A" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="st-drop-zone" data-answer="BERBLOK">
+              <span class="st-drop-hint">Lepaskan di sini</span>
+            </div>
+          </div>
+
+          <div class="st-tray" data-answer="BERLAPIS">
+            <div class="st-tray-visual">
+              <!-- Berlapis: horizontal layers -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="15" width="70" height="10" rx="3" fill="#C4A882" stroke="#7A5C3A" stroke-width="1.5"/>
+                <rect x="5" y="29" width="70" height="10" rx="3" fill="#A8895C" stroke="#7A5C3A" stroke-width="1.5"/>
+                <rect x="5" y="43" width="70" height="10" rx="3" fill="#C4A882" stroke="#7A5C3A" stroke-width="1.5"/>
+                <rect x="5" y="57" width="70" height="10" rx="3" fill="#B49870" stroke="#7A5C3A" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="st-drop-zone" data-answer="BERLAPIS">
+              <span class="st-drop-hint">Lepaskan di sini</span>
+            </div>
+          </div>
+
+          <div class="st-tray" data-answer="BUTIR RAPUH">
+            <div class="st-tray-visual">
+              <!-- Butir Rapuh: small round granules -->
+              <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="45" r="9"  fill="#C8A87A" stroke="#7A5C3A" stroke-width="1.5"/>
+                <circle cx="32" cy="35" r="8"  fill="#B89060" stroke="#7A5C3A" stroke-width="1.5"/>
+                <circle cx="50" cy="48" r="10" fill="#D4B484" stroke="#7A5C3A" stroke-width="1.5"/>
+                <circle cx="66" cy="38" r="8"  fill="#C0986A" stroke="#7A5C3A" stroke-width="1.5"/>
+                <circle cx="22" cy="60" r="7"  fill="#A87840" stroke="#7A5C3A" stroke-width="1.5"/>
+                <circle cx="42" cy="65" r="8"  fill="#C8A87A" stroke="#7A5C3A" stroke-width="1.5"/>
+                <circle cx="60" cy="62" r="7"  fill="#B89060" stroke="#7A5C3A" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="st-drop-zone" data-answer="BUTIR RAPUH">
+              <span class="st-drop-hint">Lepaskan di sini</span>
+            </div>
+          </div>
+
+        </div><!-- /.st-trays -->
+
+        <button class="st-next-btn" id="fasa1-next">Seterusnya →</button>
+      </div><!-- /#fasa-1 -->
+
+
+      <!-- ═══════════════════════════════════════
+           FASA 2 — Imbasan Mikroskop (Padanan Ciri)
+      ════════════════════════════════════════════ -->
+      <div class="st-fasa hidden" id="fasa-2">
+        <div class="st-fasa-header">
+          <div class="st-fasa-badge">Fasa 2</div>
+          <h2 class="st-fasa-title">Imbasan Mikroskop — Padanan Ciri</h2>
+          <p class="st-fasa-desc">Seret ciri-ciri ke nama struktur tanah yang betul.</p>
+        </div>
+
+        <div class="st-matching-area">
+          <!-- Ciri chips on left -->
+          <div class="st-ciri-bank" id="ciri-bank">
+            <div class="st-ciri-chip" draggable="true" data-ciri="liang">Mempunyai ruang liang paling banyak</div>
+            <div class="st-ciri-chip" draggable="true" data-ciri="kubus">Berbentuk kubus yang tidak sekata</div>
+            <div class="st-ciri-chip" draggable="true" data-ciri="tiang">Berbentuk seperti tiang dengan puncak yang berbentuk agak bulat</div>
+          </div>
+
+          <!-- Drop targets on right -->
+          <div class="st-match-targets">
+            <div class="st-match-target" data-answer="liang">
+              <span class="st-match-label">Butir Rapuh</span>
+              <div class="st-match-drop" data-answer="liang"><span class="st-drop-hint">Lepaskan di sini</span></div>
+            </div>
+            <div class="st-match-target" data-answer="kubus">
+              <span class="st-match-label">Berblok</span>
+              <div class="st-match-drop" data-answer="kubus"><span class="st-drop-hint">Lepaskan di sini</span></div>
+            </div>
+            <div class="st-match-target" data-answer="tiang">
+              <span class="st-match-label">Kolumnar</span>
+              <div class="st-match-drop" data-answer="tiang"><span class="st-drop-hint">Lepaskan di sini</span></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="st-next-btn" id="fasa2-next" disabled>Seterusnya →</button>
+      </div><!-- /#fasa-2 -->
+
+
+      <!-- ═══════════════════════════════════════
+           FASA 3 — Simulasi Kesan (MCQ Checkboxes)
+      ════════════════════════════════════════════ -->
+      <div class="st-fasa hidden" id="fasa-3">
+        <div class="st-fasa-header">
+          <div class="st-fasa-badge">Fasa 3</div>
+          <h2 class="st-fasa-title">Simulasi Kesan — Kepentingan Struktur Tanah</h2>
+          <p class="st-fasa-desc">Pilih <strong>3 kepentingan</strong> struktur tanah yang betul untuk pokok tumbuh sihat.</p>
+        </div>
+
+        <div class="st-sim-area">
+          <!-- Plant simulation display -->
+          <div class="st-plant-display" id="plant-display">
+            <div class="st-plant-emoji" id="plant-emoji">🌱</div>
+            <p class="st-plant-status" id="plant-status">Pilih jawapan yang betul…</p>
+          </div>
+
+          <!-- Options -->
+          <div class="st-options-grid" id="options-grid">
+            <button class="st-option-btn" data-val="pengudaraan" data-correct="true">
+              <span class="st-option-icon">💨</span>
+              Memperbaiki pengudaraan tanah
+            </button>
+            <button class="st-option-btn" data-val="kepadatan" data-correct="true">
+              <span class="st-option-icon">🛡️</span>
+              Mencegah kepadatan tanah
+            </button>
+            <button class="st-option-btn" data-val="penyaliran" data-correct="false">
+              <span class="st-option-icon">🚫</span>
+              Menghalang penyaliran air
+            </button>
+            <button class="st-option-btn" data-val="pegangan" data-correct="true">
+              <span class="st-option-icon">💧</span>
+              Mengekalkan daya pegangan air tanah
+            </button>
+          </div>
+
+          <p class="st-fasa3-hint" id="fasa3-hint"></p>
+        </div>
+
+        <button class="st-next-btn" id="fasa3-submit">Semak Jawapan</button>
+      </div><!-- /#fasa-3 -->
+
+      <!-- ═══════════════════════════════════════
+           COMPLETE SCREEN
+      ════════════════════════════════════════════ -->
+      <div class="st-fasa hidden" id="fasa-complete">
+        <div class="st-complete-inner">
+          <div class="st-complete-trophy">🏆</div>
+          <h2 class="st-complete-title">Tahniah!</h2>
+          <p class="st-complete-sub">Anda telah selesai Makmal Geologi AgriRevise.</p>
+          <div class="st-final-score">
+            Jumlah Skor: <span id="final-score-display">0</span> mata
+          </div>
+          <div class="st-complete-actions">
+            <!-- <button class="st-action-btn st-btn-retry" onclick="restartGame()">🔄 Cuba Semula</button> -->
+            <button class="st-action-btn st-btn-home" onclick="window.location.href='../pemuliharaan-tanah.html'">🏠 Kembali</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.st-shell -->
+
+  </div><!-- /.page -->
+
+  <div id="fasa-result-modal" class="complete-modal hidden">
+    <div class="complete-box">
+      <h2 id="fasa-result-title">Fasa Selesai 🎉</h2>
+      <p id="fasa-result-message">Anda mendapat 0/0 betul.</p>
+
+      <div class="complete-actions">
+        <button id="fasa-result-next">Seterusnya</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+  <script src="../struktur-tanah.js"></script>
+</body>
+</html>

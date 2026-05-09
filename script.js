@@ -45,3 +45,99 @@ document.addEventListener('click', (e) => {
     navDropdown.style.display = 'none';
   }
 });
+
+// ======================================
+// LOCK / UNLOCK SECOND GAME
+// ======================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const tapakCard = document.getElementById('tapak-card');
+  const lockOverlay = document.getElementById('lock-overlay');
+
+  if (!tapakCard) return;
+
+  // check unlock status
+  const gameUnlocked = localStorage.getItem('jenisTanahCompleted');
+
+  // LOCKED
+  if (gameUnlocked !== 'true') {
+
+    tapakCard.classList.add('locked');
+
+    tapakCard.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      alert('Selesaikan permainan "Jenis dan Sifat Tanah" terlebih dahulu.');
+    });
+
+  }
+
+  // UNLOCKED
+  else {
+    tapakCard.classList.remove('locked');
+
+    if (lockOverlay) {
+      lockOverlay.style.display = 'none';
+    }
+  }
+
+});
+
+// ======================================
+// PLAYER NAME MODAL
+// ======================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const modal = document.getElementById('name-modal');
+  const input = document.getElementById('player-name-input');
+  const saveBtn = document.getElementById('save-player-name');
+
+  if (!modal) return;
+
+  // check existing player
+  const existingName = localStorage.getItem('playerName');
+
+  // already exists
+  if (existingName) {
+    modal.classList.add('hidden');
+    return;
+  }
+
+  // first time user
+  modal.classList.remove('hidden');
+
+  // auto focus
+  setTimeout(() => {
+    input.focus();
+  }, 200);
+
+  function savePlayerName() {
+
+    const playerName = input.value.trim();
+
+    if (playerName.length < 2) {
+      alert('Sila masukkan nama yang sah.');
+      return;
+    }
+
+    // SAVE LOCALLY
+    localStorage.setItem('playerName', playerName);
+
+    console.log("PLAYER NAME SAVED:", playerName);
+
+    // later you can send to DB here
+
+    modal.classList.add('hidden');
+  }
+
+  saveBtn.addEventListener('click', savePlayerName);
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      savePlayerName();
+    }
+  });
+
+});

@@ -481,6 +481,28 @@ function showFinalCompletion() {
 
   const percentage = Math.round((totalCorrect / totalQuestions) * 100);
 
+  // ======================================
+  // SAVE TO LOCAL LEADERBOARD
+  // ======================================
+
+  const playerName = localStorage.getItem('playerName') || 'Pemain';
+
+  const leaderboardScores = JSON.parse(
+    localStorage.getItem('leaderboardScores')
+  ) || [];
+
+  leaderboardScores.push({
+    name: playerName,
+    score: percentage,
+    date: new Date().toISOString()
+  });
+
+  localStorage.setItem(
+    'leaderboardScores',
+    JSON.stringify(leaderboardScores)
+  );
+
+
   // create modal content
   const modal = document.getElementById('station-complete-modal');
   modal.classList.remove('hidden');
