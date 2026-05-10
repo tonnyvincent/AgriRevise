@@ -8,6 +8,7 @@ let currentFasa = 1;
 
 // ── Phase tracking ──
 const TOTAL_FASA = 3;
+const TOTAL_QUESTIONS = 11;
 const POINTS = {
   fasa1PerDrop : 10,   // per correct drop in fasa 1
   fasa2PerDrop : 15,   // per correct drop in fasa 2
@@ -21,11 +22,7 @@ const $$ = (sel) => document.querySelectorAll(sel);
 
 function addScore(pts) {
   totalScore += pts;
-
-  const scoreDisplay = $('score-display');
-  if (scoreDisplay) {
-    scoreDisplay.textContent = totalScore;
-  }
+  updateScoreDisplay();
 
   const pill = document.querySelector('.st-score-pill');
   if (pill) {
@@ -33,6 +30,14 @@ function addScore(pts) {
     setTimeout(() => {
       pill.style.transform = 'scale(1)';
     }, 220);
+  }
+}
+
+function updateScoreDisplay() {
+  const scoreDisplay = $('score-display');
+  if (scoreDisplay) {
+    scoreDisplay.textContent = totalScore;
+    scoreDisplay.parentElement?.setAttribute('aria-label', `Skor ${totalScore}/${TOTAL_QUESTIONS}`);
   }
 }
 
@@ -203,6 +208,7 @@ function checkFasa1Answers() {
   });
 
   totalScore += correct;
+  updateScoreDisplay();
 
   $('fasa1-next').textContent = 'Seterusnya →';
   fasa1Checked = true;
@@ -279,6 +285,7 @@ function checkFasa2Answers() {
   });
 
   totalScore += correct;
+  updateScoreDisplay();
 
   $('fasa2-next').textContent = 'Seterusnya →';
   fasa2Checked = true;
@@ -376,20 +383,21 @@ function handleFasa3Submit() {
   });
 
   totalScore += correctCount;
+  updateScoreDisplay();
 
   if (wrongCount === 0 && correctCount === REQUIRED_SELECTIONS) {
     setPlant('great');
   } else if (wrongCount > 0) {
     setPlant('sad');
-    $('fasa3-hint').textContent = `${correctCount} betul, ${wrongCount} salah. Cuba lagi!`;
+    $('fasa3-hint').textContent = `${correctCount} betul, ${wrongCount} salah.`;
   } else {
     setPlant('happy');
   }
 
-  $('fasa3-submit').textContent = 'Selesai ✓';
-  $('fasa3-submit').disabled = false;
-  $('fasa3-submit').removeEventListener('click', handleFasa3Submit);
-  $('fasa3-submit').addEventListener('click', finishGame);
+  $('fasa3-submit').textContent = 'Selesai';
+  $('fasa3-submit').disabled = true;
+
+  showFasaResultModal(3, correctCount, REQUIRED_SELECTIONS, finishGame, 'Makmal Selesai');
 }
 
 // =============================================
@@ -400,7 +408,7 @@ function finishGame() {
   setProgress(TOTAL_FASA + 1);
   $('progress-fill').style.width = '100%';
   $('step-label').textContent = 'Selesai!';
-  const totalQuestions = FASA1_TOTAL + FASA2_TOTAL + REQUIRED_SELECTIONS;
+  const totalQuestions = TOTAL_QUESTIONS;
   const percentage = Math.round((totalScore / totalQuestions) * 100);
 
   $('final-score-display').textContent = `${totalScore}/${totalQuestions} (${percentage}%)`;
@@ -415,7 +423,7 @@ function finishGame() {
 
 function restartGame() {
   totalScore  = 0;
-  $('score-display').textContent = '0';
+  updateScoreDisplay();
   currentFasa = 1;
 
   // Reset fasa 1 chips
@@ -478,10 +486,11 @@ function restartGame() {
 
 document.addEventListener('DOMContentLoaded', () => {
   setProgress(1);
+  updateScoreDisplay();
   initFasa1();
 });
 
-function showFasaResultModal(fasa, correct, total, nextAction) {
+function showFasaResultModal(fasa, correct, total, nextAction, buttonText = 'Seterusnya') {
   const modal = $('fasa-result-modal');
   const title = $('fasa-result-title');
   const message = $('fasa-result-message');
@@ -489,6 +498,7 @@ function showFasaResultModal(fasa, correct, total, nextAction) {
 
   title.textContent = `Fasa ${fasa} Selesai 🎉`;
   message.textContent = `Anda mendapat ${correct}/${total} betul (${Math.round((correct / total) * 100)}%)`;
+  nextBtn.textContent = buttonText;
 
   modal.classList.remove('hidden');
 

@@ -1,0 +1,615 @@
+/* =============================================
+   JENIS TANAH GAMES - phone-first shared styling
+   Scoped to jdst-game-body and tdtp-game-body
+   ============================================= */
+
+html:has(body.jdst-game-body),
+html:has(body.tdtp-game-body),
+body.jdst-game-body,
+body.tdtp-game-body {
+  width: 100%;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+body.jdst-game-body,
+body.tdtp-game-body {
+  background: #eaf4df;
+}
+
+.jdst-game-body .page,
+.tdtp-game-body .page {
+  width: min(100vw, 390px);
+  height: min(100dvh, 844px);
+  min-height: 0;
+  max-width: 390px;
+  max-height: 844px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.jdst-game-body .bg-img,
+.jdst-game-body .bg-overlay,
+.tdtp-game-body .bg-img,
+.tdtp-game-body .bg-overlay {
+  position: fixed;
+  height: 100vh;
+}
+
+.jdst-game-body .jdst-hero-body,
+.tdtp-game-body .jdst-hero-body {
+  flex: 0 0 auto;
+  padding: 6px 7px 0;
+  min-height: 0;
+}
+
+.jdst-game-body .jdst-title-bar,
+.tdtp-game-body .jdst-title-bar {
+  width: 100%;
+  padding: 0;
+}
+
+.jdst-game-body .jdst-title-pill,
+.tdtp-game-body .jdst-title-pill {
+  width: 100%;
+  min-height: 42px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background: rgba(240,250,252,0.88);
+  border: 1.5px solid rgba(160,200,100,0.3);
+  color: #1b5e2f;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.7rem;
+  line-height: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+.jdst-game-body .game-back-btn,
+.tdtp-game-body .game-back-btn {
+  flex: 0 0 auto;
+  border: 1.5px solid rgba(46,125,50,0.28);
+  border-radius: 9px;
+  background: rgba(46,125,50,0.12);
+  color: #1b5e2f;
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 6px 8px;
+  white-space: nowrap;
+}
+
+.jdst-game-body .game-progress,
+.tdtp-game-body .game-progress {
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.jdst-game-body .progress-text,
+.tdtp-game-body .progress-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.jdst-game-body .progress-bar,
+.tdtp-game-body .progress-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.jdst-game-body .progress-fill,
+.tdtp-game-body .progress-fill {
+  background: linear-gradient(90deg, #2e7d32, #66bb6a);
+  border-radius: 99px;
+}
+
+.jdst-game-body .game-score-pill,
+.tdtp-game-body .game-score-pill {
+  flex: 0 0 auto;
+  min-width: 46px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, #ff9500, #ffb74d);
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.68rem;
+  line-height: 1;
+  padding: 6px 9px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(255,149,0,0.28);
+  white-space: nowrap;
+}
+
+.jdst-game-body .question-card,
+.tdtp-game-body .question-card,
+.jdst-game-body .completion-content,
+.tdtp-game-body .completion-content,
+.tdtp-game-body .complete-box {
+  background: rgba(255,255,255,0.84);
+  backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(160,200,100,0.35);
+  border-radius: 16px;
+  box-shadow: 0 8px 36px rgba(0,0,0,0.13);
+}
+
+/* 1.1.1 Jenis dan Sifat Tanah */
+.jdst-game-body .game-container {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  width: 100%;
+  max-width: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 226px auto;
+  align-content: start;
+  align-items: start;
+  gap: 7px;
+  padding: 6px 7px 7px;
+  overflow: hidden;
+}
+
+.jdst-game-body .game-profile {
+  position: static;
+  flex: none;
+  width: 100%;
+  height: 226px;
+  min-height: 0;
+}
+
+.jdst-game-body .soil-profile {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  border: 1.5px solid rgba(160,200,100,0.35);
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.jdst-game-body .soil-layer {
+  flex: 1;
+  height: auto;
+  opacity: 0.52;
+  min-height: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.22);
+}
+
+.jdst-game-body .soil-layer.layer-unlock {
+  opacity: 1;
+}
+
+.jdst-game-body .soil-layer.jdst-particle-hit {
+  filter: saturate(1.25) brightness(1.08);
+}
+
+.jdst-game-body .layer-label {
+  display: block;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 0.5rem;
+  text-align: left;
+  white-space: nowrap;
+  opacity: 0.95;
+}
+
+.jdst-game-body .game-question {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 0;
+}
+
+.jdst-game-body .question-card {
+  height: auto;
+  min-height: 0;
+  padding: 11px 10px 10px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.jdst-game-body .question-text {
+  flex: 0 0 auto;
+  min-height: 0;
+  max-height: 112px;
+  overflow: hidden;
+  color: #1b5e2f;
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1.16;
+  text-align: center;
+}
+
+.jdst-game-body .question-text br {
+  margin-bottom: 2px;
+}
+
+.jdst-game-body .options-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.jdst-game-body .option-button {
+  min-height: 48px;
+  padding: 6px 7px;
+  border-radius: 11px;
+  border: 2px solid rgba(46,125,50,0.25);
+  background: rgba(255,255,255,0.8);
+  color: #1a2e1a;
+  font-size: 0.56rem;
+  font-weight: 900;
+  line-height: 1.14;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.jdst-game-body .option-button:hover:not(:disabled) {
+  border-color: #2e7d32;
+  background: rgba(46,125,50,0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(46,125,50,0.15);
+}
+
+.jdst-game-body .option-button.correct,
+.jdst-game-body .option-button.correct-highlight {
+  background: rgba(46,125,50,0.2);
+  border-color: #2e7d32;
+}
+
+.jdst-game-body .option-button.wrong {
+  background: rgba(220,50,50,0.12);
+  border-color: #e53935;
+}
+
+.jdst-game-body .feedback {
+  min-height: 24px;
+  font-size: 0.58rem;
+  line-height: 1.12;
+}
+
+.jdst-soil-particle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffcf5a 0 35%, #43a047 36% 100%);
+  box-shadow: 0 0 10px rgba(255,207,90,0.55);
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0.95;
+  transition:
+    transform 0.78s cubic-bezier(.2,.8,.2,1),
+    opacity 0.78s ease;
+}
+
+.jdst-game-body .btn-next,
+.tdtp-game-body .btn-restart {
+  align-self: center;
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 22px;
+  min-height: 34px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.68rem;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: 0;
+  box-shadow: 0 4px 18px rgba(46,125,50,0.3);
+}
+
+.jdst-game-body .completion-screen {
+  height: 100%;
+  min-height: 0;
+}
+
+.jdst-game-body .completion-content {
+  width: min(286px, 100%);
+  padding: 20px 16px;
+}
+
+.jdst-game-body .completion-content h2,
+.tdtp-game-body .completion-content h2 {
+  color: #1b5e2f;
+  font-size: 1.28rem;
+}
+
+.jdst-game-body .completion-content p,
+.tdtp-game-body .completion-content p {
+  color: #4a6a4a;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.jdst-game-body .final-score,
+.tdtp-game-body .final-score {
+  color: #fff !important;
+  background: linear-gradient(135deg, #ff9500, #ffb74d);
+  border-radius: 99px;
+  padding: 8px 18px;
+  font-size: 0.82rem !important;
+  margin: 8px auto !important;
+}
+
+/* 1.1.2 Tanah di Tapak Penanaman */
+.tdtp-game-body .tdtp-game-container {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  padding: 6px 7px 7px;
+  overflow: hidden;
+}
+
+.tdtp-game-body .game-station {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tdtp-game-body .game-station[style*="block"],
+.tdtp-game-body #station-1 {
+  display: block;
+}
+
+.tdtp-game-body .question-card {
+  height: 100%;
+  min-height: 0;
+  padding: 10px;
+  gap: 7px;
+  overflow: hidden;
+}
+
+.tdtp-game-body .question-text {
+  min-height: 0;
+  color: #1b5e2f;
+  font-size: 0.66rem;
+  font-weight: 900;
+  line-height: 1.12;
+  text-align: center;
+}
+
+.tdtp-game-body .instruction-text {
+  color: #4a6a4a;
+  font-size: 0.52rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+.tdtp-game-body .drag-options {
+  gap: 6px;
+  margin: 0;
+  min-height: 31px;
+}
+
+.tdtp-game-body .drag-item {
+  width: auto !important;
+  min-width: 58px;
+  max-width: 116px;
+  min-height: 28px;
+  margin: 0;
+  padding: 5px 8px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1b5e2f, #2e7d32);
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 900;
+  line-height: 1.08;
+  text-align: center;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  box-shadow: 0 3px 12px rgba(27,94,47,0.25);
+}
+
+.tdtp-game-body .drag-item.dragging {
+  opacity: 0.42;
+}
+
+.tdtp-game-body .drag-preview {
+  border-radius: 15px;
+  background: linear-gradient(135deg, #1b5e2f, #2e7d32);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+}
+
+.tdtp-game-body .drop-zones {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  margin: 0;
+}
+
+.tdtp-game-body .drop-zone {
+  display: grid;
+  grid-template-columns: 1fr 64px;
+  align-items: center;
+  gap: 6px;
+  min-height: 62px;
+  padding: 6px;
+  border: 2px dashed rgba(46,125,50,0.45);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.76);
+}
+
+.tdtp-game-body .drop-zone.drag-over {
+  border-color: #2e7d32;
+  background: rgba(46,125,50,0.12);
+}
+
+.tdtp-game-body .drop-zone.correct {
+  border-color: #2e7d32;
+  background: rgba(46,125,50,0.18);
+}
+
+.tdtp-game-body .drop-zone.incorrect {
+  border-color: #e53935;
+  background: rgba(220,50,50,0.12);
+}
+
+.tdtp-game-body .zone-content {
+  width: auto;
+  min-height: 0;
+  color: #365236;
+  font-size: 0.52rem;
+  font-weight: 800;
+  line-height: 1.1;
+  overflow: hidden;
+}
+
+.tdtp-game-body .zone-note {
+  color: #5f775f;
+  font-size: 0.48rem;
+}
+
+.tdtp-game-body .zone-slot {
+  flex: none;
+  width: 64px;
+  height: 30px;
+  border: 2px dashed rgba(46,125,50,0.35);
+  border-radius: 9px;
+  background: rgba(255,255,255,0.8);
+  padding: 2px;
+}
+
+.tdtp-game-body .dropped-item {
+  width: 100% !important;
+  min-width: 0;
+  max-width: none;
+  min-height: 0;
+  height: 100%;
+  margin: 0;
+  padding: 3px 4px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #1b5e2f, #2e7d32);
+  font-size: 0.45rem;
+  font-weight: 900;
+  line-height: 1;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: none;
+}
+
+.tdtp-game-body .dropped-item.correct {
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+}
+
+.tdtp-game-body .dropped-item.incorrect {
+  background: linear-gradient(135deg, #c62828, #ef5350);
+}
+
+.tdtp-game-body .ordered-sequence .drop-zone {
+  min-height: 50px;
+}
+
+.tdtp-game-body .tdtp-check-btn {
+  align-self: center;
+  min-height: 30px;
+  margin-top: 1px;
+  padding: 7px 18px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.62rem;
+  line-height: 1;
+  box-shadow: 0 4px 14px rgba(46,125,50,0.28);
+  cursor: pointer;
+}
+
+.tdtp-game-body .tdtp-check-btn:disabled {
+  background: rgba(46,125,50,0.22);
+  color: rgba(27,94,47,0.5);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.tdtp-game-body .complete-modal {
+  width: min(100vw, 390px);
+  height: min(100dvh, 844px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tdtp-game-body .complete-box {
+  width: min(330px, calc(100% - 28px));
+  padding: 20px 16px;
+  border-radius: 16px;
+}
+
+.tdtp-game-body .complete-box h2 {
+  color: #1b5e2f;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.18rem;
+}
+
+.tdtp-game-body .complete-box p {
+  color: #4a6a4a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.tdtp-game-body #next-station-btn,
+.tdtp-game-body #complete-btn {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: #fff;
+  border-radius: 18px;
+  padding: 9px 18px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.68rem;
+}
+
+.tdtp-game-body #completion-screen {
+  position: relative;
+  z-index: 8;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.tdtp-game-body .completion-content {
+  width: min(320px, calc(100% - 28px));
+  padding: 20px 16px;
+}
+
+@media (max-width: 370px) {
+  .jdst-game-body .game-container {
+    grid-template-rows: 210px auto;
+  }
+
+  .jdst-game-body .game-profile {
+    height: 210px;
+  }
+
+  .jdst-game-body .option-button,
+  .tdtp-game-body .zone-content {
+    font-size: 0.5rem;
+  }
+}

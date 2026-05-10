@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.2.2 PH Tanah - +AgriRevise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../ph-tanah.css" />
+</head>
+<body class="pht-game-body">
+
+  <div class="page pht-page">
+
+    <img src="../images/background-latihan-pengukuhan.png" alt="Farm" class="bg-img desktop-bg" />
+    <img src="../images/background-latihan-pengukuhan-mobile.png" alt="Farm Mobile" class="bg-img mobile-bg" />
+    <div class="bg-overlay"></div>
+
+    <nav>
+      <a href="#" class="nav-logo">
+        <img src="../images/agrirevise-logo.png" alt="AgriRevise" class="nav-logo-img" />
+        <span class="nav-logo-text">
+          <span class="logo-agri">+Agri</span><span class="logo-revise">Revise</span>
+        </span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#">Manual Penggunaan</a></li>
+          <li><a href="../latihan-pengukuhan.html">Latihan Pengukuhan</a></li>
+          <li><a href="#">Papan Prestasi</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="../index.html" class="nav-cta">Laman Utama</a>
+          <button class="nav-toggle" id="nav-toggle">☰</button>
+
+          <div class="nav-dropdown" id="nav-dropdown">
+            <a href="#">Manual Penggunaan</a>
+            <a href="../latihan-pengukuhan.html">Latihan Pengukuhan</a>
+            <a href="#">Papan Prestasi</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pht-shell" aria-live="polite">
+      <div class="pht-topbar">
+        <a class="pht-back-btn" href="../pemuliharaan-tanah.html">&larr; Kembali</a>
+        <div class="pht-progress-wrap">
+          <div class="pht-progress-track">
+            <div class="pht-progress-fill" id="pht-progress-fill"></div>
+          </div>
+          <span class="pht-step-label" id="pht-step-label">Stesen 1 / 3</span>
+        </div>
+        <div class="pht-score-pill"><span id="pht-score-display">0</span>/12</div>
+      </div>
+
+      <section class="pht-station" id="pht-station-1">
+        <div class="pht-station-header">
+          <div class="pht-station-badge">Stesen 1</div>
+          <h1 class="pht-station-title">Papan Kalibrasi pH</h1>
+          <p class="pht-station-desc">Seret label julat pH ke zon carta yang betul.</p>
+        </div>
+
+        <div class="pht-lab-board">
+          <div class="pht-scale-panel" aria-label="Carta skala pH">
+            <div class="pht-scale-numbers">
+              <span>pH 1</span>
+              <span>pH 7</span>
+              <span>pH 14</span>
+            </div>
+            <div class="pht-scale-bar">
+              <div class="pht-scale-zone pht-scale-zone-acid">
+                <div class="pht-drop-zone" data-pht-group="scale" data-pht-answer="asid" data-pht-hint="pH rendah">
+                  <span class="pht-drop-hint">pH rendah</span>
+                </div>
+              </div>
+              <div class="pht-scale-zone pht-scale-zone-neutral">
+                <div class="pht-drop-zone" data-pht-group="scale" data-pht-answer="neutral" data-pht-hint="pH 7">
+                  <span class="pht-drop-hint">pH 7</span>
+                </div>
+              </div>
+              <div class="pht-scale-zone pht-scale-zone-alkali">
+                <div class="pht-drop-zone" data-pht-group="scale" data-pht-answer="alkali" data-pht-hint="pH tinggi">
+                  <span class="pht-drop-hint">pH tinggi</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pht-chip-bank" id="pht-scale-bank">
+            <button class="pht-draggable pht-label-chip" type="button" draggable="true" data-pht-group="scale" data-pht-answer="neutral" data-pht-bank="pht-scale-bank">Neutral</button>
+            <button class="pht-draggable pht-label-chip" type="button" draggable="true" data-pht-group="scale" data-pht-answer="alkali" data-pht-bank="pht-scale-bank">Kealkalian semakin tinggi</button>
+            <button class="pht-draggable pht-label-chip" type="button" draggable="true" data-pht-group="scale" data-pht-answer="asid" data-pht-bank="pht-scale-bank">Semakin berasid</button>
+          </div>
+        </div>
+
+        <p class="pht-feedback" id="pht-station-1-feedback"></p>
+        <button class="pht-next-btn" id="pht-station-1-submit" type="button">Semak Jawapan</button>
+      </section>
+
+      <section class="pht-station pht-hidden" id="pht-station-2">
+        <div class="pht-station-header">
+          <div class="pht-station-badge">Stesen 2</div>
+          <h1 class="pht-station-title">Fail Laporan Tanah</h1>
+          <p class="pht-station-desc">Cop 3 faktor yang mempengaruhi pH tanah, kemudian padankan kesannya.</p>
+        </div>
+
+        <div class="pht-theory-grid">
+          <div class="pht-report-panel">
+            <div class="pht-panel-label">Faktor pH Tanah</div>
+            <div class="pht-factor-grid" id="pht-factor-grid">
+              <button class="pht-factor-card" type="button" data-pht-correct="true">Larut resapan</button>
+              <button class="pht-factor-card" type="button" data-pht-correct="false">Hakisan tanah</button>
+              <button class="pht-factor-card" type="button" data-pht-correct="true">Jenis bahan induk</button>
+              <button class="pht-factor-card" type="button" data-pht-correct="true">Penggunaan baja</button>
+            </div>
+          </div>
+
+          <div class="pht-effect-panel" id="pht-effect-area">
+            <div class="pht-panel-label">Kesan pH Tanah</div>
+            <div class="pht-effect-bank" id="pht-effect-bank">
+              <button class="pht-draggable pht-effect-chip" type="button" draggable="true" data-pht-group="effect" data-pht-answer="nutrien" data-pht-bank="pht-effect-bank">Ketersediaan Nutrien</button>
+              <button class="pht-draggable pht-effect-chip" type="button" draggable="true" data-pht-group="effect" data-pht-answer="penyakit" data-pht-bank="pht-effect-bank">Penyakit Tumbuhan</button>
+            </div>
+
+            <div class="pht-effect-targets">
+              <div class="pht-effect-card pht-effect-card-nutrient">
+                <div class="pht-effect-visual">
+                  <div class="pht-root pht-root-healthy"></div>
+                </div>
+                <p>Pada pH 5.5 hingga pH 6.5, nutrien dalam tanah dapat diambil oleh tumbuhan.</p>
+                <div class="pht-drop-zone" data-pht-group="effect" data-pht-answer="nutrien" data-pht-hint="Lepaskan tag">
+                  <span class="pht-drop-hint">Lepaskan tag</span>
+                </div>
+              </div>
+
+              <div class="pht-effect-card pht-effect-card-disease">
+                <div class="pht-effect-visual">
+                  <div class="pht-root pht-root-fungal"></div>
+                </div>
+                <p>Pada nilai pH tanah yang rendah, kulat mudah membiak.</p>
+                <div class="pht-drop-zone" data-pht-group="effect" data-pht-answer="penyakit" data-pht-hint="Lepaskan tag">
+                  <span class="pht-drop-hint">Lepaskan tag</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="pht-feedback" id="pht-station-2-feedback"></p>
+        <button class="pht-next-btn" id="pht-station-2-submit" type="button">Semak Jawapan</button>
+      </section>
+
+      <section class="pht-station pht-hidden" id="pht-station-3">
+        <div class="pht-station-header">
+          <div class="pht-station-badge">Stesen 3</div>
+          <h1 class="pht-station-title">Meja Eksperimen Utama</h1>
+          <p class="pht-station-desc">Susun prosedur menguji pH tanah menggunakan meter pH.</p>
+        </div>
+
+        <div class="pht-experiment-layout">
+          <div class="pht-instrument-panel">
+            <div class="pht-lab-demo" id="pht-lab-demo">
+              <div class="pht-buffer-bottle">
+                <span>Buffer</span>
+              </div>
+              <div class="pht-beaker">
+                <div class="pht-beaker-soil"></div>
+                <div class="pht-beaker-water"></div>
+              </div>
+              <div class="pht-meter" id="pht-meter">
+                <div class="pht-meter-screen" id="pht-meter-screen">--</div>
+                <div class="pht-meter-probe"></div>
+              </div>
+            </div>
+            <p class="pht-demo-caption" id="pht-demo-caption">Susun semua langkah untuk mengaktifkan simulasi meter pH.</p>
+          </div>
+
+          <div class="pht-procedure-area">
+            <div class="pht-procedure-bank" id="pht-procedure-bank">
+              <button class="pht-draggable pht-procedure-chip" type="button" draggable="true" data-pht-group="procedure" data-pht-answer="3" data-pht-bank="pht-procedure-bank">Kacau larutan hingga sebati dan biarkan selama 20 minit. Kacau semula larutan tersebut.</button>
+              <button class="pht-draggable pht-procedure-chip" type="button" draggable="true" data-pht-group="procedure" data-pht-answer="1" data-pht-bank="pht-procedure-bank">Uji meter pH dalam larutan penampan pH 4.1 atau pH 7.01.</button>
+              <button class="pht-draggable pht-procedure-chip" type="button" draggable="true" data-pht-group="procedure" data-pht-answer="4" data-pht-bank="pht-procedure-bank">Masukkan meter pH, dapatkan bacaan pH tanah dan catatkan pada laporan eksperimen.</button>
+              <button class="pht-draggable pht-procedure-chip" type="button" draggable="true" data-pht-group="procedure" data-pht-answer="2" data-pht-bank="pht-procedure-bank">Masukkan 10 g sampel tanah dan 10 ml air suling ke dalam bikar.</button>
+            </div>
+
+            <div class="pht-procedure-slots">
+              <div class="pht-procedure-slot">
+                <span class="pht-slot-number">1</span>
+                <div class="pht-drop-zone" data-pht-group="procedure" data-pht-answer="1" data-pht-hint="Langkah 1">
+                  <span class="pht-drop-hint">Langkah 1</span>
+                </div>
+              </div>
+              <div class="pht-procedure-slot">
+                <span class="pht-slot-number">2</span>
+                <div class="pht-drop-zone" data-pht-group="procedure" data-pht-answer="2" data-pht-hint="Langkah 2">
+                  <span class="pht-drop-hint">Langkah 2</span>
+                </div>
+              </div>
+              <div class="pht-procedure-slot">
+                <span class="pht-slot-number">3</span>
+                <div class="pht-drop-zone" data-pht-group="procedure" data-pht-answer="3" data-pht-hint="Langkah 3">
+                  <span class="pht-drop-hint">Langkah 3</span>
+                </div>
+              </div>
+              <div class="pht-procedure-slot">
+                <span class="pht-slot-number">4</span>
+                <div class="pht-drop-zone" data-pht-group="procedure" data-pht-answer="4" data-pht-hint="Langkah 4">
+                  <span class="pht-drop-hint">Langkah 4</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="pht-feedback" id="pht-station-3-feedback"></p>
+        <button class="pht-next-btn" id="pht-station-3-submit" type="button">Semak Jawapan</button>
+      </section>
+
+      <section class="pht-station pht-hidden" id="pht-station-complete">
+        <div class="pht-complete-inner">
+          <div class="pht-complete-medal">pH</div>
+          <h1 class="pht-complete-title">Makmal Selesai!</h1>
+          <p class="pht-complete-sub">Anda telah melengkapkan cabaran PH Tanah.</p>
+          <div class="pht-final-score">Skor: <span id="pht-final-score">0/12</span></div>
+          <a class="pht-home-btn" href="../pemuliharaan-tanah.html">Kembali ke Topik</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="pht-result-modal pht-hidden" id="pht-result-modal">
+    <div class="pht-result-box">
+      <h2 id="pht-result-title">Stesen Selesai</h2>
+      <p id="pht-result-message">Anda mendapat 0/0 betul.</p>
+      <button class="pht-next-btn" id="pht-result-next" type="button">Seterusnya</button>
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+  <script src="../ph-tanah.js"></script>
+</body>
+</html>

@@ -109,6 +109,7 @@ let gameState = {
 document.addEventListener('DOMContentLoaded', function() {
   loadQuestion();
   updateProgress();
+  updateScoreDisplay();
 });
 
 // Load and display current question
@@ -160,6 +161,7 @@ function selectOption(selectedIndex) {
   if (selectedIndex === question.correct) {
     // Correct answer
     gameState.score++;
+    updateScoreDisplay();
     gameState.answeredQuestions.add(gameState.currentQuestion);
     
     feedback.innerHTML = '<div class="feedback-correct">✓ Betul!</div>';
@@ -167,6 +169,8 @@ function selectOption(selectedIndex) {
     
     // Unlock soil layer every 3 correct answers (from bottom to top)
     const layerToUnlock = Math.floor((gameState.score - 1) / 3) + 1;
+    playSoilParticles(buttons[selectedIndex], layerToUnlock);
+
     if (gameState.score % 3 === 0 && layerToUnlock <= 5) {
       unlockLayer(layerToUnlock);
     }
@@ -198,6 +202,47 @@ function unlockLayer(stage) {
   }
 }
 
+function playSoilParticles(sourceEl, targetStage) {
+  const targetLayer = document.getElementById(`layer-${Math.min(targetStage, 5)}`);
+  const profile = document.querySelector('.soil-profile');
+
+  if (!sourceEl || !profile) return;
+
+  const targetEl = targetLayer || profile;
+  const sourceRect = sourceEl.getBoundingClientRect();
+  const targetRect = targetEl.getBoundingClientRect();
+  const startX = sourceRect.left + sourceRect.width / 2;
+  const startY = sourceRect.top + sourceRect.height / 2;
+
+  targetEl.classList.add('jdst-particle-hit');
+  window.setTimeout(() => {
+    targetEl.classList.remove('jdst-particle-hit');
+  }, 650);
+
+  for (let i = 0; i < 7; i++) {
+    const particle = document.createElement('span');
+    particle.className = 'jdst-soil-particle';
+    particle.style.left = `${startX}px`;
+    particle.style.top = `${startY}px`;
+
+    const endX = targetRect.left + (targetRect.width * (0.18 + Math.random() * 0.64));
+    const endY = targetRect.top + (targetRect.height * (0.25 + Math.random() * 0.5));
+    const driftX = endX - startX;
+    const driftY = endY - startY;
+
+    document.body.appendChild(particle);
+
+    window.setTimeout(() => {
+      particle.style.transform = `translate(${driftX}px, ${driftY}px) scale(0.38)`;
+      particle.style.opacity = '0.1';
+    }, 20 + i * 28);
+
+    window.setTimeout(() => {
+      particle.remove();
+    }, 940 + i * 28);
+  }
+}
+
 // Next question
 document.getElementById('btn-next').addEventListener('click', function() {
   if (gameState.currentQuestion < gameQuestions.length - 1) {
@@ -214,6 +259,13 @@ function updateProgress() {
   document.getElementById('progress-fill').style.width = progress + '%';
 }
 
+function updateScoreDisplay() {
+  const scoreDisplay = document.getElementById('jdst-score-display');
+  if (scoreDisplay) {
+    scoreDisplay.textContent = gameState.score;
+  }
+}
+
 // Show completion screen
 function showCompletion() {
 
@@ -223,6 +275,8 @@ function showCompletion() {
   document.querySelector('.question-card').style.display = 'none';
   document.getElementById('completion-screen').style.display = 'flex';
   document.getElementById('final-score').textContent = gameState.score;
+  document.getElementById('progress-fill').style.width = '100%';
+  updateScoreDisplay();
   
   // Animate completion
   document.getElementById('completion-screen').style.animation = 'fadeIn 0.6s ease';

@@ -25,12 +25,12 @@ html, body {
 
 .locked-card {
   position: relative;
-  overflow: hidden;
 }
 
 .locked-card.locked {
   filter: grayscale(0.8);
   opacity: 0.75;
+  overflow: hidden;
 }
 
 .lock-overlay {

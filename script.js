@@ -52,37 +52,61 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const tapakCard = document.getElementById('tapak-card');
-  const lockOverlay = document.getElementById('lock-overlay');
+  setupLockedCard({
+    cardId: 'tapak-card',
+    overlayId: 'lock-overlay',
+    storageKey: 'jenisTanahCompleted',
+    message: 'Selesaikan permainan "Jenis dan Sifat Tanah" terlebih dahulu.'
+  });
 
-  if (!tapakCard) return;
+  setupLockedCard({
+    cardId: 'pemuliharaan-topic-card',
+    overlayId: 'pemuliharaan-topic-lock-overlay',
+    storageKey: 'tapakPenanamanCompleted',
+    message: 'Selesaikan topik "1.1 Jenis Tanah" terlebih dahulu.'
+  });
 
-  // check unlock status
-  const gameUnlocked = localStorage.getItem('jenisTanahCompleted');
+  setupLockedCard({
+    cardId: 'ph-card',
+    overlayId: 'ph-lock-overlay',
+    storageKey: 'strukturTanahCompleted',
+    message: 'Selesaikan permainan "Struktur Tanah" terlebih dahulu.'
+  });
 
-  // LOCKED
-  if (gameUnlocked !== 'true') {
-
-    tapakCard.classList.add('locked');
-
-    tapakCard.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      alert('Selesaikan permainan "Jenis dan Sifat Tanah" terlebih dahulu.');
-    });
-
-  }
-
-  // UNLOCKED
-  else {
-    tapakCard.classList.remove('locked');
-
-    if (lockOverlay) {
-      lockOverlay.style.display = 'none';
-    }
-  }
+  setupLockedCard({
+    cardId: 'baja-topic-card',
+    overlayId: 'baja-topic-lock-overlay',
+    storageKey: 'phTanahCompleted',
+    message: 'Selesaikan topik "1.2 Pemuliharaan Tanah" terlebih dahulu.'
+  });
 
 });
+
+function setupLockedCard({ cardId, overlayId, storageKey, message }) {
+  const card = document.getElementById(cardId);
+  const overlay = document.getElementById(overlayId);
+
+  if (!card) return;
+
+  const gameUnlocked = localStorage.getItem(storageKey);
+
+  if (gameUnlocked !== 'true') {
+    card.classList.add('locked');
+
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert(message);
+    });
+
+    return;
+  }
+
+  card.classList.remove('locked');
+
+  if (overlay) {
+    overlay.style.display = 'none';
+  }
+}
 
 // ======================================
 // PLAYER NAME MODAL

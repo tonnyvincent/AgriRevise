@@ -18,10 +18,14 @@ let expeditionState = {
   }
 };
 
+const TOTAL_EXPEDITION_QUESTIONS = 10;
+
 // Initialize game
 document.addEventListener('DOMContentLoaded', function() {
   initializeDragAndDrop();
+  initializeStationCheckButtons();
   updateProgress();
+  updateScoreDisplay();
   updateMissionStatus();
   document.querySelectorAll('.btn-restart-expedition').forEach(button => {
     button.addEventListener('click', resetExpedition);
@@ -143,6 +147,22 @@ let draggedElement = null;
 let touchDraggedElement = null;
 let dragPreview = null;
 
+function getStationBank(station) {
+  return document.querySelector(`#station-${station} .drag-options`);
+}
+
+function restoreDragItem(item, station) {
+  if (!item) return;
+
+  item.classList.remove('dropped-item', 'correct', 'incorrect', 'dragging');
+  item.draggable = true;
+
+  const bank = getStationBank(station);
+  if (bank) {
+    bank.appendChild(item);
+  }
+}
+
 function handleDragStart(e) {
   draggedElement = this;
   this.classList.add('dragging');
@@ -186,26 +206,25 @@ function handleDrop(e) {
 
   const existingItem = dropZone.querySelector('.dropped-item');
   if (existingItem) {
-    existingItem.remove();
+    restoreDragItem(existingItem, currentStation);
   }
 
   clearPreviousPlacement(currentStation, draggedValue, expectedAnswer);
 
-  const itemClone = draggedElement.cloneNode(true);
-  itemClone.draggable = false;
-  itemClone.classList.add('dropped-item');
-  itemClone.classList.remove('dragging');
+  draggedElement.draggable = true;
+  draggedElement.classList.add('dropped-item');
+  draggedElement.classList.remove('dragging', 'correct', 'incorrect');
 
-const slot = dropZone.querySelector('.zone-slot');
+  const slot = dropZone.querySelector('.zone-slot');
 
   if (slot) {
     slot.innerHTML = ""; // clear previous
-    slot.appendChild(itemClone);
+    slot.appendChild(draggedElement);
   }
   
   expeditionState.answers[`station${currentStation}`][expectedAnswer] = draggedValue;
 
-  checkStationCompletion(currentStation);
+  updateStationCheckButton(currentStation);
 }
 
 function getDraggedValue(element, station) {
@@ -232,6 +251,10 @@ function clearPreviousPlacement(station, draggedValue, currentZone) {
       if (oldZone) {
         // clear slot (NEW STRUCTURE)
         const slot = oldZone.querySelector('.zone-slot');
+        const oldItem = slot?.querySelector('.dropped-item');
+        if (oldItem) {
+          restoreDragItem(oldItem, station);
+        }
         if (slot) slot.innerHTML = "";
 
         // remove styling states
@@ -244,23 +267,45 @@ function clearPreviousPlacement(station, draggedValue, currentZone) {
   });
 }
 
-function checkStationCompletion(station) {
+function initializeStationCheckButtons() {
+  document.querySelectorAll('.tdtp-check-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const station = Number(button.getAttribute('data-station'));
+
+      if (!isStationFilled(station) || expeditionState.stationsCompleted.has(station)) {
+        return;
+      }
+
+      button.disabled = true;
+      validateStation(station);
+    });
+  });
+}
+
+function isStationFilled(station) {
   const dropZones = document.querySelectorAll(`#station-${station} .drop-zone`);
 
-  let allFilled = true;
+  return [...dropZones].every(zone => zone.querySelector('.dropped-item'));
+}
 
-  dropZones.forEach(zone => {
-    if (!zone.querySelector('.dropped-item')) {
-      allFilled = false;
-    }
-  });
+function updateStationCheckButton(station) {
+  const button = document.querySelector(`.tdtp-check-btn[data-station="${station}"]`);
+  if (!button) return;
 
-  if (allFilled) {
-    validateStation(station);
+  button.disabled = !isStationFilled(station) || expeditionState.stationsCompleted.has(station);
+}
+
+function updateAllStationCheckButtons() {
+  for (let station = 1; station <= 3; station++) {
+    updateStationCheckButton(station);
   }
 }
 
 function validateStation(station) {
+  if (expeditionState.stationsCompleted.has(station)) {
+    return;
+  }
+
   const dropZones = document.querySelectorAll(`#station-${station} .drop-zone`);
 
   let correctCount = 0;
@@ -313,6 +358,9 @@ function validateStation(station) {
   };
 
   expeditionState.scores[`station${station}`] = scoreData;
+  expeditionState.stationsCompleted.add(station);
+  updateScoreDisplay();
+  updateStationCheckButton(station);
 
   // 🔥 store full session log
   expeditionState.sessionLog.push(scoreData);
@@ -388,10 +436,13 @@ function showStationModal(station) {
     };
   }
 
-  document.getElementById('restart-expedition-btn').onclick = () => {
-    modal.classList.add('hidden');
-    resetExpedition();
-  };
+  const restartBtn = document.getElementById('restart-expedition-btn');
+  if (restartBtn) {
+    restartBtn.onclick = () => {
+      modal.classList.add('hidden');
+      resetExpedition();
+    };
+  }
 }
 
 // Next station buttons
@@ -413,6 +464,7 @@ function goToStation(station) {
   document.getElementById(`station-${station}`).style.display = 'block';
   expeditionState.currentStation = station;
   updateProgress();
+  updateStationCheckButton(station);
   updateMissionStatus();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -421,6 +473,21 @@ function updateProgress() {
   document.getElementById('station-num').textContent = expeditionState.currentStation;
   const progress = (expeditionState.currentStation / 3) * 100;
   document.getElementById('progress-fill').style.width = progress + '%';
+}
+
+function getTotalCorrectAnswers() {
+  return Object.values(expeditionState.scores)
+    .filter(Boolean)
+    .reduce((sum, score) => sum + score.correct, 0);
+}
+
+function updateScoreDisplay() {
+  const scoreDisplay = document.getElementById('tdtp-score-display');
+  if (scoreDisplay) {
+    const score = getTotalCorrectAnswers();
+    scoreDisplay.textContent = score;
+    scoreDisplay.parentElement?.setAttribute('aria-label', `Skor ${score}/${TOTAL_EXPEDITION_QUESTIONS}`);
+  }
 }
 
 function updateMissionStatus() {
@@ -438,6 +505,11 @@ function resetExpedition() {
     station2: {},
     station3: {}
   };
+  expeditionState.scores = {
+    station1: null,
+    station2: null,
+    station3: null
+  };
 
   for (let station = 1; station <= 3; station++) {
     const stationEl = document.getElementById(`station-${station}`);
@@ -454,7 +526,7 @@ function resetExpedition() {
       zone.classList.remove('correct', 'incorrect');
       const dropItem = zone.querySelector('.dropped-item');
       if (dropItem) {
-        dropItem.remove();
+        restoreDragItem(dropItem, station);
       }
     });
   }
@@ -462,6 +534,8 @@ function resetExpedition() {
   document.querySelector('.expedition-game').style.display = 'block';
   document.getElementById('completion-screen').style.display = 'none';
   updateProgress();
+  updateAllStationCheckButtons();
+  updateScoreDisplay();
   updateMissionStatus();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -480,6 +554,10 @@ function showFinalCompletion() {
   const totalQuestions = s1.total + s2.total + s3.total;
 
   const percentage = Math.round((totalCorrect / totalQuestions) * 100);
+  updateScoreDisplay();
+
+  localStorage.setItem('tapakPenanamanCompleted', 'true');
+  localStorage.setItem('tapakPenanamanScore', String(percentage));
 
   // ======================================
   // SAVE TO LOCAL LEADERBOARD

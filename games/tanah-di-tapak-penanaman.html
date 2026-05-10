@@ -7,8 +7,9 @@
   <meta name="description" content="Modul 1.1.2 Tanah di Tapak Penanaman — Soil Expedition Mission. Ahli Agronomi / Pakar Tanah mengklasifikasi jenis tanah berdasarkan sifat dan kaedah rasa jari." />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../jenis-tanah-games.css" />
 </head>
-<body class="game-page">
+<body class="game-page tdtp-game-body">
 
   <div class="page">
 
@@ -51,16 +52,17 @@
 
       <!-- ═══ PAGE TITLE ═══ -->
       <div class="jdst-title-bar">
-        <div class="jdst-title-pill">
-          Tanah di Tapak Penanaman
+        <div class="jdst-title-pill game-status-bar" aria-label="Kemajuan permainan Tanah di Tapak Penanaman">
+          <a class="game-back-btn" href="../jenis-tanah.html">← Kembali</a>
 
-          <!-- Progress indicator -->
-            <div class="game-progress">
-              <div class="progress-text">Stesen <span id="station-num">1</span> / 3</div>
-              <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-              </div>
+          <div class="game-progress">
+            <div class="progress-text">Stesen <span id="station-num">1</span> / 3</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
             </div>
+          </div>
+
+          <div class="game-score-pill"><span id="tdtp-score-display">0</span>/10</div>
         </div>
 
       </div>
@@ -104,6 +106,7 @@
             </div>
           </div>
 
+          <button class="tdtp-check-btn" type="button" data-station="1" disabled>Semak Jawapan</button>
         </div>
       </div>
 
@@ -127,7 +130,6 @@
             <div class="drop-zone" data-answer="pasir">
               <div class="zone-content">90% Pasir, 05% Kelodak, 05% Liat<br><span class="zone-note">(Sifat: Sangat berpasir dan kasar)</span></div>
                 <div class="zone-slot"></div>
-              </div>
             </div>
             <div class="drop-zone" data-answer="tanah-liat">
               <div class="zone-content">70% Liat, 15% Pasir, 15% Kelodak<br><span class="zone-note">(Sifat: Kandungan liat yang sangat tinggi)</span></div>
@@ -136,8 +138,10 @@
             <div class="drop-zone" data-answer="loam">
               <div class="zone-content">20% Liat, 40% Pasir, 40% Kelodak<br><span class="zone-note">(Sifat: Campuran komponen yang paling seimbang)</span></div>
                 <div class="zone-slot"></div>
+            </div>
           </div>
 
+          <button class="tdtp-check-btn" type="button" data-station="2" disabled>Semak Jawapan</button>
         </div>
       </div>
 
@@ -177,6 +181,7 @@
             </div>
           </div>
 
+          <button class="tdtp-check-btn" type="button" data-station="3" disabled>Semak Jawapan</button>
         </div>
       </div>
 
