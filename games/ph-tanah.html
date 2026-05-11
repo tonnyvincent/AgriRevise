@@ -65,23 +65,21 @@
 
         <div class="pht-lab-board">
           <div class="pht-scale-panel" aria-label="Carta skala pH">
-            <div class="pht-scale-numbers">
-              <span>pH 1</span>
-              <span>pH 7</span>
-              <span>pH 14</span>
-            </div>
             <div class="pht-scale-bar">
               <div class="pht-scale-zone pht-scale-zone-acid">
+                <span class="pht-scale-side-label">pH 1</span>
                 <div class="pht-drop-zone" data-pht-group="scale" data-pht-answer="asid" data-pht-hint="pH rendah">
                   <span class="pht-drop-hint">pH rendah</span>
                 </div>
               </div>
               <div class="pht-scale-zone pht-scale-zone-neutral">
+                <span class="pht-scale-side-label">pH 7</span>
                 <div class="pht-drop-zone" data-pht-group="scale" data-pht-answer="neutral" data-pht-hint="pH 7">
                   <span class="pht-drop-hint">pH 7</span>
                 </div>
               </div>
               <div class="pht-scale-zone pht-scale-zone-alkali">
+                <span class="pht-scale-side-label">pH 14</span>
                 <div class="pht-drop-zone" data-pht-group="scale" data-pht-answer="alkali" data-pht-hint="pH tinggi">
                   <span class="pht-drop-hint">pH tinggi</span>
                 </div>
@@ -219,13 +217,13 @@
         <button class="pht-next-btn" id="pht-station-3-submit" type="button">Semak Jawapan</button>
       </section>
 
-      <section class="pht-station pht-hidden" id="pht-station-complete">
-        <div class="pht-complete-inner">
-          <div class="pht-complete-medal">pH</div>
-          <h1 class="pht-complete-title">Makmal Selesai!</h1>
-          <p class="pht-complete-sub">Anda telah melengkapkan cabaran PH Tanah.</p>
-          <div class="pht-final-score">Skor: <span id="pht-final-score">0/12</span></div>
-          <a class="pht-home-btn" href="../pemuliharaan-tanah.html">Kembali ke Topik</a>
+      <section class="game-completion-modal pht-hidden" id="pht-station-complete" role="dialog" aria-modal="true" aria-labelledby="pht-complete-title">
+        <div class="game-completion-card">
+          <div class="game-completion-icon" aria-hidden="true">🏆</div>
+          <h1 class="game-completion-title" id="pht-complete-title">Game Selesai</h1>
+          <p class="game-completion-message">Anda telah menyelesaikan PH Tanah.</p>
+          <div class="game-completion-score">Skor:&nbsp;<span id="pht-final-score">0/12</span></div>
+          <a class="game-completion-home" href="../pemuliharaan-tanah.html"><span aria-hidden="true">🏠</span> Kembali</a>
         </div>
       </section>
     </main>

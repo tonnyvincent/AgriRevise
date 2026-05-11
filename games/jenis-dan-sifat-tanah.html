@@ -136,19 +136,20 @@
           <button class="btn-next" id="btn-next" style="display: none;">Soalan Seterusnya</button>
         </div>
 
-        <!-- Completion Screen -->
-        <div class="completion-screen" id="completion-screen" style="display: none;">
-          <div class="completion-content">
-            <h2>🎉 Tahniah!</h2>
-            <p>Anda telah menyelesaikan permainan dengan jayanya!</p>
-            <p class="final-score">Markah: <span id="final-score">0</span>/15</p>
-            <a href="../jenis-tanah.html" class="btn-restart">Kembali ke Topik</a>
-          </div>
-        </div>
       </div>
 
     </div>
     <!-- /.game-container -->
+
+    <div class="game-completion-modal hidden" id="completion-screen" role="dialog" aria-modal="true" aria-labelledby="jdst-complete-title">
+      <div class="game-completion-card">
+        <div class="game-completion-icon" aria-hidden="true">🏆</div>
+        <h2 class="game-completion-title" id="jdst-complete-title">Game Selesai</h2>
+        <p class="game-completion-message">Anda telah menyelesaikan Jenis dan Sifat Tanah.</p>
+        <div class="game-completion-score">Skor:&nbsp;<span id="final-score">0</span>/15</div>
+        <a href="../jenis-tanah.html" class="game-completion-home"><span aria-hidden="true">🏠</span> Kembali</a>
+      </div>
+    </div>
 
   </div><!-- /.page -->
 

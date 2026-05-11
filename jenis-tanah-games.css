@@ -426,13 +426,22 @@ body.tdtp-game-body {
 }
 
 .tdtp-game-body .drag-item.dragging {
-  opacity: 0.42;
+  opacity: 0;
 }
 
 .tdtp-game-body .drag-preview {
+  position: fixed;
+  z-index: 10050;
+  min-width: 62px;
+  min-height: 30px;
   border-radius: 15px;
   background: linear-gradient(135deg, #1b5e2f, #2e7d32);
   box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+  opacity: 0.96;
+  pointer-events: none;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
 .tdtp-game-body .drop-zones {
@@ -587,7 +596,7 @@ body.tdtp-game-body {
   font-size: 0.68rem;
 }
 
-.tdtp-game-body #completion-screen {
+.tdtp-game-body #completion-screen:not(.game-completion-modal) {
   position: relative;
   z-index: 8;
   flex: 1 1 auto;

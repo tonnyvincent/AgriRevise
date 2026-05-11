@@ -74,13 +74,37 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setupLockedCard({
+    cardId: 'kaedah-card',
+    overlayId: 'kaedah-lock-overlay',
+    storageKey: 'phTanahCompleted',
+    message: 'Selesaikan permainan "PH Tanah" terlebih dahulu.'
+  });
+
+  setupLockedCard({
     cardId: 'baja-topic-card',
     overlayId: 'baja-topic-lock-overlay',
-    storageKey: 'phTanahCompleted',
+    storageKey: 'kaedahMemperbaikiTanahCompleted',
     message: 'Selesaikan topik "1.2 Pemuliharaan Tanah" terlebih dahulu.'
   });
 
+  setupCardNavigation();
+
 });
+
+function setupCardNavigation() {
+  document.querySelectorAll('a.lp-card[href]').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      const href = card.getAttribute('href');
+
+      if (!href || href === '#' || card.classList.contains('locked') || e.defaultPrevented) {
+        return;
+      }
+
+      e.preventDefault();
+      window.location.href = href;
+    });
+  });
+}
 
 function setupLockedCard({ cardId, overlayId, storageKey, message }) {
   const card = document.getElementById(cardId);

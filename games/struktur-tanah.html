@@ -249,18 +249,13 @@
       <!-- ═══════════════════════════════════════
            COMPLETE SCREEN
       ════════════════════════════════════════════ -->
-      <div class="st-fasa hidden" id="fasa-complete">
-        <div class="st-complete-inner">
-          <div class="st-complete-trophy">🏆</div>
-          <h2 class="st-complete-title">Tahniah!</h2>
-          <p class="st-complete-sub">Anda telah selesai Makmal Geologi AgriRevise.</p>
-          <div class="st-final-score">
-            Jumlah Skor: <span id="final-score-display">0</span> mata
-          </div>
-          <div class="st-complete-actions">
-            <!-- <button class="st-action-btn st-btn-retry" onclick="restartGame()">🔄 Cuba Semula</button> -->
-            <button class="st-action-btn st-btn-home" onclick="window.location.href='../pemuliharaan-tanah.html'">🏠 Kembali</button>
-          </div>
+      <div class="game-completion-modal hidden" id="fasa-complete" role="dialog" aria-modal="true" aria-labelledby="st-complete-title">
+        <div class="game-completion-card">
+          <div class="game-completion-icon" aria-hidden="true">🏆</div>
+          <h2 class="game-completion-title" id="st-complete-title">Game Selesai</h2>
+          <p class="game-completion-message">Anda telah menyelesaikan Struktur Tanah.</p>
+          <div class="game-completion-score">Skor:&nbsp;<span id="final-score-display">0/11</span></div>
+          <a href="../pemuliharaan-tanah.html" class="game-completion-home"><span aria-hidden="true">🏠</span> Kembali</a>
         </div>
       </div>
 

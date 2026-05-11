@@ -482,7 +482,7 @@
   }
 
   function finishGame() {
-    const finalText = `${state.score}/${TOTAL_SCORE} (${Math.round((state.score / TOTAL_SCORE) * 100)}%)`;
+    const finalText = `${state.score}/${TOTAL_SCORE}`;
     $('#pht-final-score').textContent = finalText;
     localStorage.setItem('phTanahCompleted', 'true');
     localStorage.setItem('phTanahScore', String(state.score));

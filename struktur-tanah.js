@@ -409,10 +409,7 @@ function finishGame() {
   $('progress-fill').style.width = '100%';
   $('step-label').textContent = 'Selesai!';
   const totalQuestions = TOTAL_QUESTIONS;
-  const percentage = Math.round((totalScore / totalQuestions) * 100);
-
-  $('final-score-display').textContent = `${totalScore}/${totalQuestions} (${percentage}%)`;
-  localStorage.setItem('strukturTanahScore', percentage);
+  $('final-score-display').textContent = `${totalScore}/${totalQuestions}`;
 
   // Mark completed in localStorage so pemuliharaan page can unlock next card if needed
   localStorage.setItem('strukturTanahCompleted', 'true');

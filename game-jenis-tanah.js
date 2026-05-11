@@ -272,14 +272,13 @@ function showCompletion() {
   // SAVE COMPLETION
   localStorage.setItem('jenisTanahCompleted', 'true');
 
-  document.querySelector('.question-card').style.display = 'none';
-  document.getElementById('completion-screen').style.display = 'flex';
   document.getElementById('final-score').textContent = gameState.score;
   document.getElementById('progress-fill').style.width = '100%';
   updateScoreDisplay();
+  document.getElementById('completion-screen').classList.remove('hidden');
   
   // Animate completion
-  document.getElementById('completion-screen').style.animation = 'fadeIn 0.6s ease';
+  document.getElementById('completion-screen').style.animation = 'fadeIn 0.25s ease';
 }
 
 // Add CSS animations to head

@@ -181,7 +181,7 @@ body.pht-game-body {
 }
 
 .pht-scale-numbers {
-  display: flex;
+  display: none;
   justify-content: space-between;
   color: #1b5e2f;
   font-weight: 900;
@@ -200,10 +200,22 @@ body.pht-game-body {
 }
 
 .pht-scale-zone {
-  display: flex;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
   align-items: center;
-  justify-content: center;
+  justify-content: stretch;
+  gap: 10px;
   padding: 16px;
+}
+
+.pht-scale-side-label {
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.82rem;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.28);
+  white-space: nowrap;
 }
 
 .pht-scale-zone-acid {
@@ -1223,7 +1235,13 @@ body.pht-game-body {
 
 .pht-scale-zone {
   min-height: 64px;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 6px;
   padding: 7px 9px;
+}
+
+.pht-scale-side-label {
+  font-size: 0.62rem;
 }
 
 .pht-scale-bar .pht-drop-zone {

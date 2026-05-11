@@ -46,24 +46,29 @@ function initializeDragAndDrop() {
   });
 
   document.querySelectorAll('.drag-item').forEach(item => {
-
-  item.addEventListener('touchstart', handleTouchStart, { passive: false });
-  item.addEventListener('touchmove', handleTouchMove, { passive: false });
-  item.addEventListener('touchend', handleTouchEnd);
-
+    item.addEventListener('touchstart', handleTouchStart, { passive: false });
+    item.addEventListener('touchmove', handleTouchMove, { passive: false });
+    item.addEventListener('touchend', handleTouchEnd, { passive: false });
+    item.addEventListener('touchcancel', cleanupTouchDrag, { passive: false });
   });
 }
 
 function handleTouchStart(e) {
+  e.preventDefault();
+
   touchDraggedElement = this;
+  draggedElement = this;
 
   this.classList.add('dragging');
 
-  // create preview
+  const rect = this.getBoundingClientRect();
   dragPreview = this.cloneNode(true);
   dragPreview.classList.add('drag-preview');
+  dragPreview.style.width = `${Math.max(rect.width, 62)}px`;
+  dragPreview.style.height = `${Math.max(rect.height, 30)}px`;
 
   document.body.appendChild(dragPreview);
+  document.body.classList.add('tdtp-touch-dragging');
 
   movePreview(e.touches[0]);
 }
@@ -71,16 +76,9 @@ function handleTouchStart(e) {
 function movePreview(touch) {
   if (!dragPreview) return;
 
-  const offsetX = 0;
-  const offsetY = -60; // move ABOVE finger
-
-  dragPreview.style.position = 'fixed';
-  dragPreview.style.left = (touch.clientX + offsetX) + 'px';
-  dragPreview.style.top = (touch.clientY + offsetY) + 'px';
-  dragPreview.style.transform = 'translate(-50%, -50%) scale(1.05)';
-  dragPreview.style.pointerEvents = 'none';
-  dragPreview.style.zIndex = '9999';
-  dragPreview.style.opacity = '0.95';
+  dragPreview.style.left = `${touch.clientX}px`;
+  dragPreview.style.top = `${touch.clientY}px`;
+  dragPreview.style.transform = 'translate(-50%, calc(-100% - 12px)) scale(1.06)';
 }
 
 function handleTouchMove(e) {
@@ -108,6 +106,8 @@ function handleTouchMove(e) {
 }
 
 function handleTouchEnd(e) {
+  e.preventDefault();
+
   const touch = e.changedTouches[0];
 
   const elementBelow = document.elementFromPoint(
@@ -125,11 +125,18 @@ function handleTouchEnd(e) {
     });
   }
 
+  cleanupTouchDrag(e);
+}
+
+function cleanupTouchDrag(e) {
+  if (e && typeof e.preventDefault === 'function') {
+    e.preventDefault();
+  }
+
   if (touchDraggedElement) {
     touchDraggedElement.classList.remove('dragging');
   }
 
-  // remove preview
   if (dragPreview) {
     dragPreview.remove();
     dragPreview = null;
@@ -139,7 +146,9 @@ function handleTouchEnd(e) {
     zone.classList.remove('drag-over');
   });
 
+  document.body.classList.remove('tdtp-touch-dragging');
   touchDraggedElement = null;
+  draggedElement = null;
 }
 
 // Current dragging element
@@ -532,7 +541,7 @@ function resetExpedition() {
   }
 
   document.querySelector('.expedition-game').style.display = 'block';
-  document.getElementById('completion-screen').style.display = 'none';
+  document.getElementById('completion-screen').classList.add('hidden');
   updateProgress();
   updateAllStationCheckButtons();
   updateScoreDisplay();
@@ -541,8 +550,7 @@ function resetExpedition() {
 }
 
 function showCompletion() {
-  document.querySelector('.expedition-game').style.display = 'none';
-  document.getElementById('completion-screen').style.display = 'flex';
+  document.getElementById('completion-screen').classList.remove('hidden');
 }
 
 function showFinalCompletion() {
@@ -581,31 +589,8 @@ function showFinalCompletion() {
   );
 
 
-  // create modal content
-  const modal = document.getElementById('station-complete-modal');
-  modal.classList.remove('hidden');
-
-  modal.querySelector('.complete-box').innerHTML = `
-    <h2>🎉 Eksperimen Selesai!</h2>
-
-    <p>Jumlah Markah Anda:</p>
-
-    <div style="font-size: 18px; font-weight: 700; margin: 10px 0;">
-      ${totalCorrect} / ${totalQuestions}
-    </div>
-
-    <div style="font-size: 16px; margin-bottom: 15px;">
-      Skor: ${percentage}%
-    </div>
-
-    <div class="complete-actions">
-      <button id="complete-btn">Selesai</button>
-    </div>
-  `;
-
-  document.getElementById('complete-btn').onclick = () => {
-    window.location.href = "../latihan-pengukuhan.html";
-  };
+  document.getElementById('tdtp-final-score').textContent = `${totalCorrect}/${totalQuestions}`;
+  document.getElementById('completion-screen').classList.remove('hidden');
 
   // log for later DB usage
   console.log("FINAL SCORE:", {
