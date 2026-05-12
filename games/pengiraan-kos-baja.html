@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.3.2 Pengiraan Kos Baja - +AgriRevise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../pengiraan-kos-baja.css" />
+</head>
+<body class="jb-game-body">
+
+  <div class="page jb-page">
+
+    <img src="../images/background-latihan-pengukuhan.png" alt="Farm" class="bg-img desktop-bg" />
+    <img src="../images/background-latihan-pengukuhan-mobile.png" alt="Farm Mobile" class="bg-img mobile-bg" />
+    <div class="bg-overlay"></div>
+
+    <nav>
+      <a href="#" class="nav-logo">
+        <img src="../images/agrirevise-logo.png" alt="AgriRevise" class="nav-logo-img" />
+        <span class="nav-logo-text">
+          <span class="logo-agri">+Agri</span><span class="logo-revise">Revise</span>
+        </span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#">Manual Penggunaan</a></li>
+          <li><a href="../latihan-pengukuhan.html">Latihan Pengukuhan</a></li>
+          <li><a href="#">Papan Prestasi</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="../index.html" class="nav-cta">Laman Utama</a>
+          <button class="nav-toggle" id="nav-toggle">&#9776;</button>
+
+          <div class="nav-dropdown" id="nav-dropdown">
+            <a href="#">Manual Penggunaan</a>
+            <a href="../latihan-pengukuhan.html">Latihan Pengukuhan</a>
+            <a href="#">Papan Prestasi</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="jb-shell" aria-live="polite">
+      <div class="jb-topbar">
+        <a class="jb-back-btn" href="../baja-dan-pembajaan.html">&larr; Kembali</a>
+        <div class="jb-progress-wrap">
+          <div class="jb-progress-track">
+            <div class="jb-progress-fill" id="jb-progress-fill"></div>
+          </div>
+          <span class="jb-step-label" id="jb-step-label">Misi 1 / 10</span>
+        </div>
+        <div class="jb-score-pill"><span id="jb-score-display">0</span>/10</div>
+      </div>
+
+      <section class="jb-game-card" id="jb-game-card">
+        <div class="jb-station-head">
+          <div class="jb-mission-badge" id="jb-mission-badge">Misi 1</div>
+          <h1 class="jb-station-title" id="jb-mission-title">Misi Tabur &amp; Subur</h1>
+          <p class="jb-station-desc" id="jb-mission-desc">Pilih guni baja yang tepat untuk memulihkan ladang.</p>
+        </div>
+
+        <div class="jb-scene" id="jb-scene" style="--jb-progress: 0;">
+          <div class="jb-warehouse-header">
+            <strong>Gudang Baja AGRIREVISE</strong>
+            <div class="jb-warehouse-stats">
+              <span>BAJA</span>
+              <span>KUANTITI</span>
+              <strong id="jb-warehouse-item">Baja Urea</strong>
+              <strong id="jb-warehouse-qty">43.48 kg</strong>
+            </div>
+          </div>
+
+          <div class="jb-purchase-order">
+            <h2>Pesanan Belian</h2>
+            <p>Item: <span id="jb-po-item">Baja Urea</span></p>
+            <p>Berat: <span id="jb-po-weight">43.48 kg</span></p>
+            <p>Kadar: <span id="jb-po-rate">RM120.00 / 50kg</span></p>
+            <div class="jb-po-line"></div>
+            <div class="jb-po-tag">Kira <span id="jb-po-number">Pesanan 1/5</span></div>
+          </div>
+
+          <div class="jb-sun"></div>
+          <div class="jb-cloud jb-cloud-one"></div>
+          <div class="jb-cloud jb-cloud-two"></div>
+          <div class="jb-health-badge">
+            <span>Ladang</span>
+            <strong id="jb-field-percent">0%</strong>
+          </div>
+          <div class="jb-scene-alert" id="jb-scene-alert">Kuantiti tidak tepat</div>
+
+          <div class="jb-warehouse-sign">AGRIREVISE</div>
+          <div class="jb-conveyor">
+            <div class="jb-conveyor-lines"></div>
+            <div class="jb-conveyor-bag"></div>
+          </div>
+          <div class="jb-lorry">
+            <span class="jb-lorry-box"></span>
+            <span class="jb-lorry-cab"></span>
+            <span class="jb-lorry-wheel jb-lorry-wheel-one"></span>
+            <span class="jb-lorry-wheel jb-lorry-wheel-two"></span>
+          </div>
+
+          <div class="jb-tractor">
+            <span class="jb-tractor-cabin"></span>
+            <span class="jb-tractor-wheel jb-tractor-wheel-one"></span>
+            <span class="jb-tractor-wheel jb-tractor-wheel-two"></span>
+          </div>
+          <div class="jb-fertilizer-dust" id="jb-fertilizer-dust"></div>
+
+          <div class="jb-field">
+            <div class="jb-field-green"></div>
+            <div class="jb-field-row jb-field-row-one"></div>
+            <div class="jb-field-row jb-field-row-two"></div>
+            <div class="jb-field-row jb-field-row-three"></div>
+            <div class="jb-plant jb-plant-one"><span></span></div>
+            <div class="jb-plant jb-plant-two"><span></span></div>
+            <div class="jb-plant jb-plant-three"><span></span></div>
+          </div>
+        </div>
+
+        <div class="jb-order-panel">
+          <div class="jb-order-meta">
+            <span class="jb-order-type" id="jb-order-type">Pesanan Kerja</span>
+            <span class="jb-question-count" id="jb-question-count">1/10</span>
+          </div>
+          <p class="jb-question-text" id="jb-question-text"></p>
+
+          <button class="jb-formula-btn" id="jb-formula-btn" type="button">Formula Rujukan</button>
+          <div class="jb-formula-card jb-hidden" id="jb-formula-card">
+            <span id="jb-formula-text"></span>
+          </div>
+
+          <div class="jb-choice-grid" id="jb-choice-grid"></div>
+
+          <div class="jb-cash-panel jb-hidden" id="jb-cash-panel">
+            <div class="jb-cash-display" id="jb-cash-display">RM 0</div>
+            <div class="jb-keypad" id="jb-keypad" aria-label="Pad kekunci digital">
+              <button class="jb-key-btn" type="button" data-jb-key="1">1</button>
+              <button class="jb-key-btn" type="button" data-jb-key="2">2</button>
+              <button class="jb-key-btn" type="button" data-jb-key="3">3</button>
+              <button class="jb-key-btn" type="button" data-jb-key="4">4</button>
+              <button class="jb-key-btn" type="button" data-jb-key="5">5</button>
+              <button class="jb-key-btn" type="button" data-jb-key="6">6</button>
+              <button class="jb-key-btn" type="button" data-jb-key="7">7</button>
+              <button class="jb-key-btn" type="button" data-jb-key="8">8</button>
+              <button class="jb-key-btn" type="button" data-jb-key="9">9</button>
+              <button class="jb-key-btn" type="button" data-jb-key=".">.</button>
+              <button class="jb-key-btn" type="button" data-jb-key="0">0</button>
+              <button class="jb-key-btn jb-key-action" type="button" data-jb-key="back">Padam</button>
+            </div>
+            <button class="jb-clear-btn" id="jb-clear-btn" type="button">Kosongkan</button>
+          </div>
+
+          <p class="jb-feedback" id="jb-feedback"></p>
+          <button class="jb-submit-btn" id="jb-submit-btn" type="button">Semak Jawapan</button>
+        </div>
+      </section>
+
+      <section class="jb-completion-modal jb-hidden" id="jb-completion-modal" role="dialog" aria-modal="true" aria-labelledby="jb-complete-title">
+        <div class="jb-completion-card">
+          <div class="jb-completion-icon" aria-hidden="true">
+            <span class="ar-page-icon ar-icon-fertilizer"><span></span></span>
+          </div>
+          <h1 class="jb-completion-title" id="jb-complete-title">Game Selesai</h1>
+          <p class="jb-completion-message">Anda telah menyelesaikan misi Pengiraan Kos Baja.</p>
+          <div class="jb-completion-score">Skor:&nbsp;<span id="jb-final-score">0/10</span></div>
+          <a class="jb-completion-home" href="../baja-dan-pembajaan.html">Kembali</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../script.js"></script>
+  <script src="../pengiraan-kos-baja.js"></script>
+</body>
+</html>
