@@ -1,0 +1,1171 @@
+/* =============================================
+   JENIS BAJA - Grow Your Plant game
+   Unique game namespace: jbg-
+   ============================================= */
+
+html:has(body.jbg-game-body),
+body.jbg-game-body {
+  width: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body.jbg-game-body {
+  background: #eaf4df;
+}
+
+.jbg-page {
+  width: min(100vw, 390px);
+  min-height: 100dvh;
+  max-width: 390px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.jbg-page .bg-img,
+.jbg-page .bg-overlay {
+  position: fixed;
+  height: 100vh;
+}
+
+.jbg-page nav {
+  padding: 6px 12px;
+}
+
+.jbg-page .nav-logo {
+  width: 36px;
+  height: 36px;
+  gap: 6px;
+}
+
+.jbg-page .nav-logo-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.jbg-page .nav-logo-text,
+.jbg-page .nav-links {
+  display: none;
+}
+
+.jbg-page .nav-cta {
+  padding: 8px 22px;
+  font-size: 0.88rem;
+}
+
+.jbg-page .nav-toggle {
+  display: block;
+  color: #173d2a;
+}
+
+.jbg-shell {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  min-height: min(calc(100dvh - 52px), 792px);
+  margin: 0 auto;
+  padding: 6px 7px 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: visible;
+}
+
+.jbg-topbar {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(240, 250, 252, 0.88);
+  border: 1.5px solid rgba(160, 200, 100, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.jbg-back-btn {
+  padding: 6px 8px;
+  border: 1.5px solid rgba(46, 125, 50, 0.3);
+  border-radius: 9px;
+  background: rgba(46, 125, 50, 0.12);
+  color: #1b5e2f;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.jbg-back-btn:hover {
+  background: rgba(46, 125, 50, 0.22);
+  transform: translateX(-2px);
+}
+
+.jbg-progress-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.jbg-progress-track {
+  flex: 1;
+  min-width: 58px;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.jbg-progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #2e7d32, #66bb6a);
+  transition: width 0.35s ease;
+}
+
+.jbg-step-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.jbg-score-pill {
+  min-width: 46px;
+  padding: 6px 9px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, #ff9500, #ffb74d);
+  box-shadow: 0 2px 10px rgba(255, 149, 0, 0.3);
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.68rem;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.jbg-game-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 10px;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid rgba(160, 200, 100, 0.35);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 255, 245, 0.96));
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(8px);
+  animation: jbgPanelRise 0.45s ease both;
+}
+
+.jbg-station-head {
+  flex: 0 0 auto;
+  margin-bottom: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  text-align: center;
+}
+
+.jbg-mission-badge {
+  padding: 3px 14px;
+  border-radius: 99px;
+  background: linear-gradient(135deg, #1b5e2f, #2e7d32);
+  box-shadow: 0 2px 10px rgba(27, 94, 47, 0.25);
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.64rem;
+  line-height: 1.1;
+}
+
+.jbg-station-title {
+  margin: 0;
+  color: #1b5e2f;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.jbg-station-desc {
+  margin: 0;
+  color: #315a34;
+  font-size: 0.64rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.jbg-scene {
+  --jbg-growth: 0;
+  --jbg-growth-percent: 0%;
+  --jbg-plant-scale: 0.72;
+  --jbg-seed-opacity: 1;
+  --jbg-seed-scale: 1;
+  --jbg-sprout-opacity: 0;
+  --jbg-sprout-scale: 0.45;
+  --jbg-stem-opacity: 0;
+  --jbg-stem-offset: 176;
+  --jbg-low-leaf-opacity: 0;
+  --jbg-low-leaf-scale: 0.55;
+  --jbg-top-leaf-opacity: 0;
+  --jbg-top-leaf-scale: 0.45;
+  --jbg-bloom-opacity: 0;
+  --jbg-sun-opacity: 0.25;
+  --jbg-field-opacity: 0.1;
+  --jbg-root-opacity: 0;
+  --jbg-root-main: 22px;
+  --jbg-root-side: 15px;
+  position: relative;
+  flex: 0 0 auto;
+  height: 228px;
+  min-height: 0;
+  margin-bottom: 7px;
+  overflow: hidden;
+  border: 1.5px solid rgba(111, 152, 78, 0.24);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #b8e3f3 0%, #e4f3dd 48%, #9bc675 49%, #765031 100%);
+}
+
+.jbg-sun {
+  position: absolute;
+  top: -30px;
+  right: -20px;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 104, 0.76), rgba(255, 215, 104, 0));
+  opacity: var(--jbg-sun-opacity);
+}
+
+.jbg-cloud {
+  position: absolute;
+  z-index: 1;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.78);
+  filter: drop-shadow(0 4px 9px rgba(67, 103, 130, 0.12));
+}
+
+.jbg-cloud::before,
+.jbg-cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.jbg-cloud-one {
+  left: 27px;
+  top: 28px;
+  width: 70px;
+  height: 25px;
+  animation: jbgCloudDrift 7s ease-in-out infinite;
+}
+
+.jbg-cloud-one::before {
+  left: 10px;
+  top: -11px;
+  width: 24px;
+  height: 24px;
+}
+
+.jbg-cloud-one::after {
+  right: 9px;
+  top: -8px;
+  width: 30px;
+  height: 30px;
+}
+
+.jbg-cloud-two {
+  right: 58px;
+  top: 54px;
+  width: 52px;
+  height: 18px;
+  opacity: 0.66;
+  animation: jbgCloudDrift 6.5s ease-in-out 0.8s infinite;
+}
+
+.jbg-cloud-two::before {
+  left: 8px;
+  top: -8px;
+  width: 18px;
+  height: 18px;
+}
+
+.jbg-cloud-two::after {
+  right: 8px;
+  top: -7px;
+  width: 21px;
+  height: 21px;
+}
+
+.jbg-growth-badge,
+.jbg-topic-chip,
+.jbg-scene-alert {
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  border-radius: 12px;
+  font-size: 0.52rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.jbg-growth-badge {
+  left: 8px;
+  min-width: 72px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #1b5e2f;
+}
+
+.jbg-growth-badge span,
+.jbg-growth-badge strong {
+  display: block;
+}
+
+.jbg-growth-badge strong {
+  margin-top: 2px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.74rem;
+}
+
+.jbg-topic-chip {
+  right: 8px;
+  max-width: 148px;
+  padding: 7px 9px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff9500, #ffb74d);
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jbg-scene-alert {
+  right: 8px;
+  max-width: 150px;
+  padding: 7px 9px;
+  background: linear-gradient(135deg, #c0392b, #ff6b5d);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.jbg-field {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 52%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 14% 36%, rgba(67, 41, 26, 0.36) 0 4px, transparent 5px),
+    radial-gradient(circle at 76% 60%, rgba(67, 41, 26, 0.34) 0 5px, transparent 6px),
+    linear-gradient(180deg, #815735, #5c3f2e);
+}
+
+.jbg-field-green {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--jbg-growth-percent);
+  background:
+    repeating-linear-gradient(106deg, rgba(255, 255, 255, 0.16) 0 4px, transparent 4px 12px),
+    linear-gradient(180deg, rgba(103, 180, 78, 0.92), rgba(67, 134, 55, 0.72));
+  opacity: var(--jbg-field-opacity);
+  transition: width 0.5s ease, opacity 0.4s ease;
+}
+
+.jbg-soil-row {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 2px;
+  border-radius: 99px;
+  background: rgba(255, 244, 210, 0.22);
+  transform: rotate(-10deg);
+}
+
+.jbg-soil-row-one {
+  top: 28%;
+}
+
+.jbg-soil-row-two {
+  top: 52%;
+}
+
+.jbg-soil-row-three {
+  top: 76%;
+}
+
+.jbg-root {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 50px;
+  width: 4px;
+  height: 34px;
+  border-radius: 99px;
+  background: rgba(244, 220, 164, 0.82);
+  opacity: var(--jbg-root-opacity);
+  transform-origin: top;
+  transition: height 0.45s ease, opacity 0.35s ease;
+}
+
+.jbg-root::before,
+.jbg-root::after {
+  content: "";
+  position: absolute;
+  top: 17px;
+  width: 22px;
+  height: 3px;
+  border-radius: 99px;
+  background: inherit;
+}
+
+.jbg-root::before {
+  right: 1px;
+  transform: rotate(-34deg);
+  transform-origin: right center;
+}
+
+.jbg-root::after {
+  left: 1px;
+  transform: rotate(34deg);
+  transform-origin: left center;
+}
+
+.jbg-root-one {
+  margin-left: -3px;
+  height: var(--jbg-root-main);
+}
+
+.jbg-root-two {
+  margin-left: -20px;
+  height: var(--jbg-root-side);
+  transform: rotate(16deg);
+}
+
+.jbg-root-three {
+  margin-left: 17px;
+  height: var(--jbg-root-side);
+  transform: rotate(-16deg);
+}
+
+.jbg-plant {
+  position: absolute;
+  z-index: 9;
+  left: 50%;
+  bottom: 60px;
+  width: 154px;
+  height: 176px;
+  overflow: visible;
+  transform: translateX(-50%) scale(var(--jbg-plant-scale));
+  transform-origin: bottom center;
+  transition: transform 0.55s ease, filter 0.35s ease;
+  filter: drop-shadow(0 7px 8px rgba(28, 78, 36, 0.24));
+  pointer-events: none;
+}
+
+.jbg-plant-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.jbg-plant-shadow {
+  fill: rgba(39, 28, 18, 0.28);
+  opacity: calc(0.08 + var(--jbg-growth) * 0.34);
+}
+
+.jbg-seed {
+  opacity: var(--jbg-seed-opacity);
+  transform: scale(var(--jbg-seed-scale));
+  transform-box: view-box;
+  transform-origin: 80px 158px;
+  transition: opacity 0.35s ease, transform 0.45s ease;
+}
+
+.jbg-seed ellipse {
+  fill: #c48942;
+  stroke: rgba(89, 55, 24, 0.34);
+  stroke-width: 2;
+}
+
+.jbg-seed path {
+  fill: none;
+  stroke: rgba(255, 231, 174, 0.64);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.jbg-sprout {
+  opacity: var(--jbg-sprout-opacity);
+  transform: scale(var(--jbg-sprout-scale));
+  transform-box: view-box;
+  transform-origin: 80px 159px;
+  transition: opacity 0.35s ease, transform 0.5s ease;
+}
+
+.jbg-sprout-stem {
+  fill: none;
+  stroke: #38a848;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.jbg-sprout-leaf {
+  fill: url("#jbgPlantLeafGradient");
+  fill-opacity: 1;
+  stroke: rgba(16, 103, 41, 0.64);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.jbg-plant-stem {
+  fill: none;
+  stroke: url("#jbgPlantStemGradient");
+  stroke-width: 13;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 176;
+  stroke-dashoffset: var(--jbg-stem-offset);
+  opacity: var(--jbg-stem-opacity);
+  transition: stroke-dashoffset 0.55s ease, opacity 0.35s ease;
+}
+
+.jbg-plant-stem-highlight {
+  fill: none;
+  stroke: rgba(197, 255, 172, 0.36);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 176;
+  stroke-dashoffset: var(--jbg-stem-offset);
+  opacity: var(--jbg-stem-opacity);
+  transition: stroke-dashoffset 0.55s ease, opacity 0.35s ease;
+}
+
+.jbg-plant-leaves {
+  transform-box: view-box;
+  transform-origin: 80px 106px;
+}
+
+.jbg-leaf-stage {
+  transform-box: view-box;
+  transition: opacity 0.18s ease, transform 0.48s ease;
+}
+
+.jbg-leaf-stage-low {
+  opacity: var(--jbg-low-leaf-opacity);
+  transform: scale(var(--jbg-low-leaf-scale));
+  transform-origin: 80px 108px;
+}
+
+.jbg-leaf-stage-top {
+  opacity: var(--jbg-top-leaf-opacity);
+  transform: scale(var(--jbg-top-leaf-scale));
+  transform-origin: 80px 72px;
+}
+
+.jbg-plant-leaf {
+  fill: url("#jbgPlantLeafGradient");
+  fill-opacity: 1;
+  stroke: rgba(13, 100, 40, 0.72);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.jbg-plant-leaf-left-low,
+.jbg-plant-leaf-right-low {
+  filter: drop-shadow(0 3px 3px rgba(27, 94, 47, 0.2));
+}
+
+.jbg-plant-leaf-left-top,
+.jbg-plant-leaf-right-top {
+  filter: drop-shadow(0 2px 3px rgba(27, 94, 47, 0.18));
+}
+
+.jbg-plant-vein {
+  fill: none;
+  stroke: rgba(224, 255, 202, 0.82);
+  stroke-width: 2.3;
+  stroke-linecap: round;
+}
+
+.jbg-bloom {
+  opacity: var(--jbg-bloom-opacity);
+  fill: #ffb74d;
+  filter: drop-shadow(0 4px 6px rgba(255, 149, 0, 0.28));
+  transform: scale(calc(0.62 + var(--jbg-bloom-opacity) * 0.38));
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 0.4s ease, transform 0.45s ease;
+}
+
+.jbg-bloom-center {
+  fill: #ffe082;
+}
+
+.jbg-fertilizer-bag {
+  position: absolute;
+  z-index: 8;
+  left: 22px;
+  bottom: 90px;
+  width: 54px;
+  height: 60px;
+  border-radius: 12px 12px 16px 16px;
+  background:
+    radial-gradient(circle at 34% 66%, #ffca55 0 4px, transparent 5px),
+    radial-gradient(circle at 60% 72%, #8bc34a 0 4px, transparent 5px),
+    linear-gradient(180deg, #f9f1d4 0 27%, #ffb74d 28% 100%);
+  border: 1.5px solid rgba(131, 77, 16, 0.25);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.45), 0 6px 12px rgba(70, 44, 28, 0.16);
+}
+
+.jbg-fertilizer-bag::before {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -7px;
+  height: 13px;
+  border-radius: 5px 5px 2px 2px;
+  background: linear-gradient(180deg, #f6e4a5, #c48a32);
+}
+
+.jbg-fertilizer-bag span {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 18px;
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.68);
+  color: #1b5e2f;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.45rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.jbg-sprinkler {
+  position: absolute;
+  z-index: 8;
+  left: 72px;
+  bottom: 126px;
+  width: 82px;
+  height: 18px;
+  border-radius: 10px 20px 20px 10px;
+  background: linear-gradient(90deg, #5a6b72, #9aa6a7);
+  transform: rotate(-10deg);
+  transform-origin: left center;
+  opacity: 0.86;
+}
+
+.jbg-sprinkler::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  width: 24px;
+  height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(180deg, #1b5e2f, #2e7d32);
+}
+
+.jbg-sprinkler::after {
+  content: "";
+  position: absolute;
+  right: -9px;
+  top: 4px;
+  width: 14px;
+  height: 10px;
+  border-radius: 0 9px 9px 0;
+  background: #4e6366;
+}
+
+.jbg-nutrient-dust {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+}
+
+.jbg-particle {
+  position: absolute;
+  top: 95px;
+  left: var(--jbg-x);
+  width: var(--jbg-size);
+  height: var(--jbg-size);
+  border-radius: 50%;
+  background: var(--jbg-color);
+  opacity: 0;
+  animation: jbgParticleFall 0.9s ease-out forwards;
+}
+
+.jbg-scene.jbg-correct .jbg-sprinkler {
+  animation: jbgSprinkleTilt 0.95s ease;
+}
+
+.jbg-scene.jbg-correct .jbg-field,
+.jbg-scene.jbg-correct .jbg-plant {
+  animation: jbgRewardGlow 1.05s ease;
+}
+
+.jbg-scene.jbg-wrong {
+  animation: jbgWrongShake 0.28s ease;
+}
+
+.jbg-scene.jbg-wrong .jbg-scene-alert {
+  animation: jbgAlertFlash 1.05s ease;
+}
+
+.jbg-scene.jbg-wrong .jbg-plant {
+  animation: jbgPlantStall 0.7s ease;
+}
+
+.jbg-quiz-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1.5px solid rgba(46, 125, 50, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.jbg-question-meta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.jbg-question-type,
+.jbg-question-count {
+  min-width: 0;
+  border-radius: 99px;
+  font-size: 0.53rem;
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.jbg-question-type {
+  max-width: 230px;
+  padding: 5px 8px;
+  overflow: hidden;
+  background: rgba(46, 125, 50, 0.16);
+  color: #1b5e2f;
+  text-overflow: ellipsis;
+}
+
+.jbg-question-count {
+  padding: 5px 7px;
+  background: rgba(255, 149, 0, 0.16);
+  color: #b25d00;
+  font-family: 'Fredoka One', cursive;
+}
+
+.jbg-question-text {
+  flex: 0 0 auto;
+  min-height: 38px;
+  margin: 0;
+  color: #173d22;
+  font-size: 0.66rem;
+  font-weight: 900;
+  line-height: 1.16;
+}
+
+.jbg-option-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  align-content: stretch;
+}
+
+.jbg-option-btn {
+  position: relative;
+  min-width: 0;
+  min-height: 43px;
+  padding: 7px 6px 7px 32px;
+  border: 1.5px solid rgba(126, 92, 38, 0.28);
+  border-radius: 12px 12px 14px 14px;
+  background:
+    radial-gradient(circle at 18px 64%, #66bb6a 0 3px, transparent 4px),
+    linear-gradient(180deg, #fff1ca, #d99c43);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.46), 0 3px 10px rgba(0, 0, 0, 0.08);
+  color: #1b3d24;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 900;
+  line-height: 1.08;
+  text-align: left;
+  overflow-wrap: anywhere;
+  transition: transform 0.15s ease, border-color 0.2s ease, filter 0.2s ease;
+  touch-action: manipulation;
+}
+
+.jbg-option-btn::before {
+  content: attr(data-jbg-key);
+  position: absolute;
+  left: 7px;
+  top: 50%;
+  width: 21px;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #1b5e2f, #2e7d32);
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.56rem;
+  transform: translateY(-50%);
+}
+
+.jbg-option-btn:active {
+  transform: scale(0.97);
+}
+
+.jbg-option-btn.jbg-selected {
+  border-color: rgba(255, 149, 0, 0.76);
+  filter: brightness(1.04);
+}
+
+.jbg-option-btn.jbg-correct {
+  border-color: rgba(46, 125, 50, 0.76);
+  background:
+    radial-gradient(circle at 18px 64%, #f6e4a5 0 3px, transparent 4px),
+    linear-gradient(180deg, #b9ebb7, #65b653);
+}
+
+.jbg-option-btn.jbg-wrong {
+  border-color: rgba(198, 63, 55, 0.6);
+  background:
+    radial-gradient(circle at 18px 64%, #f6e4a5 0 3px, transparent 4px),
+    linear-gradient(180deg, #ffd1c9, #e57373);
+}
+
+.jbg-feedback {
+  flex: 0 0 auto;
+  min-height: 15px;
+  margin: 0;
+  color: #b25d00;
+  font-size: 0.58rem;
+  font-weight: 900;
+  line-height: 1.08;
+  text-align: center;
+}
+
+.jbg-feedback.jbg-good {
+  color: #1b5e2f;
+}
+
+.jbg-submit-btn {
+  flex: 0 0 auto;
+  width: min(190px, 80%);
+  min-height: 34px;
+  margin: 0 auto;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #1b5e2f, #2e7d32);
+  box-shadow: 0 5px 14px rgba(46, 125, 50, 0.25);
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.jbg-submit-btn:disabled {
+  opacity: 0.72;
+}
+
+.jbg-hidden {
+  display: none !important;
+}
+
+.jbg-completion-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(18, 38, 28, 0.36);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.jbg-completion-card {
+  width: min(320px, 100%);
+  padding: 22px 18px 20px;
+  border: 1.5px solid rgba(160, 200, 100, 0.35);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: jbgCompletePop 0.25s ease;
+}
+
+.jbg-completion-icon {
+  width: 86px;
+  height: 86px;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 7px 16px rgba(255, 149, 0, 0.36));
+}
+
+.jbg-completion-icon .ar-page-icon {
+  --ar-size: 76px;
+  border-radius: 22px;
+}
+
+.jbg-completion-title {
+  display: block;
+  margin: 0 0 12px;
+  color: #1b5e2f;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.32rem;
+  line-height: 1.05;
+}
+
+.jbg-completion-message {
+  margin: 0 auto 12px;
+  color: #4a6a4a;
+  font-size: 0.76rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.jbg-completion-score,
+.jbg-completion-home {
+  width: 100%;
+  min-height: 38px;
+  margin: 0 auto;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.78rem;
+  line-height: 1;
+}
+
+.jbg-completion-score {
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #ff9500, #ffb74d);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 149, 0, 0.28);
+}
+
+.jbg-completion-home {
+  border: none;
+  background: linear-gradient(135deg, #1b5e2f, #2e7d32);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(46, 125, 50, 0.3);
+}
+
+@keyframes jbgPanelRise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes jbgCloudDrift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(9px);
+  }
+}
+
+@keyframes jbgParticleFall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0) scale(0.7);
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--jbg-drift), 78px, 0) scale(1);
+  }
+}
+
+@keyframes jbgSprinkleTilt {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  42% {
+    transform: rotate(7deg) translateY(2px);
+  }
+  68% {
+    transform: rotate(-16deg);
+  }
+}
+
+@keyframes jbgRewardGlow {
+  0% {
+    filter: brightness(0.95) saturate(0.92);
+  }
+  50% {
+    filter: brightness(1.16) saturate(1.22);
+  }
+  100% {
+    filter: brightness(1) saturate(1);
+  }
+}
+
+@keyframes jbgWrongShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  35% {
+    transform: translateX(-4px);
+  }
+  70% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes jbgAlertFlash {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  20%,
+  76% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes jbgPlantStall {
+  0%,
+  100% {
+    filter: none;
+  }
+  45% {
+    filter: grayscale(0.35) brightness(0.86);
+  }
+}
+
+@keyframes jbgCompletePop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-height: 760px) {
+  .jbg-scene {
+    height: 178px;
+    margin-bottom: 6px;
+  }
+
+  .jbg-station-head {
+    margin-bottom: 5px;
+  }
+
+  .jbg-station-desc {
+    display: none;
+  }
+
+  .jbg-fertilizer-bag {
+    bottom: 74px;
+    transform: scale(0.86);
+    transform-origin: left bottom;
+  }
+
+  .jbg-sprinkler {
+    bottom: 108px;
+    transform: rotate(-10deg) scale(0.86);
+    transform-origin: left center;
+  }
+
+  .jbg-plant {
+    bottom: 46px;
+    width: 138px;
+    height: 158px;
+  }
+
+  .jbg-quiz-panel {
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .jbg-question-text {
+    min-height: 32px;
+    font-size: 0.58rem;
+  }
+
+  .jbg-option-grid {
+    gap: 5px;
+  }
+
+  .jbg-option-btn {
+    min-height: 38px;
+    padding: 6px 5px 6px 30px;
+    font-size: 0.49rem;
+  }
+
+  .jbg-submit-btn {
+    min-height: 31px;
+    padding: 7px 16px;
+    font-size: 0.64rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jbg-game-card,
+  .jbg-cloud,
+  .jbg-scene.jbg-correct .jbg-sprinkler,
+  .jbg-scene.jbg-correct .jbg-field,
+  .jbg-scene.jbg-correct .jbg-plant,
+  .jbg-scene.jbg-wrong,
+  .jbg-scene.jbg-wrong .jbg-scene-alert,
+  .jbg-scene.jbg-wrong .jbg-plant,
+  .jbg-particle,
+  .jbg-completion-card {
+    animation: none !important;
+  }
+}

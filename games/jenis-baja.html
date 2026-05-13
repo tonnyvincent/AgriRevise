@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1.3.1 Jenis Baja - +AgriRevise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../jenis-baja.css" />
+</head>
+<body class="jbg-game-body">
+
+  <div class="page jbg-page">
+
+    <img src="../images/background-latihan-pengukuhan.png" alt="Farm" class="bg-img desktop-bg" />
+    <img src="../images/background-latihan-pengukuhan-mobile.png" alt="Farm Mobile" class="bg-img mobile-bg" />
+    <div class="bg-overlay"></div>
+
+    <nav>
+      <a href="#" class="nav-logo">
+        <img src="../images/agrirevise-logo.png" alt="AgriRevise" class="nav-logo-img" />
+        <span class="nav-logo-text">
+          <span class="logo-agri">+Agri</span><span class="logo-revise">Revise</span>
+        </span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#">Manual Penggunaan</a></li>
+          <li><a href="../latihan-pengukuhan.html">Latihan Pengukuhan</a></li>
+          <li><a href="#">Papan Prestasi</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="../index.html" class="nav-cta">Laman Utama</a>
+          <button class="nav-toggle" id="nav-toggle">&#9776;</button>
+
+          <div class="nav-dropdown" id="nav-dropdown">
+            <a href="#">Manual Penggunaan</a>
+            <a href="../latihan-pengukuhan.html">Latihan Pengukuhan</a>
+            <a href="#">Papan Prestasi</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="jbg-shell" aria-live="polite">
+      <div class="jbg-topbar">
+        <a class="jbg-back-btn" href="../baja-dan-pembajaan.html">&larr; Kembali</a>
+        <div class="jbg-progress-wrap">
+          <div class="jbg-progress-track">
+            <div class="jbg-progress-fill" id="jbg-progress-fill"></div>
+          </div>
+          <span class="jbg-step-label" id="jbg-step-label">Soalan 1 / 14</span>
+        </div>
+        <div class="jbg-score-pill"><span id="jbg-score-display">0</span>/14</div>
+      </div>
+
+      <section class="jbg-game-card" id="jbg-game-card">
+        <div class="jbg-station-head">
+          <div class="jbg-mission-badge" id="jbg-mission-badge">Misi 1</div>
+          <h1 class="jbg-station-title" id="jbg-mission-title">Grow Your Plant</h1>
+          <p class="jbg-station-desc" id="jbg-mission-desc">Jawab soalan untuk menabur baja dan membesarkan pokok.</p>
+        </div>
+
+        <div class="jbg-scene" id="jbg-scene" style="--jbg-growth: 0; --jbg-growth-percent: 0%; --jbg-plant-scale: 0.72; --jbg-seed-opacity: 1; --jbg-sprout-opacity: 0; --jbg-stem-opacity: 0; --jbg-low-leaf-opacity: 0; --jbg-top-leaf-opacity: 0; --jbg-bloom-opacity: 0;">
+          <div class="jbg-sun"></div>
+          <div class="jbg-cloud jbg-cloud-one"></div>
+          <div class="jbg-cloud jbg-cloud-two"></div>
+
+          <div class="jbg-growth-badge">
+            <span>Tumbesaran</span>
+            <strong id="jbg-growth-text">0%</strong>
+          </div>
+          <div class="jbg-topic-chip" id="jbg-topic-chip">Jenis Baja</div>
+          <div class="jbg-scene-alert" id="jbg-scene-alert">Tiada baja ditabur</div>
+
+          <div class="jbg-fertilizer-bag">
+            <span id="jbg-bag-label">Baja</span>
+          </div>
+          <div class="jbg-sprinkler"></div>
+          <div class="jbg-nutrient-dust" id="jbg-nutrient-dust"></div>
+
+          <div class="jbg-field">
+            <div class="jbg-field-green"></div>
+            <div class="jbg-soil-row jbg-soil-row-one"></div>
+            <div class="jbg-soil-row jbg-soil-row-two"></div>
+            <div class="jbg-soil-row jbg-soil-row-three"></div>
+            <div class="jbg-root jbg-root-one"></div>
+            <div class="jbg-root jbg-root-two"></div>
+            <div class="jbg-root jbg-root-three"></div>
+          </div>
+          <div class="jbg-plant" aria-hidden="true">
+            <svg class="jbg-plant-svg" viewBox="0 0 160 180" focusable="false">
+              <defs>
+                <linearGradient id="jbgPlantStemGradient" x1="61" y1="162" x2="93" y2="34" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#1f7733" />
+                  <stop offset="0.52" stop-color="#37a246" />
+                  <stop offset="1" stop-color="#67bf55" />
+                </linearGradient>
+                <linearGradient id="jbgPlantLeafGradient" x1="29" y1="41" x2="128" y2="112" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#b4df6f" />
+                  <stop offset="0.5" stop-color="#4caf50" />
+                  <stop offset="1" stop-color="#1f813a" />
+                </linearGradient>
+              </defs>
+              <path class="jbg-plant-shadow" d="M51 163 C69 154 95 154 113 163 C96 174 69 174 51 163Z" />
+              <g class="jbg-seed">
+                <ellipse cx="80" cy="158" rx="16" ry="10" />
+                <path d="M67 156 C74 161 82 162 94 157" />
+              </g>
+              <g class="jbg-sprout">
+                <path class="jbg-sprout-stem" d="M80 159 C80 147 81 136 84 126" />
+                <path class="jbg-sprout-leaf jbg-sprout-leaf-left" d="M82 140 C67 139 58 131 55 119 C70 118 83 125 88 136 C87 140 85 142 82 140Z" />
+                <path class="jbg-sprout-leaf jbg-sprout-leaf-right" d="M83 134 C94 125 108 124 119 130 C108 142 94 145 83 139 C81 137 81 135 83 134Z" />
+              </g>
+              <path class="jbg-plant-stem" d="M80 166 C77 135 79 110 77 84 C75 61 83 45 94 31" />
+              <path class="jbg-plant-stem-highlight" d="M78 160 C76 129 78 106 76 85 C74 65 80 50 89 36" />
+              <g class="jbg-plant-leaves">
+                <g class="jbg-leaf-stage jbg-leaf-stage-low">
+                  <path class="jbg-plant-leaf jbg-plant-leaf-left-low" d="M77 114 C48 108 30 89 24 67 C51 64 78 76 88 101 C87 111 84 116 77 114Z" />
+                  <path class="jbg-plant-vein" d="M79 105 C58 97 44 84 31 70" />
+                  <path class="jbg-plant-leaf jbg-plant-leaf-right-low" d="M79 103 C105 91 128 92 147 106 C128 128 97 133 78 115 C75 110 75 106 79 103Z" />
+                  <path class="jbg-plant-vein" d="M82 109 C104 109 124 111 140 107" />
+                </g>
+                <g class="jbg-leaf-stage jbg-leaf-stage-top">
+                  <path class="jbg-plant-leaf jbg-plant-leaf-left-top" d="M78 76 C56 68 45 52 44 35 C65 31 90 44 93 66 C89 73 84 77 78 76Z" />
+                  <path class="jbg-plant-vein" d="M82 68 C68 60 57 49 49 38" />
+                  <path class="jbg-plant-leaf jbg-plant-leaf-right-top" d="M80 68 C100 49 124 43 147 51 C138 75 111 91 86 79 C81 75 78 71 80 68Z" />
+                  <path class="jbg-plant-vein" d="M87 71 C108 65 128 58 143 53" />
+                </g>
+              </g>
+              <g class="jbg-bloom">
+                <circle cx="95" cy="29" r="8" />
+                <circle cx="85" cy="22" r="8" />
+                <circle cx="105" cy="21" r="8" />
+                <circle cx="86" cy="38" r="8" />
+                <circle cx="104" cy="37" r="8" />
+                <circle class="jbg-bloom-center" cx="95" cy="30" r="8" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="jbg-quiz-panel">
+          <div class="jbg-question-meta">
+            <span class="jbg-question-type" id="jbg-question-type">Objektif Konsep</span>
+            <span class="jbg-question-count" id="jbg-question-count">1/14</span>
+          </div>
+          <p class="jbg-question-text" id="jbg-question-text"></p>
+          <div class="jbg-option-grid" id="jbg-option-grid"></div>
+          <p class="jbg-feedback" id="jbg-feedback"></p>
+          <button class="jbg-submit-btn" id="jbg-submit-btn" type="button">Semak Jawapan</button>
+        </div>
+      </section>
+
+      <section class="jbg-completion-modal jbg-hidden" id="jbg-completion-modal" role="dialog" aria-modal="true" aria-labelledby="jbg-complete-title">
+        <div class="jbg-completion-card">
+          <div class="jbg-completion-icon" aria-hidden="true">
+            <span class="ar-page-icon ar-icon-fertilizer"><span></span></span>
+          </div>
+          <h1 class="jbg-completion-title" id="jbg-complete-title">Game Selesai</h1>
+          <p class="jbg-completion-message">Anda telah menyelesaikan misi Jenis Baja.</p>
+          <div class="jbg-completion-score">Skor:&nbsp;<span id="jbg-final-score">0/14</span></div>
+          <a class="jbg-completion-home" href="../baja-dan-pembajaan.html">Kembali</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../script.js"></script>
+  <script src="../jenis-baja.js"></script>
+</body>
+</html>
