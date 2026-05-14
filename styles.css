@@ -1670,7 +1670,7 @@ body.game-page .hero-body {
 .leaderboard-header,
 .leaderboard-row {
   display: grid;
-  grid-template-columns: 88px minmax(0, 1fr) 112px;
+  grid-template-columns: 64px minmax(0, 1fr) 116px;
 
   align-items: center;
 
@@ -1694,6 +1694,17 @@ body.game-page .hero-body {
 .leaderboard-header > div,
 .leaderboard-row > div {
   min-width: 0;
+}
+
+.leaderboard-header > div:first-child,
+.leaderboard-row > div:first-child {
+  display: flex;
+  justify-content: center;
+}
+
+.leaderboard-header > div:last-child,
+.leaderboard-row > div:last-child {
+  text-align: right;
 }
 
 .leaderboard-header {
@@ -1894,7 +1905,7 @@ body.game-page .hero-body {
 
   .leaderboard-header,
   .leaderboard-row {
-    grid-template-columns: 66px minmax(0, 1fr) 76px;
+    grid-template-columns: 42px minmax(0, 1fr) 96px;
     gap: 8px;
 
     font-size: 0.76rem;

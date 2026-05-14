@@ -61,7 +61,7 @@ function getLocalFallbackPlayers() {
 function updateHeading() {
   if (!scoreHeading) return;
 
-  scoreHeading.textContent = currentSort === 'total' ? 'Skor Jumlah' : 'Skor Game';
+  scoreHeading.textContent = currentSort === 'total' ? 'Jumlah Skor' : 'Skor Game';
 }
 
 function getSortedPlayers() {
