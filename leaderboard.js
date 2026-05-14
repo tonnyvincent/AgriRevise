@@ -6,10 +6,16 @@ const leaderboardList = document.getElementById('leaderboard-list');
 const clearBtn = document.getElementById('clear-score-btn');
 const sortSelect = document.getElementById('leaderboard-sort');
 const scoreHeading = document.getElementById('leaderboard-score-heading');
+const pagination = document.getElementById('leaderboard-pagination');
+const prevBtn = document.getElementById('leaderboard-prev');
+const nextBtn = document.getElementById('leaderboard-next');
+const pageLabel = document.getElementById('leaderboard-page-label');
 const scoreApi = window.AgriReviseScores;
 
 let players = [];
 let currentSort = sortSelect ? sortSelect.value : 'total';
+let currentPage = 1;
+const pageSize = 5;
 
 function getGameMeta(gameKey) {
   return scoreApi?.games?.[gameKey] || null;
@@ -34,6 +40,10 @@ function getMaxScore(sortKey = currentSort) {
 function setStatus(message) {
   leaderboardList.innerHTML = '';
 
+  if (pagination) {
+    pagination.classList.add('hidden');
+  }
+
   const empty = document.createElement('div');
   empty.className = 'empty-score';
   empty.textContent = message;
@@ -52,26 +62,59 @@ function updateHeading() {
   scoreHeading.textContent = currentSort === 'total' ? 'Skor Jumlah' : 'Skor Game';
 }
 
+function getSortedPlayers() {
+  return players
+    .slice()
+    .sort((a, b) => getScore(b) - getScore(a) || Number(b.total_score || 0) - Number(a.total_score || 0));
+}
+
+function getTotalPages() {
+  return Math.max(1, Math.ceil(players.length / pageSize));
+}
+
+function updatePagination() {
+  const totalPages = getTotalPages();
+
+  currentPage = Math.min(Math.max(currentPage, 1), totalPages);
+
+  if (pageLabel) {
+    pageLabel.textContent = `${currentPage} / ${totalPages}`;
+  }
+
+  if (prevBtn) {
+    prevBtn.disabled = currentPage <= 1;
+  }
+
+  if (nextBtn) {
+    nextBtn.disabled = currentPage >= totalPages;
+  }
+
+  if (pagination) {
+    pagination.classList.toggle('hidden', players.length === 0);
+  }
+}
+
 function renderLeaderboard() {
   updateHeading();
   leaderboardList.innerHTML = '';
+  updatePagination();
 
   if (!players.length) {
     setStatus('Tiada skor lagi.');
     return;
   }
 
-  players
-    .slice()
-    .sort((a, b) => getScore(b) - getScore(a) || Number(b.total_score || 0) - Number(a.total_score || 0))
+  getSortedPlayers()
+    .slice((currentPage - 1) * pageSize, currentPage * pageSize)
     .forEach((player, index) => {
+      const rank = ((currentPage - 1) * pageSize) + index + 1;
       const row = document.createElement('div');
       row.className = 'leaderboard-row';
 
       const rankCell = document.createElement('div');
       const rankBadge = document.createElement('div');
       rankBadge.className = 'rank-badge';
-      rankBadge.textContent = index + 1;
+      rankBadge.textContent = rank;
       rankCell.appendChild(rankBadge);
 
       const name = document.createElement('div');
@@ -100,6 +143,7 @@ function renderLeaderboard() {
 
 async function loadLeaderboard() {
   currentSort = sortSelect ? sortSelect.value : 'total';
+  currentPage = 1;
   setStatus('Memuatkan skor...');
 
   if (!scoreApi) {
@@ -126,6 +170,20 @@ async function loadLeaderboard() {
 
 if (sortSelect) {
   sortSelect.addEventListener('change', loadLeaderboard);
+}
+
+if (prevBtn) {
+  prevBtn.addEventListener('click', () => {
+    currentPage -= 1;
+    renderLeaderboard();
+  });
+}
+
+if (nextBtn) {
+  nextBtn.addEventListener('click', () => {
+    currentPage += 1;
+    renderLeaderboard();
+  });
 }
 
 if (clearBtn) {
