@@ -1628,6 +1628,10 @@ body.game-page .hero-body {
     inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
+.leaderboard-card.leaderboard-full-page {
+  height: 100%;
+}
+
 .leaderboard-tools {
   flex: 0 0 auto;
   display: flex;
@@ -1680,6 +1684,10 @@ body.game-page .hero-body {
   overflow: hidden;
 }
 
+.leaderboard-card.leaderboard-full-page #leaderboard-list {
+  flex: 1 1 auto;
+}
+
 .leaderboard-header > div,
 .leaderboard-row > div {
   min-width: 0;
@@ -1723,6 +1731,11 @@ body.game-page .hero-body {
 
   box-shadow:
     0 6px 18px rgba(0,0,0,0.28);
+}
+
+.leaderboard-card.leaderboard-full-page .leaderboard-row {
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 .leaderboard-row:hover {
@@ -1892,9 +1905,14 @@ body.game-page .hero-body {
   }
 
   .leaderboard-row {
-    min-height: 0;
     flex: 0 1 auto;
-    max-height: 54px;
+    min-height: 44px;
+    max-height: none;
+  }
+
+  .leaderboard-card.leaderboard-full-page .leaderboard-row {
+    flex: 1 1 0;
+    min-height: 0;
   }
 
   .rank-badge {

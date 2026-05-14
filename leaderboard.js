@@ -3,6 +3,7 @@
 // ======================================
 
 const leaderboardList = document.getElementById('leaderboard-list');
+const leaderboardCard = document.querySelector('.leaderboard-card');
 const clearBtn = document.getElementById('clear-score-btn');
 const sortSelect = document.getElementById('leaderboard-sort');
 const scoreHeading = document.getElementById('leaderboard-score-heading');
@@ -39,6 +40,7 @@ function getMaxScore(sortKey = currentSort) {
 
 function setStatus(message) {
   leaderboardList.innerHTML = '';
+  leaderboardCard?.classList.remove('leaderboard-full-page');
 
   if (pagination) {
     pagination.classList.add('hidden');
@@ -104,9 +106,12 @@ function renderLeaderboard() {
     return;
   }
 
-  getSortedPlayers()
-    .slice((currentPage - 1) * pageSize, currentPage * pageSize)
-    .forEach((player, index) => {
+  const visiblePlayers = getSortedPlayers()
+    .slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+  leaderboardCard?.classList.toggle('leaderboard-full-page', visiblePlayers.length === pageSize);
+
+  visiblePlayers.forEach((player, index) => {
       const rank = ((currentPage - 1) * pageSize) + index + 1;
       const row = document.createElement('div');
       row.className = 'leaderboard-row';
