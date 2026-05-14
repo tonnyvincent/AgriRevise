@@ -1144,6 +1144,7 @@ body.pht-game-body {
   overflow: hidden;
   padding: 12px 10px 10px;
   border-radius: 16px;
+  justify-content: stretch;
 }
 
 .pht-station:not(.pht-hidden) {
@@ -1185,7 +1186,7 @@ body.pht-game-body {
 .pht-lab-board,
 .pht-theory-grid,
 .pht-experiment-layout {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
 }
@@ -1211,13 +1212,17 @@ body.pht-game-body {
 /* Station 1 compact scale */
 .pht-lab-board {
   gap: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .pht-scale-panel {
-  flex: 0 0 auto;
+  flex: 1 1 auto;
   min-height: 0;
   padding: 8px;
   border-radius: 13px;
+  display: flex;
+  flex-direction: column;
 }
 
 .pht-scale-numbers {
@@ -1228,24 +1233,25 @@ body.pht-game-body {
 .pht-scale-bar {
   grid-template-columns: 1fr;
   min-height: 0;
-  height: 270px;
-  max-height: 270px;
+  flex: 1 1 auto;
+  height: auto;
+  max-height: none;
   border-radius: 13px;
 }
 
 .pht-scale-zone {
-  min-height: 64px;
+  min-height: 0;
   grid-template-columns: 40px minmax(0, 1fr);
   gap: 6px;
-  padding: 7px 9px;
+  padding: clamp(8px, 1.5dvh, 12px) 9px;
 }
 
 .pht-scale-side-label {
-  font-size: 0.62rem;
+  font-size: clamp(0.7rem, 2.85vw, 0.84rem);
 }
 
 .pht-scale-bar .pht-drop-zone {
-  min-height: 43px;
+  min-height: clamp(54px, 8.5dvh, 74px);
   max-width: 100%;
   border-radius: 10px;
 }
@@ -1259,11 +1265,11 @@ body.pht-game-body {
 
 .pht-label-chip,
 .pht-effect-chip {
-  max-width: 128px;
-  min-height: 30px;
-  padding: 6px 8px;
-  border-radius: 15px;
-  font-size: 0.56rem;
+  max-width: 142px;
+  min-height: 36px;
+  padding: 8px 10px;
+  border-radius: 18px;
+  font-size: clamp(0.62rem, 2.5vw, 0.72rem);
   line-height: 1.08;
   white-space: normal;
 }
@@ -1276,7 +1282,7 @@ body.pht-game-body {
 }
 
 .pht-drop-hint {
-  font-size: 0.52rem;
+  font-size: clamp(0.58rem, 2.35vw, 0.68rem);
   line-height: 1;
 }
 
@@ -1559,4 +1565,115 @@ body.pht-game-body {
 .pht-home-btn {
   padding: 9px 22px;
   font-size: 0.76rem;
+}
+
+/* Balance the later pH stations across the whole phone viewport. */
+#pht-station-2 .pht-theory-grid {
+  grid-template-rows: minmax(116px, 0.36fr) minmax(0, 1fr);
+  align-content: stretch;
+  align-items: stretch;
+}
+
+#pht-station-2 .pht-report-panel,
+#pht-station-2 .pht-effect-panel {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#pht-station-2 .pht-factor-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+#pht-station-2 .pht-factor-card {
+  min-height: 0;
+  font-size: clamp(0.58rem, 2.35vw, 0.68rem);
+}
+
+#pht-station-2 .pht-effect-targets {
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: stretch;
+}
+
+#pht-station-2 .pht-effect-card {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#pht-station-2 .pht-effect-visual {
+  flex: 0.9 1 auto;
+  height: auto;
+  min-height: 54px;
+  align-items: center;
+}
+
+#pht-station-2 .pht-effect-visual .pht-root {
+  transform: scale(1.35);
+  transform-origin: center bottom;
+}
+
+#pht-station-2 .pht-effect-card p {
+  flex: 0 0 auto;
+  min-height: 42px;
+  font-size: clamp(0.54rem, 2.15vw, 0.64rem);
+}
+
+#pht-station-2 .pht-effect-card .pht-drop-zone {
+  flex: 0 0 auto;
+  min-height: 48px;
+}
+
+#pht-station-3 .pht-experiment-layout {
+  grid-template-rows: minmax(180px, 0.42fr) minmax(0, 1fr);
+  align-content: stretch;
+  align-items: stretch;
+}
+
+#pht-station-3 .pht-instrument-panel,
+#pht-station-3 .pht-procedure-area {
+  min-height: 0;
+}
+
+#pht-station-3 .pht-instrument-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+#pht-station-3 .pht-lab-demo {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 150px;
+}
+
+#pht-station-3 .pht-procedure-area {
+  align-items: stretch;
+}
+
+#pht-station-3 .pht-procedure-bank,
+#pht-station-3 .pht-procedure-slots {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  align-content: stretch;
+}
+
+#pht-station-3 .pht-procedure-chip {
+  min-height: 0;
+  max-height: none;
+  height: 100%;
+  font-size: clamp(0.48rem, 1.95vw, 0.58rem);
+}
+
+#pht-station-3 .pht-procedure-slot {
+  min-height: 0;
+}
+
+#pht-station-3 .pht-slot-number,
+#pht-station-3 .pht-procedure-slot .pht-drop-zone {
+  min-height: 0;
+  height: 100%;
 }

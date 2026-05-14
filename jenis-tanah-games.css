@@ -371,62 +371,70 @@ body.tdtp-game-body {
   max-width: none;
   padding: 6px 7px 7px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .tdtp-game-body .game-station {
-  height: 100%;
+  flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
+  display: none;
 }
 
 .tdtp-game-body .game-station[style*="block"],
-.tdtp-game-body #station-1 {
-  display: block;
+.tdtp-game-body #station-1:not([style*="none"]) {
+  display: flex !important;
+  flex-direction: column;
 }
 
 .tdtp-game-body .question-card {
-  height: 100%;
+  flex: 1 1 auto;
   min-height: 0;
-  padding: 10px;
-  gap: 7px;
+  padding: clamp(12px, 2.2dvh, 18px) 12px clamp(14px, 2.4dvh, 20px);
+  gap: clamp(8px, 1.6dvh, 13px);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .tdtp-game-body .question-text {
+  flex: 0 0 auto;
   min-height: 0;
   color: #1b5e2f;
-  font-size: 0.66rem;
+  font-size: clamp(0.78rem, 3.25vw, 0.94rem);
   font-weight: 900;
-  line-height: 1.12;
+  line-height: 1.16;
   text-align: center;
 }
 
 .tdtp-game-body .instruction-text {
   color: #4a6a4a;
-  font-size: 0.52rem;
+  font-size: clamp(0.56rem, 2.3vw, 0.66rem);
   font-weight: 800;
   line-height: 1.1;
   margin-top: 4px;
 }
 
 .tdtp-game-body .drag-options {
-  gap: 6px;
+  flex: 0 0 auto;
+  gap: 7px;
   margin: 0;
-  min-height: 31px;
+  min-height: 34px;
 }
 
 .tdtp-game-body .drag-item {
   width: auto !important;
-  min-width: 58px;
-  max-width: 116px;
-  min-height: 28px;
+  min-width: 68px;
+  max-width: 132px;
+  min-height: 34px;
   margin: 0;
-  padding: 5px 8px;
-  border-radius: 14px;
+  padding: 7px 10px;
+  border-radius: 17px;
   background: linear-gradient(135deg, #1b5e2f, #2e7d32);
   color: #fff;
   font-family: 'Nunito', sans-serif;
-  font-size: 0.5rem;
+  font-size: clamp(0.56rem, 2.3vw, 0.66rem);
   font-weight: 900;
   line-height: 1.08;
   text-align: center;
@@ -457,21 +465,24 @@ body.tdtp-game-body {
 }
 
 .tdtp-game-body .drop-zones {
+  flex: 1 1 auto;
+  min-height: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 6px;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: clamp(8px, 1.55dvh, 12px);
   margin: 0;
 }
 
 .tdtp-game-body .drop-zone {
   display: grid;
-  grid-template-columns: 1fr 64px;
+  grid-template-columns: 1fr clamp(82px, 24vw, 104px);
   align-items: center;
-  gap: 6px;
-  min-height: 62px;
-  padding: 6px;
+  gap: 11px;
+  min-height: 0;
+  padding: 10px;
   border: 2px dashed rgba(46,125,50,0.45);
-  border-radius: 12px;
+  border-radius: 14px;
   background: rgba(255,255,255,0.76);
 }
 
@@ -494,23 +505,23 @@ body.tdtp-game-body {
   width: auto;
   min-height: 0;
   color: #365236;
-  font-size: 0.52rem;
+  font-size: clamp(0.76rem, 3.05vw, 0.92rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.18;
   overflow: hidden;
 }
 
 .tdtp-game-body .zone-note {
   color: #5f775f;
-  font-size: 0.48rem;
+  font-size: 0.68rem;
 }
 
 .tdtp-game-body .zone-slot {
   flex: none;
-  width: 64px;
-  height: 30px;
+  width: 100%;
+  height: clamp(46px, 8.2dvh, 68px);
   border: 2px dashed rgba(46,125,50,0.35);
-  border-radius: 9px;
+  border-radius: 12px;
   background: rgba(255,255,255,0.8);
   padding: 2px;
 }
@@ -546,20 +557,25 @@ body.tdtp-game-body {
 }
 
 .tdtp-game-body .ordered-sequence .drop-zone {
-  min-height: 50px;
+  min-height: 0;
+}
+
+.tdtp-game-body .ordered-sequence {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
 }
 
 .tdtp-game-body .tdtp-check-btn {
   align-self: center;
-  min-height: 30px;
-  margin-top: 1px;
-  padding: 7px 18px;
+  flex: 0 0 auto;
+  min-height: 38px;
+  margin-top: 0;
+  padding: 9px 24px;
   border: none;
-  border-radius: 16px;
+  border-radius: 19px;
   background: linear-gradient(135deg, #2e7d32, #43a047);
   color: #fff;
   font-family: 'Fredoka One', cursive;
-  font-size: 0.62rem;
+  font-size: clamp(0.68rem, 2.7vw, 0.8rem);
   line-height: 1;
   box-shadow: 0 4px 14px rgba(46,125,50,0.28);
   cursor: pointer;
