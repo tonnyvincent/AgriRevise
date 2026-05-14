@@ -16,7 +16,7 @@ const scoreApi = window.AgriReviseScores;
 let players = [];
 let currentSort = sortSelect ? sortSelect.value : 'total';
 let currentPage = 1;
-const pageSize = 7;
+const pageSize = 5;
 
 function getGameMeta(gameKey) {
   return scoreApi?.games?.[gameKey] || null;

@@ -1878,13 +1878,13 @@ body.game-page .hero-body {
   }
 
   .leaderboard-tools {
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     gap: 6px;
     margin-bottom: 8px;
   }
 
   .leaderboard-tools select {
-    font-size: 0.76rem;
+    font-size: 0.86rem;
   }
 
   .leaderboard-header,
@@ -1892,21 +1892,21 @@ body.game-page .hero-body {
     grid-template-columns: 66px minmax(0, 1fr) 76px;
     gap: 8px;
 
-    font-size: 0.68rem;
+    font-size: 0.76rem;
 
     padding: 6px 8px;
   }
 
   .leaderboard-header {
     min-height: 34px;
-    font-size: 0.66rem;
+    font-size: 0.74rem;
     margin-bottom: 7px;
     white-space: nowrap;
   }
 
   .leaderboard-row {
     flex: 0 1 auto;
-    min-height: 40px;
+    min-height: 48px;
     max-height: none;
   }
 
@@ -1919,24 +1919,24 @@ body.game-page .hero-body {
     width: 28px;
     height: 28px;
 
-    font-size: 0.76rem;
+    font-size: 0.84rem;
   }
 
   .player-name,
   .player-score {
-    font-size: 0.74rem;
+    font-size: 0.88rem;
   }
 
   .player-score-sub {
-    font-size: 0.54rem;
+    font-size: 0.64rem;
     line-height: 1.1;
     white-space: nowrap;
   }
 
   .leaderboard-pagination button {
-    width: 22px;
-    height: 26px;
-    font-size: 1.6rem;
+    width: 24px;
+    height: 28px;
+    font-size: 1.8rem;
   }
 }
 
