@@ -59,10 +59,24 @@
 
       <div class="leaderboard-card">
 
+        <div class="leaderboard-tools">
+          <label for="leaderboard-sort">Susun ikut</label>
+          <select id="leaderboard-sort">
+            <option value="total">Jumlah</option>
+            <option value="jenis_sifat_tanah">Jenis dan Sifat Tanah</option>
+            <option value="tanah_tapak_penanaman">Tanah di Tapak Penanaman</option>
+            <option value="struktur_tanah">Struktur Tanah</option>
+            <option value="ph_tanah">pH Tanah</option>
+            <option value="kaedah_memperbaiki_tanah">Kaedah Memperbaiki Tanah</option>
+            <option value="jenis_baja">Jenis Baja</option>
+            <option value="pengiraan_kos_baja">Pengiraan Kos Baja</option>
+          </select>
+        </div>
+
         <div class="leaderboard-header">
           <div>Kedudukan</div>
           <div>Nama</div>
-          <div>Skor</div>
+          <div id="leaderboard-score-heading">Skor Jumlah</div>
         </div>
 
         <div id="leaderboard-list"></div>
@@ -73,6 +87,7 @@
 
   </div>
 
+  <script src="score-api.js"></script>
   <script src="script.js"></script>
   <script src="leaderboard.js"></script>
 </body>

@@ -1611,6 +1611,29 @@ body.game-page .hero-body {
     inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
+.leaderboard-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: #ffffff;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+
+.leaderboard-tools select {
+  min-width: 220px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.94);
+  color: #1b5e2f;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  outline: none;
+}
+
 .leaderboard-header,
 .leaderboard-row {
   display: grid;
@@ -1713,6 +1736,12 @@ body.game-page .hero-body {
     0 0 12px rgba(255,213,79,0.25);
 }
 
+.player-score-sub {
+  margin-top: 2px;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.9);
+}
+
 .empty-score {
   text-align: center;
 
@@ -1730,6 +1759,16 @@ body.game-page .hero-body {
 }
 
 @media (max-width: 600px) {
+
+  .leaderboard-tools {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .leaderboard-tools select {
+    min-width: 0;
+    width: 100%;
+  }
 
   .leaderboard-header,
   .leaderboard-row {

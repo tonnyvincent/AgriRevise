@@ -141,12 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('name-modal');
   const input = document.getElementById('player-name-input');
   const saveBtn = document.getElementById('save-player-name');
+  const existingName = localStorage.getItem('playerName');
+
+  if (existingName && window.AgriReviseScores) {
+    window.AgriReviseScores.ensurePlayer(existingName);
+  }
 
   if (!modal) return;
 
   // check existing player
-  const existingName = localStorage.getItem('playerName');
-
   // already exists
   if (existingName) {
     modal.classList.add('hidden');
@@ -161,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     input.focus();
   }, 200);
 
-  function savePlayerName() {
+  async function savePlayerName() {
 
     const playerName = input.value.trim();
 
@@ -173,11 +176,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // SAVE LOCALLY
     localStorage.setItem('playerName', playerName);
 
+    if (window.AgriReviseScores) {
+      saveBtn.disabled = true;
+
+      try {
+        await window.AgriReviseScores.savePlayer(playerName);
+      } catch (error) {
+        console.warn('PLAYER DB SAVE FAILED:', error);
+      } finally {
+        saveBtn.disabled = false;
+        modal.classList.add('hidden');
+      }
+    } else {
+      modal.classList.add('hidden');
+    }
+
     console.log("PLAYER NAME SAVED:", playerName);
-
-    // later you can send to DB here
-
-    modal.classList.add('hidden');
   }
 
   saveBtn.addEventListener('click', savePlayerName);

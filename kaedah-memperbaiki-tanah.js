@@ -258,6 +258,9 @@
     setText('#kmt-final-score', finalScore);
     localStorage.setItem('kaedahMemperbaikiTanahCompleted', 'true');
     localStorage.setItem('kaedahMemperbaikiTanahScore', String(state.score));
+    if (window.AgriReviseScores) {
+      window.AgriReviseScores.saveScore('kaedah_memperbaiki_tanah', state.score);
+    }
     $('#kmt-completion-modal').classList.remove('hidden');
   }
 

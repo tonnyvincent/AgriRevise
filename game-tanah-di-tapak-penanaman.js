@@ -565,28 +565,11 @@ function showFinalCompletion() {
   updateScoreDisplay();
 
   localStorage.setItem('tapakPenanamanCompleted', 'true');
-  localStorage.setItem('tapakPenanamanScore', String(percentage));
+  localStorage.setItem('tapakPenanamanScore', String(totalCorrect));
 
-  // ======================================
-  // SAVE TO LOCAL LEADERBOARD
-  // ======================================
-
-  const playerName = localStorage.getItem('playerName') || 'Pemain';
-
-  const leaderboardScores = JSON.parse(
-    localStorage.getItem('leaderboardScores')
-  ) || [];
-
-  leaderboardScores.push({
-    name: playerName,
-    score: percentage,
-    date: new Date().toISOString()
-  });
-
-  localStorage.setItem(
-    'leaderboardScores',
-    JSON.stringify(leaderboardScores)
-  );
+  if (window.AgriReviseScores) {
+    window.AgriReviseScores.saveScore('tanah_tapak_penanaman', totalCorrect);
+  }
 
 
   document.getElementById('tdtp-final-score').textContent = `${totalCorrect}/${totalQuestions}`;

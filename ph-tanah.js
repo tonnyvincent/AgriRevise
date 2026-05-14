@@ -486,6 +486,9 @@
     $('#pht-final-score').textContent = finalText;
     localStorage.setItem('phTanahCompleted', 'true');
     localStorage.setItem('phTanahScore', String(state.score));
+    if (window.AgriReviseScores) {
+      window.AgriReviseScores.saveScore('ph_tanah', state.score);
+    }
     showStation('complete');
   }
 

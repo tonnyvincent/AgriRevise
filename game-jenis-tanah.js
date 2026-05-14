@@ -271,6 +271,11 @@ function showCompletion() {
 
   // SAVE COMPLETION
   localStorage.setItem('jenisTanahCompleted', 'true');
+  localStorage.setItem('jenisTanahScore', String(gameState.score));
+
+  if (window.AgriReviseScores) {
+    window.AgriReviseScores.saveScore('jenis_sifat_tanah', gameState.score);
+  }
 
   document.getElementById('final-score').textContent = gameState.score;
   document.getElementById('progress-fill').style.width = '100%';

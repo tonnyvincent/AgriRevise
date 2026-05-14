@@ -435,6 +435,9 @@
     setText('#jb-final-score', finalScore);
     localStorage.setItem('pengiraanKosBajaCompleted', 'true');
     localStorage.setItem('pengiraanKosBajaScore', String(state.score));
+    if (window.AgriReviseScores) {
+      window.AgriReviseScores.saveScore('pengiraan_kos_baja', state.score);
+    }
     $('#jb-completion-modal').classList.remove('jb-hidden');
   }
 

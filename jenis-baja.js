@@ -470,6 +470,9 @@
     setText('#jbg-final-score', finalScore);
     localStorage.setItem('jenisBajaCompleted', 'true');
     localStorage.setItem('jenisBajaScore', String(state.score));
+    if (window.AgriReviseScores) {
+      window.AgriReviseScores.saveScore('jenis_baja', state.score);
+    }
     $('#jbg-completion-modal').classList.remove('jbg-hidden');
   }
 

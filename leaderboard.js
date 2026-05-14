@@ -1,69 +1,143 @@
 // ======================================
-// LOCAL LEADERBOARD
+// DATABASE LEADERBOARD
 // ======================================
 
 const leaderboardList = document.getElementById('leaderboard-list');
 const clearBtn = document.getElementById('clear-score-btn');
+const sortSelect = document.getElementById('leaderboard-sort');
+const scoreHeading = document.getElementById('leaderboard-score-heading');
+const scoreApi = window.AgriReviseScores;
 
-// GET SCORES
-let scores = JSON.parse(localStorage.getItem('leaderboardScores')) || [];
+let players = [];
+let currentSort = sortSelect ? sortSelect.value : 'total';
 
-// SORT HIGHEST SCORE
-scores.sort((a, b) => b.score - a.score);
+function getGameMeta(gameKey) {
+  return scoreApi?.games?.[gameKey] || null;
+}
 
-function renderLeaderboard() {
+function getScore(player, sortKey = currentSort) {
+  if (sortKey === 'total') {
+    return Number(player.total_score || player.score || 0);
+  }
 
+  return Number(player.scores?.[sortKey] || 0);
+}
+
+function getMaxScore(sortKey = currentSort) {
+  if (sortKey === 'total') {
+    return scoreApi?.maxTotalScore || 82;
+  }
+
+  return getGameMeta(sortKey)?.maxScore || 0;
+}
+
+function setStatus(message) {
   leaderboardList.innerHTML = '';
 
-  if (scores.length === 0) {
+  const empty = document.createElement('div');
+  empty.className = 'empty-score';
+  empty.textContent = message;
 
-    leaderboardList.innerHTML = `
-      <div class="empty-score">
-        Tiada skor lagi.
-      </div>
-    `;
+  leaderboardList.appendChild(empty);
+}
 
+function getLocalFallbackPlayers() {
+  const localPlayer = scoreApi?.getLocalLeaderboardPlayer?.();
+  return localPlayer ? [localPlayer] : [];
+}
+
+function updateHeading() {
+  if (!scoreHeading) return;
+
+  scoreHeading.textContent = currentSort === 'total' ? 'Skor Jumlah' : 'Skor Game';
+}
+
+function renderLeaderboard() {
+  updateHeading();
+  leaderboardList.innerHTML = '';
+
+  if (!players.length) {
+    setStatus('Tiada skor lagi.');
     return;
   }
 
-  scores.forEach((player, index) => {
+  players
+    .slice()
+    .sort((a, b) => getScore(b) - getScore(a) || Number(b.total_score || 0) - Number(a.total_score || 0))
+    .forEach((player, index) => {
+      const row = document.createElement('div');
+      row.className = 'leaderboard-row';
 
-    const row = document.createElement('div');
+      const rankCell = document.createElement('div');
+      const rankBadge = document.createElement('div');
+      rankBadge.className = 'rank-badge';
+      rankBadge.textContent = index + 1;
+      rankCell.appendChild(rankBadge);
 
-    row.className = 'leaderboard-row';
+      const name = document.createElement('div');
+      name.className = 'player-name';
+      name.textContent = player.name;
 
-    row.innerHTML = `
-      <div>
-        <div class="rank-badge">
-          ${index + 1}
-        </div>
-      </div>
+      const score = document.createElement('div');
+      score.className = 'player-score';
 
-      <div class="player-name">
-        ${player.name}
-      </div>
+      const mainScore = document.createElement('div');
+      mainScore.className = 'player-score-main';
+      mainScore.textContent = `${getScore(player)}/${getMaxScore()}`;
+      score.appendChild(mainScore);
 
-      <div class="player-score">
-        ${player.score}%
-      </div>
-    `;
+      if (currentSort !== 'total') {
+        const totalScore = document.createElement('div');
+        totalScore.className = 'player-score-sub';
+        totalScore.textContent = `Jumlah ${Number(player.total_score || 0)}/${scoreApi?.maxTotalScore || 82}`;
+        score.appendChild(totalScore);
+      }
 
-    leaderboardList.appendChild(row);
+      row.append(rankCell, name, score);
+      leaderboardList.appendChild(row);
+    });
+}
+
+async function loadLeaderboard() {
+  currentSort = sortSelect ? sortSelect.value : 'total';
+  setStatus('Memuatkan skor...');
+
+  if (!scoreApi) {
+    players = getLocalFallbackPlayers();
+    renderLeaderboard();
+    return;
+  }
+
+  try {
+    const response = await scoreApi.getLeaderboard(currentSort);
+    players = response.players || [];
+  } catch (error) {
+    console.warn('Leaderboard DB load failed:', error);
+    players = getLocalFallbackPlayers();
+
+    if (!players.length) {
+      setStatus('Database belum disambungkan.');
+      return;
+    }
+  }
+
+  renderLeaderboard();
+}
+
+if (sortSelect) {
+  sortSelect.addEventListener('change', loadLeaderboard);
+}
+
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    const confirmDelete = confirm('Padam skor pada peranti ini?');
+
+    if (!confirmDelete) return;
+
+    localStorage.removeItem('leaderboardScores');
+    players = getLocalFallbackPlayers();
+    renderLeaderboard();
   });
 }
 
-renderLeaderboard();
-
-// CLEAR BUTTON
-clearBtn.addEventListener('click', () => {
-
-  const confirmDelete = confirm('Padam semua skor?');
-
-  if (!confirmDelete) return;
-
-  localStorage.removeItem('leaderboardScores');
-
-  scores = [];
-
-  renderLeaderboard();
-});
+loadLeaderboard();

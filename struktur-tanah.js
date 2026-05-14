@@ -415,6 +415,10 @@ function finishGame() {
   localStorage.setItem('strukturTanahCompleted', 'true');
   localStorage.setItem('strukturTanahScore', totalScore);
 
+  if (window.AgriReviseScores) {
+    window.AgriReviseScores.saveScore('struktur_tanah', totalScore);
+  }
+
   showFasa('complete');
 }
 
