@@ -60,7 +60,14 @@
       <div class="leaderboard-card">
 
         <div class="leaderboard-tools">
-          <label for="leaderboard-sort">Susun ikut</label>
+          <div class="leaderboard-tools-top">
+            <label for="leaderboard-sort">Susun ikut</label>
+            <div class="leaderboard-pagination" id="leaderboard-pagination">
+              <button type="button" id="leaderboard-prev" aria-label="Halaman sebelumnya">&lt;</button>
+              <span id="leaderboard-page-label">1 / 1</span>
+              <button type="button" id="leaderboard-next" aria-label="Halaman seterusnya">&gt;</button>
+            </div>
+          </div>
           <select id="leaderboard-sort">
             <option value="total">Jumlah</option>
             <option value="jenis_sifat_tanah">Jenis dan Sifat Tanah</option>
@@ -80,12 +87,6 @@
         </div>
 
         <div id="leaderboard-list"></div>
-
-        <div class="leaderboard-pagination" id="leaderboard-pagination">
-          <button type="button" id="leaderboard-prev" aria-label="Halaman sebelumnya">&lt;</button>
-          <span id="leaderboard-page-label">1 / 1</span>
-          <button type="button" id="leaderboard-next" aria-label="Halaman seterusnya">&gt;</button>
-        </div>
 
       </div>
 
