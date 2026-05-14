@@ -125,7 +125,7 @@ a { text-decoration: none; color: inherit; }
 ══════════════════════════ */
 nav {
   position: relative;
-  z-index: 10;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -179,6 +179,7 @@ nav {
 }
 
 .nav-actions {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,12 +216,12 @@ nav {
   display: none;
   position: absolute;
   right: 0;
-  top: 100%;
+  top: calc(100% + 8px);
   background: rgba(0,0,0,0.9);
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-  z-index: 15;
+  z-index: 1001;
 }
 .nav-dropdown a {
   display: block;
@@ -1570,8 +1571,14 @@ body.game-page .hero-body {
 ====================================== */
 
 .leaderboard-page {
-  overflow-y: auto;
+  height: 100dvh;
+  overflow-y: hidden;
   overflow-x: hidden;
+}
+
+.leaderboard-page .lp-title-bar {
+  flex: 0 0 auto;
+  padding: 12px 0 0;
 }
 
 .leaderboard-wrapper {
@@ -1579,15 +1586,20 @@ body.game-page .hero-body {
   z-index: 5;
 
   width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
 
   display: flex;
+  align-items: stretch;
   justify-content: center;
 
-  padding: 30px 20px 100px;
+  padding: 14px 20px 18px;
 }
 
 .leaderboard-card {
   width: min(760px, 100%);
+  height: 100%;
+  min-height: 0;
 
   /* green glass background */
   background:
@@ -1605,6 +1617,8 @@ body.game-page .hero-body {
   border-radius: 18px;
 
   padding: 16px;
+  display: flex;
+  flex-direction: column;
 
   box-shadow:
     0 20px 60px rgba(0,0,0,0.45),
@@ -1613,6 +1627,7 @@ body.game-page .hero-body {
 }
 
 .leaderboard-tools {
+  flex: 0 0 auto;
   display: flex;
   align-items: stretch;
   flex-direction: column;
@@ -1653,6 +1668,16 @@ body.game-page .hero-body {
   gap: 10px;
 }
 
+#leaderboard-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 6px;
+  overflow: hidden;
+}
+
 .leaderboard-header > div,
 .leaderboard-row > div {
   min-width: 0;
@@ -1687,8 +1712,6 @@ body.game-page .hero-body {
 
   /* darker row background */
   background: rgba(255,255,255,0.09);
-
-  margin-bottom: 6px;
 
   color: #ffffff;
 
@@ -1825,17 +1848,24 @@ body.game-page .hero-body {
 
 @media (max-width: 600px) {
 
+  .leaderboard-page .lp-title-bar {
+    padding: 8px 0 0;
+  }
+
   .leaderboard-card {
+    width: 100%;
     max-width: calc(100vw - 20px);
-    padding: 10px;
+    padding: 9px;
   }
 
   .leaderboard-wrapper {
-    padding: 14px 10px 80px;
+    padding: 8px 10px 10px;
   }
 
   .leaderboard-tools {
     font-size: 0.82rem;
+    gap: 6px;
+    margin-bottom: 8px;
   }
 
   .leaderboard-tools select {
@@ -1853,14 +1883,16 @@ body.game-page .hero-body {
   }
 
   .leaderboard-header {
-    min-height: 36px;
+    min-height: 34px;
     font-size: 0.66rem;
+    margin-bottom: 7px;
     white-space: nowrap;
   }
 
   .leaderboard-row {
-    min-height: 44px;
-    margin-bottom: 5px;
+    min-height: 0;
+    flex: 1 1 0;
+    max-height: 54px;
   }
 
   .rank-badge {
@@ -1876,7 +1908,7 @@ body.game-page .hero-body {
   }
 
   .player-score-sub {
-    font-size: 0.58rem;
+    font-size: 0.54rem;
     line-height: 1.1;
     white-space: nowrap;
   }
