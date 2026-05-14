@@ -10,6 +10,6 @@ const AGRIREVISE_DB_CHARSET = 'utf8mb4';
 
 function agrirevise_database_is_configured()
 {
-    return AGRIREVISE_DB_NAME !== 'u519103142_agrirevise'
-        && AGRIREVISE_DB_USER !== 'u519103142_agrirevisedata';
+    return AGRIREVISE_DB_NAME !== 'your_database_name'
+        && AGRIREVISE_DB_USER !== 'your_database_user';
 }
