@@ -1906,7 +1906,7 @@ body.game-page .hero-body {
 
   .leaderboard-row {
     flex: 0 1 auto;
-    min-height: 44px;
+    min-height: 40px;
     max-height: none;
   }
 
