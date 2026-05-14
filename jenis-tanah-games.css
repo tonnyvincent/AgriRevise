@@ -157,9 +157,9 @@ body.tdtp-game-body {
   max-width: none;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 226px auto;
-  align-content: start;
-  align-items: start;
+  grid-template-rows: minmax(180px, 42%) minmax(0, 1fr);
+  align-content: stretch;
+  align-items: stretch;
   gap: 7px;
   padding: 6px 7px 7px;
   overflow: hidden;
@@ -169,7 +169,7 @@ body.tdtp-game-body {
   position: static;
   flex: none;
   width: 100%;
-  height: 226px;
+  height: 100%;
   min-height: 0;
 }
 
@@ -215,14 +215,18 @@ body.tdtp-game-body {
   max-width: none;
   min-width: 0;
   min-height: 0;
+  height: 100%;
 }
 
 .jdst-game-body .question-card {
-  height: auto;
+  height: 100%;
   min-height: 0;
-  padding: 11px 10px 10px;
-  gap: 8px;
+  padding: 14px 12px 12px;
+  gap: 11px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .jdst-game-body .question-text {
@@ -231,9 +235,9 @@ body.tdtp-game-body {
   max-height: 112px;
   overflow: hidden;
   color: #1b5e2f;
-  font-size: 0.62rem;
+  font-size: clamp(0.66rem, 2.7vw, 0.76rem);
   font-weight: 900;
-  line-height: 1.16;
+  line-height: 1.2;
   text-align: center;
 }
 
@@ -244,16 +248,17 @@ body.tdtp-game-body {
 .jdst-game-body .options-grid {
   grid-template-columns: 1fr 1fr;
   gap: 7px;
+  flex: 0 1 auto;
 }
 
 .jdst-game-body .option-button {
-  min-height: 48px;
+  min-height: clamp(52px, 7.5dvh, 64px);
   padding: 6px 7px;
   border-radius: 11px;
   border: 2px solid rgba(46,125,50,0.25);
   background: rgba(255,255,255,0.8);
   color: #1a2e1a;
-  font-size: 0.56rem;
+  font-size: clamp(0.6rem, 2.45vw, 0.7rem);
   font-weight: 900;
   line-height: 1.14;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -279,7 +284,7 @@ body.tdtp-game-body {
 
 .jdst-game-body .feedback {
   min-height: 24px;
-  font-size: 0.58rem;
+  font-size: 0.62rem;
   line-height: 1.12;
 }
 
@@ -610,11 +615,11 @@ body.tdtp-game-body {
 
 @media (max-width: 370px) {
   .jdst-game-body .game-container {
-    grid-template-rows: 210px auto;
+    grid-template-rows: minmax(170px, 40%) minmax(0, 1fr);
   }
 
   .jdst-game-body .game-profile {
-    height: 210px;
+    height: 100%;
   }
 
   .jdst-game-body .option-button,

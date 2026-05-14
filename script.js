@@ -87,6 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
     message: 'Selesaikan topik "1.2 Pemuliharaan Tanah" terlebih dahulu.'
   });
 
+  setupLockedCard({
+    cardId: 'kos-baja-card',
+    overlayId: 'kos-baja-lock-overlay',
+    storageKey: 'jenisBajaCompleted',
+    message: 'Selesaikan permainan "Jenis Baja" terlebih dahulu.'
+  });
+
   setupCardNavigation();
 
 });
