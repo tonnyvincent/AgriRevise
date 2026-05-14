@@ -1579,6 +1579,7 @@ body.game-page .hero-body {
 .leaderboard-page .lp-title-bar {
   flex: 0 0 auto;
   padding: 12px 0 0;
+  margin-bottom: 6px;
 }
 
 .leaderboard-wrapper {
@@ -1641,6 +1642,7 @@ body.game-page .hero-body {
   margin-bottom: 10px;
   color: #ffffff;
   font-weight: 800;
+  font-size: 1rem;
   text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 
@@ -1661,6 +1663,7 @@ body.game-page .hero-body {
   color: #1b5e2f;
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
+  font-size: 0.96rem;
   outline: none;
 }
 
@@ -1702,6 +1705,7 @@ body.game-page .hero-body {
   background: rgba(255,255,255,0.14);
 
   font-weight: 800;
+  font-size: 0.96rem;
 
   color: #ffffff;
 
@@ -1841,7 +1845,7 @@ body.game-page .hero-body {
   text-align: center;
   color: #ffffff;
   font-weight: 900;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   text-shadow: 0 2px 8px rgba(0,0,0,0.7);
 }
 
@@ -1865,6 +1869,7 @@ body.game-page .hero-body {
 
   .leaderboard-page .lp-title-bar {
     padding: 8px 0 0;
+    margin-bottom: 8px;
   }
 
   .leaderboard-card {
@@ -1878,13 +1883,13 @@ body.game-page .hero-body {
   }
 
   .leaderboard-tools {
-    font-size: 0.92rem;
+    font-size: 1rem;
     gap: 6px;
     margin-bottom: 8px;
   }
 
   .leaderboard-tools select {
-    font-size: 0.86rem;
+    font-size: 0.96rem;
   }
 
   .leaderboard-header,
@@ -1899,7 +1904,7 @@ body.game-page .hero-body {
 
   .leaderboard-header {
     min-height: 34px;
-    font-size: 0.74rem;
+    font-size: 0.84rem;
     margin-bottom: 7px;
     white-space: nowrap;
   }
