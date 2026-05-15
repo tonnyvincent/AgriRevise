@@ -1,3 +1,22 @@
+// Keep fixed-screen pages inside the actual visible mobile browser viewport.
+// This avoids content sitting under mobile address/tool bars.
+(() => {
+  const setViewportHeight = () => {
+    const viewport = window.visualViewport;
+    const height = viewport ? viewport.height : window.innerHeight;
+    document.documentElement.style.setProperty('--ar-viewport-height', `${height}px`);
+  };
+
+  setViewportHeight();
+  window.addEventListener('resize', setViewportHeight, { passive: true });
+  window.addEventListener('orientationchange', setViewportHeight, { passive: true });
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', setViewportHeight, { passive: true });
+    window.visualViewport.addEventListener('scroll', setViewportHeight, { passive: true });
+  }
+})();
+
 // No scroll behaviour needed — single viewport page.
 
 // Subtle hover lift on cards (CSS handles most of it,

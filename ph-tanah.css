@@ -11,14 +11,14 @@ body.pht-game-body {
 
 .pht-page {
   height: auto;
-  min-height: 100vh;
+  min-height: var(--ar-viewport-height);
   overflow: visible;
 }
 
 .pht-page .bg-img,
 .pht-page .bg-overlay {
   position: fixed;
-  height: 100vh;
+  height: var(--ar-viewport-height);
 }
 
 .pht-shell {
@@ -1076,7 +1076,7 @@ body.pht-game-body {
 html:has(body.pht-game-body),
 body.pht-game-body {
   width: 100%;
-  height: 100dvh;
+  height: var(--ar-viewport-height);
   min-height: 0;
   overflow: hidden;
 }
@@ -1087,7 +1087,7 @@ body.pht-game-body {
 
 .pht-page {
   width: min(100vw, 390px);
-  height: min(100dvh, 844px);
+  height: min(var(--ar-viewport-height), 844px);
   min-height: 0;
   max-width: 390px;
   max-height: 844px;
@@ -1097,7 +1097,7 @@ body.pht-game-body {
 
 .pht-shell {
   width: 100%;
-  height: min(calc(100dvh - 52px), 792px);
+  height: min(calc(var(--ar-viewport-height) - 52px), 792px);
   min-height: 0;
   margin: 0 auto;
   padding: 6px 7px 7px;
@@ -1243,7 +1243,7 @@ body.pht-game-body {
   min-height: 0;
   grid-template-columns: 40px minmax(0, 1fr);
   gap: 6px;
-  padding: clamp(8px, 1.5dvh, 12px) 9px;
+  padding: clamp(8px, 1.5svh, 12px) 9px;
 }
 
 .pht-scale-side-label {
@@ -1251,7 +1251,7 @@ body.pht-game-body {
 }
 
 .pht-scale-bar .pht-drop-zone {
-  min-height: clamp(54px, 8.5dvh, 74px);
+  min-height: clamp(54px, 8.5svh, 74px);
   max-width: 100%;
   border-radius: 10px;
 }

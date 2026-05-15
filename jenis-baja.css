@@ -6,9 +6,10 @@
 html:has(body.jbg-game-body),
 body.jbg-game-body {
   width: 100%;
-  min-height: 100dvh;
+  height: var(--ar-viewport-height);
+  min-height: 0;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 body.jbg-game-body {
@@ -17,16 +18,18 @@ body.jbg-game-body {
 
 .jbg-page {
   width: min(100vw, 390px);
-  min-height: 100dvh;
+  height: min(var(--ar-viewport-height), 844px);
+  min-height: 0;
   max-width: 390px;
+  max-height: 844px;
   margin: 0 auto;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .jbg-page .bg-img,
 .jbg-page .bg-overlay {
   position: fixed;
-  height: 100vh;
+  height: var(--ar-viewport-height);
 }
 
 .jbg-page nav {
@@ -64,13 +67,14 @@ body.jbg-game-body {
   position: relative;
   z-index: 5;
   width: 100%;
-  min-height: min(calc(100dvh - 52px), 792px);
+  height: min(calc(var(--ar-viewport-height) - 52px), 792px);
+  min-height: 0;
   margin: 0 auto;
   padding: 6px 7px 7px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .jbg-topbar {
@@ -156,7 +160,7 @@ body.jbg-game-body {
   flex: 1 1 auto;
   min-height: 0;
   padding: 10px;
-  overflow: visible;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   border: 1.5px solid rgba(160, 200, 100, 0.35);

@@ -9,6 +9,13 @@
   --text-dark:   #1a2e1a;
   --card-bg:     rgba(255,255,255,0.93);
   --shadow:      0 8px 32px rgba(0,0,0,0.14);
+  --ar-viewport-height: 100vh;
+}
+
+@supports (height: 100svh) {
+  :root {
+    --ar-viewport-height: 100svh;
+  }
 }
 
 /* ── Lock everything to one viewport ── */
@@ -77,7 +84,7 @@ html, body {
 .page {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: var(--ar-viewport-height);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -91,7 +98,7 @@ body.game-page {
 
 body.game-page .page {
   height: auto;
-  min-height: 100vh;
+  min-height: var(--ar-viewport-height);
   overflow: visible;
 }
 
@@ -325,7 +332,7 @@ body.game-page .hero-body {
 .desktop-bg {
   display: block;
   width: 100%;
-  height: 100vh;
+  height: var(--ar-viewport-height);
   object-fit: cover;
 }
 
@@ -338,7 +345,7 @@ body.game-page .hero-body {
   .mobile-bg {
     display: block;
     width: 100%;
-    height: 100vh;
+    height: var(--ar-viewport-height);
     object-fit: cover;
   }
 }
@@ -422,7 +429,7 @@ body.game-page .hero-body {
 }
 
 .topic-page .lp-title-bar {
-  padding: clamp(14px, 2.2dvh, 24px) 12px 0;
+  padding: clamp(14px, 2.2svh, 24px) 12px 0;
 }
 
 .topic-page .lp-title-pill {
@@ -440,7 +447,7 @@ body.game-page .hero-body {
   align-items: center;
   justify-content: center;
   justify-items: center;
-  padding: clamp(18px, 3dvh, 34px) clamp(24px, 8vw, 76px) clamp(26px, 7dvh, 84px);
+  padding: clamp(18px, 3svh, 34px) clamp(24px, 8vw, 76px) clamp(26px, 7svh, 84px);
 }
 
 .topic-page.topic-two-cards .lp-cards-area {
@@ -457,12 +464,12 @@ body.game-page .hero-body {
 
 .topic-page.topic-two-cards .lp-card {
   width: clamp(170px, 22vw, 270px);
-  height: clamp(245px, 46dvh, 350px);
+  height: clamp(245px, 46svh, 350px);
 }
 
 .topic-page.topic-three-cards .lp-card {
   width: clamp(160px, 20vw, 260px);
-  height: clamp(220px, 34dvh, 320px);
+  height: clamp(220px, 34svh, 320px);
 }
 
 /* Card image / illustration placeholder */
@@ -727,7 +734,7 @@ body.game-page .hero-body {
   }
 
   .topic-page .lp-title-bar {
-    padding: clamp(12px, 2dvh, 18px) 10px 0;
+    padding: clamp(12px, 2svh, 18px) 10px 0;
   }
 
   .topic-page .lp-title-pill {
@@ -738,18 +745,18 @@ body.game-page .hero-body {
 
   .topic-page .lp-cards-area {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: clamp(14px, 2.4dvh, 22px) clamp(42px, 11vw, 50px) clamp(28px, 7dvh, 70px);
-    gap: clamp(12px, 2.2dvh, 18px) clamp(12px, 4vw, 18px);
+    padding: clamp(14px, 2.4svh, 22px) clamp(42px, 11vw, 50px) clamp(28px, 7svh, 70px);
+    gap: clamp(12px, 2.2svh, 18px) clamp(12px, 4vw, 18px);
   }
 
   .topic-page.topic-two-cards .lp-card {
     width: clamp(132px, 38vw, 160px);
-    height: clamp(210px, 34dvh, 280px);
+    height: clamp(210px, 34svh, 280px);
   }
 
   .topic-page.topic-three-cards .lp-card {
     width: clamp(124px, 35vw, 150px);
-    height: clamp(178px, 29dvh, 220px);
+    height: clamp(178px, 29svh, 220px);
   }
 
   .topic-page.topic-three-cards .lp-card:nth-child(3) {
@@ -820,7 +827,7 @@ body.game-page .hero-body {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  height: calc(100vh - 350px);
+  height: calc(var(--ar-viewport-height) - 350px);
 }
 
 .tdtp-game-container {
@@ -836,7 +843,7 @@ body.game-page .hero-body {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  height: calc(100vh - 150px); /* Adjust based on your nav height */
+  height: calc(var(--ar-viewport-height) - 150px); /* Adjust based on your nav height */
 }
 
 /* Soil Profile Section */
@@ -1678,7 +1685,7 @@ body.game-page .hero-body {
 ====================================== */
 
 .leaderboard-page {
-  height: 100dvh;
+  height: var(--ar-viewport-height);
   overflow-y: hidden;
   overflow-x: hidden;
 }
@@ -2071,16 +2078,16 @@ body.game-page .hero-body {
 ====================================== */
 
 body.manual-page {
-  height: auto;
-  min-height: 100%;
+  height: var(--ar-viewport-height);
+  min-height: 0;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 body.manual-page .page {
-  height: auto;
-  min-height: 100vh;
-  overflow: visible;
+  height: var(--ar-viewport-height);
+  min-height: 0;
+  overflow: hidden;
 }
 
 body.manual-page .bg-img,
@@ -2093,7 +2100,12 @@ body.manual-page .bg-overlay {
   z-index: 5;
   width: min(1120px, calc(100% - 40px));
   margin: 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 0 0 46px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
 }
 
 .manual-title-bar {
@@ -2187,7 +2199,7 @@ body.manual-page .bg-overlay {
   gap: 10px;
 }
 
-.manual-path-row span {
+.manual-path-row a {
   position: relative;
   min-height: 54px;
   display: flex;
@@ -2202,9 +2214,15 @@ body.manual-page .bg-overlay {
   line-height: 1.2;
   text-align: center;
   box-shadow: 0 8px 18px rgba(27, 94, 47, 0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.manual-path-row span:not(:last-child)::after {
+.manual-path-row a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(27, 94, 47, 0.24);
+}
+
+.manual-path-row a:not(:last-child)::after {
   content: ">";
   position: absolute;
   right: -10px;
@@ -2337,36 +2355,150 @@ body.manual-page .bg-overlay {
 @media (max-width: 760px) {
   .manual-wrapper {
     width: min(680px, calc(100% - 24px));
-    padding-bottom: 34px;
+    padding-bottom: 12px;
+    overflow: hidden;
   }
 
   .manual-title-bar {
-    padding: 16px 0 12px;
+    padding: 10px 0 7px;
+  }
+
+  .manual-title-bar .lp-title-pill {
+    padding: 8px 18px;
+    font-size: 0.96rem;
   }
 
   .manual-hero-panel {
-    grid-template-columns: 1fr;
-    padding: 18px;
+    grid-template-columns: minmax(0, 1fr) 70px;
+    gap: 8px;
+    padding: 9px;
+    border-radius: 8px;
   }
 
   .manual-hero-image {
-    min-height: 120px;
+    min-height: 66px;
+    border-radius: 7px;
+  }
+
+  .manual-hero-image img {
+    width: 54px;
+  }
+
+  .manual-kicker {
+    display: none;
   }
 
   .manual-hero-copy h1 {
-    font-size: 1.55rem;
+    margin-bottom: 3px;
+    font-size: 0.92rem;
+    line-height: 1.06;
   }
 
-  .manual-path-row,
+  .manual-hero-copy p {
+    font-size: 0.58rem;
+    line-height: 1.18;
+  }
+
   .manual-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .manual-path-row span:not(:last-child)::after {
-    right: 50%;
-    top: auto;
-    bottom: -14px;
-    transform: translateX(50%) rotate(90deg);
+  .manual-path-panel {
+    margin-top: 6px;
+    padding: 8px;
+  }
+
+  .manual-path-panel h2,
+  .manual-tip-panel h2 {
+    margin-bottom: 5px;
+    font-size: 0.72rem;
+  }
+
+  .manual-path-row {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .manual-path-row a {
+    min-height: 32px;
+    padding: 4px;
+    border-radius: 6px;
+    font-size: 0.43rem;
+    line-height: 1.05;
+  }
+
+  .manual-path-row a:not(:last-child)::after {
+    display: none;
+  }
+
+  .manual-grid {
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .manual-card {
+    padding: 7px;
+    border-radius: 7px;
+  }
+
+  .manual-card-head {
+    gap: 5px;
+    margin-bottom: 4px;
+  }
+
+  .manual-step-number {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+    border-radius: 6px;
+    font-size: 0.68rem;
+  }
+
+  .manual-card h2 {
+    font-size: 0.58rem;
+    line-height: 1.05;
+  }
+
+  .manual-card ul {
+    gap: 2px;
+  }
+
+  .manual-card li {
+    padding-left: 10px;
+    font-size: 0.48rem;
+    line-height: 1.08;
+  }
+
+  .manual-card li:nth-child(n+2) {
+    display: none;
+  }
+
+  .manual-card li::before {
+    top: 0.45em;
+    width: 4px;
+    height: 4px;
+    box-shadow: 0 0 0 2px rgba(255, 149, 0, 0.16);
+  }
+
+  .manual-tip-panel {
+    margin-top: 6px;
+    padding: 8px;
+  }
+
+  .manual-tip-panel p {
+    font-size: 0.5rem;
+    line-height: 1.12;
+  }
+
+  .manual-actions {
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .manual-action-btn {
+    min-height: 30px;
+    padding: 7px 10px;
+    font-size: 0.56rem;
   }
 }
 
@@ -2375,36 +2507,8 @@ body.manual-page .bg-overlay {
     width: calc(100% - 18px);
   }
 
-  .manual-hero-panel,
-  .manual-card,
-  .manual-tip-panel,
-  .manual-path-panel {
-    padding: 14px;
-  }
-
   .manual-card-head {
     align-items: flex-start;
-  }
-
-  .manual-step-number {
-    width: 36px;
-    height: 36px;
-    flex-basis: 36px;
-    font-size: 1.05rem;
-  }
-
-  .manual-card h2 {
-    font-size: 1.05rem;
-  }
-
-  .manual-card li,
-  .manual-hero-copy p,
-  .manual-tip-panel p {
-    font-size: 0.9rem;
-  }
-
-  .manual-action-btn {
-    width: 100%;
   }
 }
 
@@ -2465,9 +2569,7 @@ body.manual-page .bg-overlay {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  height: 100svh;
-  height: 100dvh;
+  height: var(--ar-viewport-height);
   z-index: 10000;
   display: flex;
   align-items: center !important;

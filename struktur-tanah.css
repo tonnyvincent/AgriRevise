@@ -11,7 +11,7 @@ body {
 
 .st-page {
   height: auto;
-  min-height: 100vh;
+  min-height: var(--ar-viewport-height);
   overflow: visible;
 }
 
@@ -19,7 +19,7 @@ body {
 .st-page .bg-img,
 .st-page .bg-overlay {
   position: fixed;
-  height: 100vh;
+  height: var(--ar-viewport-height);
 }
 
 /* ════════════════════════════
@@ -898,17 +898,24 @@ body {
 
 /* Phone viewport balance: keep each fasa full-screen and scale its inner controls. */
 @media (max-width: 600px) {
+  body.st-game-body {
+    width: 100%;
+    height: var(--ar-viewport-height);
+    min-height: 0;
+    overflow: hidden;
+  }
+
   html:has(.st-page),
   body:has(.st-page) {
     width: 100%;
-    height: 100dvh;
+    height: var(--ar-viewport-height);
     min-height: 0;
     overflow: hidden;
   }
 
   .st-page {
     width: min(100vw, 390px);
-    height: min(100dvh, 844px);
+    height: min(var(--ar-viewport-height), 844px);
     min-height: 0;
     max-width: 390px;
     max-height: 844px;
@@ -934,7 +941,7 @@ body {
   .st-fasa:not(.hidden) {
     flex: 1 1 auto;
     min-height: 0;
-    padding: clamp(12px, 2dvh, 18px) 10px clamp(12px, 2dvh, 18px);
+    padding: clamp(12px, 2svh, 18px) 10px clamp(12px, 2svh, 18px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -942,7 +949,7 @@ body {
 
   .st-fasa-header {
     flex: 0 0 auto;
-    margin-bottom: clamp(8px, 1.3dvh, 12px);
+    margin-bottom: clamp(8px, 1.3svh, 12px);
     gap: 3px;
   }
 
@@ -963,11 +970,11 @@ body {
 
   #fasa-1 .st-drag-bank {
     flex: 0 0 auto;
-    margin-bottom: clamp(9px, 1.5dvh, 13px);
+    margin-bottom: clamp(9px, 1.5svh, 13px);
   }
 
   #fasa-1 .st-drag-chip {
-    height: clamp(36px, 5.6dvh, 44px);
+    height: clamp(36px, 5.6svh, 44px);
     min-height: 0;
     max-height: none;
     max-width: 104px;
@@ -980,7 +987,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(2, minmax(0, 1fr));
-    gap: clamp(8px, 1.45dvh, 12px) 8px;
+    gap: clamp(8px, 1.45svh, 12px) 8px;
     align-items: stretch;
   }
 
@@ -1006,7 +1013,7 @@ body {
   #fasa-1 .st-drop-zone {
     width: 100%;
     height: auto;
-    min-height: clamp(38px, 6dvh, 48px);
+    min-height: clamp(38px, 6svh, 48px);
     max-height: none;
     padding: 4px;
   }
@@ -1017,7 +1024,7 @@ body {
 
   .st-next-btn {
     flex: 0 0 auto;
-    margin: clamp(10px, 1.8dvh, 16px) auto 0;
+    margin: clamp(10px, 1.8svh, 16px) auto 0;
     min-height: 46px;
     padding: 11px 34px;
     font-size: clamp(0.96rem, 4vw, 1.12rem);

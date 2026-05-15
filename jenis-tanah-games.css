@@ -8,7 +8,7 @@ html:has(body.tdtp-game-body),
 body.jdst-game-body,
 body.tdtp-game-body {
   width: 100%;
-  height: 100dvh;
+  height: var(--ar-viewport-height);
   min-height: 0;
   overflow: hidden;
 }
@@ -21,7 +21,7 @@ body.tdtp-game-body {
 .jdst-game-body .page,
 .tdtp-game-body .page {
   width: min(100vw, 390px);
-  height: min(100dvh, 844px);
+  height: min(var(--ar-viewport-height), 844px);
   min-height: 0;
   max-width: 390px;
   max-height: 844px;
@@ -34,13 +34,13 @@ body.tdtp-game-body {
 .tdtp-game-body .bg-img,
 .tdtp-game-body .bg-overlay {
   position: fixed;
-  height: 100vh;
+  height: var(--ar-viewport-height);
 }
 
 .jdst-game-body .jdst-hero-body,
 .tdtp-game-body .jdst-hero-body {
   flex: 0 0 auto;
-  padding: 6px 7px 0;
+  padding: 4px 7px 0;
   min-height: 0;
 }
 
@@ -53,8 +53,8 @@ body.tdtp-game-body {
 .jdst-game-body .jdst-title-pill,
 .tdtp-game-body .jdst-title-pill {
   width: 100%;
-  min-height: 42px;
-  padding: 6px 8px;
+  min-height: 38px;
+  padding: 5px 8px;
   border-radius: 12px;
   background: rgba(240,250,252,0.88);
   border: 1.5px solid rgba(160,200,100,0.3);
@@ -221,8 +221,8 @@ body.tdtp-game-body {
 .jdst-game-body .question-card {
   height: 100%;
   min-height: 0;
-  padding: clamp(16px, 2.8dvh, 22px) 14px clamp(14px, 2.4dvh, 20px);
-  gap: clamp(10px, 1.7dvh, 14px);
+  padding: clamp(16px, 2.8svh, 22px) 14px clamp(14px, 2.4svh, 20px);
+  gap: clamp(10px, 1.7svh, 14px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -232,7 +232,7 @@ body.tdtp-game-body {
 .jdst-game-body .question-text {
   flex: 0 0 auto;
   min-height: 0;
-  max-height: clamp(104px, 16dvh, 136px);
+  max-height: clamp(104px, 16svh, 136px);
   overflow: hidden;
   color: #1b5e2f;
   font-size: clamp(0.82rem, 3.4vw, 0.96rem);
@@ -248,7 +248,7 @@ body.tdtp-game-body {
 .jdst-game-body .options-grid {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: clamp(9px, 1.45dvh, 12px) 8px;
+  gap: clamp(9px, 1.45svh, 12px) 8px;
   flex: 1 1 auto;
   min-height: 0;
 }
@@ -290,7 +290,7 @@ body.tdtp-game-body {
 
 .jdst-game-body .feedback {
   flex: 0 0 auto;
-  min-height: clamp(22px, 3dvh, 28px);
+  min-height: clamp(22px, 3svh, 28px);
   font-size: clamp(0.66rem, 2.6vw, 0.76rem);
   line-height: 1.12;
 }
@@ -369,7 +369,7 @@ body.tdtp-game-body {
   min-height: 0;
   width: 100%;
   max-width: none;
-  padding: 6px 7px 7px;
+  padding: 5px 7px 6px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -391,8 +391,8 @@ body.tdtp-game-body {
 .tdtp-game-body .question-card {
   flex: 1 1 auto;
   min-height: 0;
-  padding: clamp(12px, 2.2dvh, 18px) 12px clamp(14px, 2.4dvh, 20px);
-  gap: clamp(8px, 1.6dvh, 13px);
+  padding: clamp(8px, 1.25svh, 12px) 9px clamp(9px, 1.35svh, 13px);
+  gap: clamp(5px, 1svh, 8px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -402,15 +402,15 @@ body.tdtp-game-body {
   flex: 0 0 auto;
   min-height: 0;
   color: #1b5e2f;
-  font-size: clamp(0.78rem, 3.25vw, 0.94rem);
+  font-size: clamp(0.68rem, 2.8vw, 0.82rem);
   font-weight: 900;
-  line-height: 1.16;
+  line-height: 1.1;
   text-align: center;
 }
 
 .tdtp-game-body .instruction-text {
   color: #4a6a4a;
-  font-size: clamp(0.56rem, 2.3vw, 0.66rem);
+  font-size: clamp(0.5rem, 2vw, 0.6rem);
   font-weight: 800;
   line-height: 1.1;
   margin-top: 4px;
@@ -418,23 +418,23 @@ body.tdtp-game-body {
 
 .tdtp-game-body .drag-options {
   flex: 0 0 auto;
-  gap: 7px;
+  gap: 5px;
   margin: 0;
-  min-height: 34px;
+  min-height: 30px;
 }
 
 .tdtp-game-body .drag-item {
   width: auto !important;
-  min-width: 68px;
-  max-width: 132px;
-  min-height: 34px;
+  min-width: 60px;
+  max-width: 120px;
+  min-height: 30px;
   margin: 0;
-  padding: 7px 10px;
+  padding: 6px 8px;
   border-radius: 17px;
   background: linear-gradient(135deg, #1b5e2f, #2e7d32);
   color: #fff;
   font-family: 'Nunito', sans-serif;
-  font-size: clamp(0.56rem, 2.3vw, 0.66rem);
+  font-size: clamp(0.5rem, 2.05vw, 0.6rem);
   font-weight: 900;
   line-height: 1.08;
   text-align: center;
@@ -470,19 +470,19 @@ body.tdtp-game-body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: clamp(8px, 1.55dvh, 12px);
+  gap: clamp(5px, 0.95svh, 8px);
   margin: 0;
 }
 
 .tdtp-game-body .drop-zone {
   display: grid;
-  grid-template-columns: 1fr clamp(82px, 24vw, 104px);
+  grid-template-columns: minmax(0, 1fr) clamp(70px, 21vw, 92px);
   align-items: center;
-  gap: 11px;
+  gap: 7px;
   min-height: 0;
-  padding: 10px;
+  padding: 7px;
   border: 2px dashed rgba(46,125,50,0.45);
-  border-radius: 14px;
+  border-radius: 12px;
   background: rgba(255,255,255,0.76);
 }
 
@@ -505,23 +505,23 @@ body.tdtp-game-body {
   width: auto;
   min-height: 0;
   color: #365236;
-  font-size: clamp(0.76rem, 3.05vw, 0.92rem);
+  font-size: clamp(0.6rem, 2.45vw, 0.75rem);
   font-weight: 800;
-  line-height: 1.18;
+  line-height: 1.08;
   overflow: hidden;
 }
 
 .tdtp-game-body .zone-note {
   color: #5f775f;
-  font-size: 0.68rem;
+  font-size: 0.52rem;
 }
 
 .tdtp-game-body .zone-slot {
   flex: none;
   width: 100%;
-  height: clamp(46px, 8.2dvh, 68px);
+  height: clamp(32px, 5.6svh, 48px);
   border: 2px dashed rgba(46,125,50,0.35);
-  border-radius: 12px;
+  border-radius: 10px;
   background: rgba(255,255,255,0.8);
   padding: 2px;
 }
@@ -536,7 +536,7 @@ body.tdtp-game-body {
   padding: 3px 4px;
   border-radius: 7px;
   background: linear-gradient(135deg, #1b5e2f, #2e7d32);
-  font-size: 0.45rem;
+  font-size: 0.42rem;
   font-weight: 900;
   line-height: 1;
   display: flex !important;
@@ -567,15 +567,15 @@ body.tdtp-game-body {
 .tdtp-game-body .tdtp-check-btn {
   align-self: center;
   flex: 0 0 auto;
-  min-height: 38px;
+  min-height: 32px;
   margin-top: 0;
-  padding: 9px 24px;
+  padding: 7px 20px;
   border: none;
   border-radius: 19px;
   background: linear-gradient(135deg, #2e7d32, #43a047);
   color: #fff;
   font-family: 'Fredoka One', cursive;
-  font-size: clamp(0.68rem, 2.7vw, 0.8rem);
+  font-size: clamp(0.6rem, 2.35vw, 0.72rem);
   line-height: 1;
   box-shadow: 0 4px 14px rgba(46,125,50,0.28);
   cursor: pointer;
@@ -590,7 +590,7 @@ body.tdtp-game-body {
 
 .tdtp-game-body .complete-modal {
   width: min(100vw, 390px);
-  height: min(100dvh, 844px);
+  height: min(var(--ar-viewport-height), 844px);
   left: 50%;
   transform: translateX(-50%);
 }

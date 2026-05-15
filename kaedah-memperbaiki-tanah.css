@@ -6,7 +6,7 @@
 html:has(body.kmt-game-body),
 body.kmt-game-body {
   width: 100%;
-  height: 100dvh;
+  height: var(--ar-viewport-height);
   min-height: 0;
   overflow: hidden;
 }
@@ -17,7 +17,7 @@ body.kmt-game-body {
 
 .kmt-page {
   width: min(100vw, 390px);
-  height: min(100dvh, 844px);
+  height: min(var(--ar-viewport-height), 844px);
   min-height: 0;
   max-width: 390px;
   max-height: 844px;
@@ -28,7 +28,7 @@ body.kmt-game-body {
 .kmt-page .bg-img,
 .kmt-page .bg-overlay {
   position: fixed;
-  height: 100vh;
+  height: var(--ar-viewport-height);
 }
 
 .kmt-page nav {
@@ -66,7 +66,7 @@ body.kmt-game-body {
   position: relative;
   z-index: 5;
   width: 100%;
-  height: min(calc(100dvh - 52px), 792px);
+  height: min(calc(var(--ar-viewport-height) - 52px), 792px);
   min-height: 0;
   margin: 0 auto;
   padding: 6px 7px 7px;
