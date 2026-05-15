@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriRevise Progress Logbook</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: #1d2d1f;
+      background: #f5f7f1;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px;
+      background: #ffffff;
+    }
+
+    .cover {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 2px solid #d9ead3;
+      border-radius: 16px;
+      padding: 46px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(246,252,241,0.96)),
+        url("assets/site-01-home.png") center / cover no-repeat;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #1b5e2f;
+      line-height: 1.15;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      max-width: 720px;
+      font-size: 44px;
+    }
+
+    h2 {
+      margin-top: 34px;
+      padding-bottom: 7px;
+      border-bottom: 2px solid #d9ead3;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-top: 18px;
+      font-size: 17px;
+    }
+
+    p {
+      margin: 0 0 10px;
+      font-size: 13px;
+    }
+
+    .meta {
+      margin-top: 18px;
+      color: #426b44;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .pill {
+      display: inline-block;
+      margin: 4px 6px 4px 0;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #e7f4e5;
+      color: #1b5e2f;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .summary-grid,
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+
+    .card {
+      border: 1px solid #d9ead3;
+      border-radius: 12px;
+      padding: 14px;
+      background: #fbfdf8;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #1b5e2f;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 12px;
+    }
+
+    th,
+    td {
+      vertical-align: top;
+      border: 1px solid #d9ead3;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #e7f4e5;
+      color: #1b5e2f;
+    }
+
+    figure {
+      margin: 0;
+      break-inside: avoid;
+      border: 1px solid #d9ead3;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f7fbf5;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    figcaption {
+      padding: 8px 10px;
+      color: #355b38;
+      font-size: 11px;
+      font-weight: 700;
+      background: #f0f8ed;
+    }
+
+    .phone-shot img {
+      max-height: 560px;
+      object-fit: contain;
+      background: #eef6ee;
+    }
+
+    .code-shot {
+      break-inside: avoid;
+      margin: 12px 0;
+      border: 1px solid #1b5e2f;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #102318;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .code-title {
+      padding: 8px 12px;
+      background: #1b5e2f;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    pre {
+      margin: 0;
+      padding: 12px;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+      color: #e9ffe9;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 10.5px;
+      line-height: 1.42;
+    }
+
+    .note {
+      padding: 10px 12px;
+      border-left: 4px solid #ff9500;
+      background: #fff8ea;
+      color: #5a3d08;
+      font-size: 12px;
+    }
+
+    .break {
+      break-before: page;
+    }
+
+    ul {
+      margin: 6px 0 12px 18px;
+      padding: 0;
+      font-size: 13px;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="cover">
+      <h1>AgriRevise Development Progress Logbook</h1>
+      <p class="meta">Mobile-first educational revision website with database leaderboard, game progression, scoring, and responsive viewport improvements.</p>
+      <p class="meta">Prepared for supervisor review<br />Generated: 16 May 2026</p>
+      <div>
+        <span class="pill">Frontend UI</span>
+        <span class="pill">MySQL/PHP API</span>
+        <span class="pill">Leaderboard</span>
+        <span class="pill">Game Logic</span>
+        <span class="pill">Mobile Viewport</span>
+      </div>
+    </section>
+
+    <section class="break">
+      <h2>1. Project Summary</h2>
+      <p>AgriRevise is a web-based agriculture revision tool designed around short interactive games, topic progression, and a score leaderboard. The most recent development work focused on connecting player scores to a MySQL database, improving the leaderboard, locking game progression, and refining all mobile game pages so they fit properly in a single phone viewport.</p>
+
+      <div class="summary-grid">
+        <div class="card">
+          <strong>Main outcome</strong>
+          Player names and scores are now prepared for persistent database storage and leaderboard ranking.
+        </div>
+        <div class="card">
+          <strong>User flow</strong>
+          A player enters a name, plays games, keeps the best score per game, and appears in Papan Prestasi.
+        </div>
+        <div class="card">
+          <strong>Progression</strong>
+          Game cards can be locked until prerequisite activities are completed.
+        </div>
+        <div class="card">
+          <strong>Responsive goal</strong>
+          Main game screens were adjusted to use the available viewport without overflowing or leaving large empty areas.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Start-to-Finish Progress Log</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Work Completed</th>
+            <th>Evidence / Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Database planning</td>
+            <td>Designed a MySQL players table with ID, case-insensitive name key, individual game score columns, and total score.</td>
+            <td>Table supports one row per player name and leaderboard sorting by total or game-specific score.</td>
+          </tr>
+          <tr>
+            <td>Backend API</td>
+            <td>Added PHP endpoints for player creation, score saving, and leaderboard retrieval.</td>
+            <td>Scores update through the API and total score is recalculated from all game columns.</td>
+          </tr>
+          <tr>
+            <td>Highest score logic</td>
+            <td>Implemented local and server-side best-score preservation.</td>
+            <td>If a player gets 13/15, then later 14/15, the stored score becomes 14/15. Lower retries do not overwrite higher scores.</td>
+          </tr>
+          <tr>
+            <td>Leaderboard UI</td>
+            <td>Updated Papan Prestasi to show 5 players per page, compact rows, sort selector, and top pagination controls.</td>
+            <td>Leaderboard now supports total score and individual game score views.</td>
+          </tr>
+          <tr>
+            <td>Game locking</td>
+            <td>Connected locked topic/game cards to completed-game local storage flags.</td>
+            <td>Pengiraan Kos Baja is locked until Jenis Baja is completed.</td>
+          </tr>
+          <tr>
+            <td>Mobile viewport pass</td>
+            <td>Reviewed and adjusted all main game pages for phone-sized layout.</td>
+            <td>Cards, text, answer boxes, drag/drop zones, and calculator keypad now use the available viewport more evenly.</td>
+          </tr>
+          <tr>
+            <td>Final polish</td>
+            <td>Improved the cash mission truck animation and purchase order board.</td>
+            <td>Truck now enters from the left, waits, receives the packet, then exits right after order approval.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="break">
+      <h2>3. Database and Scoring Implementation</h2>
+      <p>The database design uses a single <strong>players</strong> table. The <strong>name_key</strong> column stores a normalized version of the player name, so the same player can continue using old scores by logging in with the same name.</p>
+
+      <div class="code-shot">
+        <div class="code-title">database/create_players_table.sql</div>
+        <pre>CREATE TABLE IF NOT EXISTS players (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  name_key VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+
+  score_jenis_sifat_tanah TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  score_tanah_tapak_penanaman TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  score_struktur_tanah TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  score_ph_tanah TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  score_kaedah_memperbaiki_tanah TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  score_jenis_baja TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  score_pengiraan_kos_baja TINYINT UNSIGNED NOT NULL DEFAULT 0,
+
+  total_score SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_players_name_key (name_key),
+  KEY idx_players_total_score (total_score)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;</pre>
+      </div>
+
+      <p>The API uses <strong>GREATEST()</strong> to preserve the best score in MySQL. This avoids losing a previous high score when a player repeats a game and scores lower.</p>
+
+      <div class="code-shot">
+        <div class="code-title">api/db.php - highest score update</div>
+        <pre>$statement = $pdo-&gt;prepare(
+  'UPDATE players
+   SET `' . $column . '` = GREATEST(`' . $column . '`, :score),
+       updated_at = CURRENT_TIMESTAMP
+   WHERE id = :id'
+);
+
+$statement-&gt;execute(array(
+  ':score' =&gt; $score,
+  ':id' =&gt; (int) $player['id'],
+));
+
+agrirevise_update_total_score($pdo, $player['id']);</pre>
+      </div>
+
+      <div class="code-shot">
+        <div class="code-title">score-api.js - local best score and API save</div>
+        <pre>function setLocalGameScore(gameKey, score) {
+  const game = games[gameKey];
+  const cleanScore = Math.max(0, Math.min(game.maxScore, Math.trunc(Number(score) || 0)));
+  const bestScore = Math.max(getLocalGameScore(gameKey), cleanScore);
+
+  localStorage.setItem(game.scoreKey, String(bestScore));
+  localStorage.setItem(game.completedKey, 'true');
+  return bestScore;
+}
+
+const localBest = setLocalGameScore(key, score);
+const payload = await request('score.php', {
+  method: 'POST',
+  body: JSON.stringify({
+    name: playerName,
+    game: key,
+    score: localBest
+  })
+});</pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Leaderboard and Progression Features</h2>
+      <p>The leaderboard page can sort by total score or by a specific game. It displays five players per page and provides navigation controls at the top of the board.</p>
+
+      <div class="code-shot">
+        <div class="code-title">leaderboard.js - five players per page</div>
+        <pre>let currentSort = sortSelect ? sortSelect.value : 'total';
+let currentPage = 1;
+const pageSize = 5;
+
+function getSortedPlayers() {
+  return players
+    .slice()
+    .sort((a, b) =&gt; getScore(b) - getScore(a) ||
+      Number(b.total_score || 0) - Number(a.total_score || 0));
+}
+
+const visiblePlayers = getSortedPlayers()
+  .slice((currentPage - 1) * pageSize, currentPage * pageSize);</pre>
+      </div>
+
+      <div class="code-shot">
+        <div class="code-title">script.js - locked game card logic</div>
+        <pre>setupLockedCard({
+  cardId: 'kos-baja-card',
+  overlayId: 'kos-baja-lock-overlay',
+  storageKey: 'jenisBajaCompleted',
+  message: 'Selesaikan permainan "Jenis Baja" terlebih dahulu.'
+});
+
+if (gameUnlocked !== 'true') {
+  card.classList.add('locked');
+  card.addEventListener('click', (e) =&gt; {
+    e.preventDefault();
+    alert(message);
+  });
+}</pre>
+      </div>
+    </section>
+
+    <section class="break">
+      <h2>5. Mobile Viewport and Game UI Improvements</h2>
+      <p>The mobile design work focused on making each game feel complete within one phone screen. Instead of only increasing the outer box height, the internal elements were also resized so the text, buttons, drop zones, and visual assets remain balanced.</p>
+
+      <div class="code-shot">
+        <div class="code-title">jenis-tanah-games.css - station layout uses full viewport</div>
+        <pre>.tdtp-game-body .tdtp-game-container {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tdtp-game-body .question-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: clamp(12px, 2.2dvh, 18px) 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tdtp-game-body .drop-zones {
+  flex: 1 1 auto;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}</pre>
+      </div>
+
+      <div class="code-shot">
+        <div class="code-title">pengiraan-kos-baja.css - truck animation</div>
+        <pre>@keyframes jbLorryArrive {
+  0% { opacity: 0; transform: translateX(-82px) scale(0.58); }
+  74% { transform: translateX(6px) scale(0.58); }
+  100% { opacity: 1; transform: translateX(0) scale(0.58); }
+}
+
+@keyframes jbLorryDeliver {
+  0%, 18% { transform: translateX(0) scale(0.58); }
+  32% { transform: translateX(10px) scale(0.58); }
+  100% { transform: translateX(360px) scale(0.58); }
+}</pre>
+      </div>
+    </section>
+
+    <section class="break">
+      <h2>6. Code Snippet Screenshots</h2>
+      <p>These screenshots show the main implementation areas: MySQL table creation, best-score saving, leaderboard pagination, and the calculator game truck animation.</p>
+
+      <div class="shot-grid">
+        <figure>
+          <img src="assets/code-01-mysql-table.png" alt="MySQL players table code screenshot" />
+          <figcaption>MySQL players table with case-insensitive name key and score columns.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/code-02-db-score-update.png" alt="PHP score update code screenshot" />
+          <figcaption>PHP API keeps the highest score and recalculates total score.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/code-03-leaderboard-pagination.png" alt="Leaderboard pagination code screenshot" />
+          <figcaption>Leaderboard pagination displays five players per page.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/code-04-lorry-animation.png" alt="Truck animation CSS code screenshot" />
+          <figcaption>Calculator game animation and purchase order styling.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="break">
+      <h2>7. Website Design Screenshots</h2>
+      <p class="note">Screenshots were captured from the current local project using a 390 x 844 mobile viewport. The leaderboard image uses mock data only for visual demonstration because local file preview cannot call the Hostinger PHP API.</p>
+
+      <div class="shot-grid">
+        <figure class="phone-shot">
+          <img src="assets/site-01-home.png" alt="AgriRevise home page" />
+          <figcaption>Home page with farm-themed mobile layout.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-02-training-menu.png" alt="Latihan Pengukuhan menu" />
+          <figcaption>Latihan Pengukuhan topic menu using the available viewport.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-03-locked-game.png" alt="Locked game card" />
+          <figcaption>Game locking in 1.3 Baja dan Pembajaan.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-04-leaderboard.png" alt="Papan Prestasi leaderboard" />
+          <figcaption>Papan Prestasi with five-player leaderboard and top pagination.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="break">
+      <h2>8. Game Page Screenshots</h2>
+      <div class="shot-grid">
+        <figure class="phone-shot">
+          <img src="assets/site-05-jenis-sifat-tanah.png" alt="Jenis dan Sifat Tanah game" />
+          <figcaption>Jenis dan Sifat Tanah: quiz panel balanced with soil profile.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-06-tapak-penanaman.png" alt="Tanah di Tapak Penanaman game" />
+          <figcaption>Tanah di Tapak Penanaman: full-height drag/drop station.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-07-struktur-tanah.png" alt="Struktur Tanah game" />
+          <figcaption>Struktur Tanah: fasa layout resized for one mobile viewport.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-08-ph-tanah.png" alt="pH Tanah game" />
+          <figcaption>pH Tanah: pH scale board expanded to use screen space.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-09-kaedah-tanah.png" alt="Kaedah Memperbaiki Tanah game" />
+          <figcaption>Kaedah Memperbaiki Tanah: answer panels and scene fit inside one viewport.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-10-jenis-baja.png" alt="Jenis Baja game" />
+          <figcaption>Jenis Baja: scene, question, and answer cards in a single mobile screen.</figcaption>
+        </figure>
+        <figure class="phone-shot">
+          <img src="assets/site-11-pengiraan-kos-baja.png" alt="Pengiraan Kos Baja cash game" />
+          <figcaption>Pengiraan Kos Baja: calculator mission with purchase order and truck scene.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="break">
+      <h2>9. Testing and Verification</h2>
+      <ul>
+        <li>Verified page layouts using Chrome mobile emulation at 390 x 844.</li>
+        <li>Checked leaderboard display with five visible players per page.</li>
+        <li>Confirmed high-score logic uses best score locally and in MySQL.</li>
+        <li>Checked the calculator/keypad mission fits in a single phone viewport.</li>
+        <li>Checked truck animation in Pengiraan Kos Baja: entry from left and delivery exit to right.</li>
+        <li>Ran <strong>git diff --check</strong> on the documentation file; no whitespace errors were reported.</li>
+      </ul>
+
+      <h2>10. Remaining Notes</h2>
+      <ul>
+        <li>Hostinger PHP/MySQL deployment should be tested through the live domain after uploading the latest files.</li>
+        <li>The local screenshot for Papan Prestasi uses mock leaderboard rows for presentation because local file preview cannot execute the hosted PHP API.</li>
+        <li>Future improvement: add a small admin/export page for downloading leaderboard records as CSV.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
