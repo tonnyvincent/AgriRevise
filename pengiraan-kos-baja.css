@@ -672,10 +672,39 @@ body.jb-game-body {
 
 .jb-scene-warehouse .jb-purchase-order {
   display: block;
-  right: 8px;
-  top: 30px;
-  width: 112px;
-  border-radius: 10px;
+  right: 7px;
+  top: 28px;
+  width: 126px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 6px 16px rgba(27, 94, 47, 0.18);
+}
+
+.jb-scene-warehouse .jb-purchase-order h2 {
+  padding: 6px 5px;
+  font-size: 0.5rem;
+}
+
+.jb-scene-warehouse .jb-purchase-order p {
+  padding: 4px 8px 0;
+  font-size: 0.45rem;
+  line-height: 1.08;
+}
+
+.jb-scene-warehouse .jb-po-line {
+  margin: 5px 8px 0;
+}
+
+.jb-scene-warehouse .jb-po-tag {
+  margin: 4px 5px 6px;
+  gap: 3px;
+  font-size: 0.42rem;
+}
+
+.jb-scene-warehouse .jb-po-tag span {
+  min-height: 18px;
+  padding: 4px 6px;
+  font-size: 0.4rem;
 }
 
 .jb-scene-warehouse .jb-warehouse-sign,
@@ -795,6 +824,10 @@ body.jb-game-body {
   opacity: 1;
   transform: translateX(0) scale(0.58);
   transform-origin: left bottom;
+}
+
+.jb-scene-warehouse.jb-lorry-arrive .jb-lorry {
+  animation: jbLorryArrive 0.78s cubic-bezier(0.2, 0.84, 0.28, 1) both;
 }
 
 .jb-lorry-box {
@@ -1381,6 +1414,23 @@ body.jb-game-body {
   }
 }
 
+@keyframes jbLorryArrive {
+  0% {
+    opacity: 0;
+    transform: translateX(-82px) scale(0.58);
+  }
+  20% {
+    opacity: 1;
+  }
+  74% {
+    transform: translateX(6px) scale(0.58);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(0.58);
+  }
+}
+
 @keyframes jbLorryDeliver {
   0%,
   18% {
@@ -1491,6 +1541,7 @@ body.jb-game-body {
   .jb-cloud,
   .jb-scene.jb-correct-choice .jb-tractor,
   .jb-scene.jb-correct-choice .jb-field,
+  .jb-scene-warehouse.jb-lorry-arrive .jb-lorry,
   .jb-scene.jb-correct-cash .jb-lorry,
   .jb-scene.jb-correct-cash .jb-conveyor-lines,
   .jb-scene.jb-correct-cash .jb-conveyor-bag,

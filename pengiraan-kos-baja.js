@@ -179,7 +179,7 @@
 
   function resetSceneClasses() {
     const scene = $('#jb-scene');
-    scene.classList.remove('jb-correct-choice', 'jb-correct-cash', 'jb-wrong');
+    scene.classList.remove('jb-correct-choice', 'jb-correct-cash', 'jb-wrong', 'jb-lorry-arrive');
     void scene.offsetWidth;
   }
 
@@ -232,6 +232,11 @@
     $('#jb-fertilizer-dust').innerHTML = '';
     $('#jb-game-card').classList.toggle('jb-cash-mode', mission.mode === 'cash');
     $('#jb-scene').classList.toggle('jb-scene-warehouse', mission.mode === 'cash');
+    if (mission.mode === 'cash') {
+      const scene = $('#jb-scene');
+      void scene.offsetWidth;
+      scene.classList.add('jb-lorry-arrive');
+    }
     $('#jb-formula-card').classList.add('jb-hidden');
     $('#jb-choice-grid').classList.toggle('jb-hidden', mission.mode !== 'choice');
     $('#jb-cash-panel').classList.toggle('jb-hidden', mission.mode !== 'cash');
