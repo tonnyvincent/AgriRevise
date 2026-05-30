@@ -12,12 +12,47 @@
     audioCache: {},
     themeStarted: false,
     themeStarting: false,
-    listenersBound: false
+    listenersBound: false,
+    boundStartTheme: null
   };
   window.__AgriReviseAudioState = sharedAudioState;
 
   function getAudio(name) {
     if (!audioFiles[name]) return null;
+
+    if (name === 'theme') {
+      const src = new URL(`audio/${audioFiles[name]}`, scriptUrl).toString();
+      let audio = document.getElementById('ar-theme-audio');
+
+      document.querySelectorAll('audio[data-ar-theme-song="true"]').forEach((item) => {
+        if (item !== audio) {
+          item.pause();
+          item.remove();
+        }
+      });
+
+      if (!audio) {
+        audio = document.createElement('audio');
+        audio.id = 'ar-theme-audio';
+        audio.dataset.arThemeSong = 'true';
+        audio.preload = 'auto';
+        audio.loop = true;
+        document.body.appendChild(audio);
+      }
+
+      if (audio.src !== src) {
+        audio.src = src;
+      }
+
+      audio.volume = 0.12;
+
+      if (sharedAudioState.audioCache.theme && sharedAudioState.audioCache.theme !== audio) {
+        sharedAudioState.audioCache.theme.pause();
+      }
+
+      sharedAudioState.audioCache.theme = audio;
+      return audio;
+    }
 
     if (!sharedAudioState.audioCache[name]) {
       const audio = new Audio(new URL(`audio/${audioFiles[name]}`, scriptUrl).toString());
@@ -43,6 +78,7 @@
         .then(() => {
           sharedAudioState.themeStarted = true;
           sharedAudioState.themeStarting = false;
+          unbindThemeStartListeners();
         })
         .catch(() => {
           sharedAudioState.themeStarted = false;
@@ -53,6 +89,14 @@
 
     sharedAudioState.themeStarted = true;
     sharedAudioState.themeStarting = false;
+    unbindThemeStartListeners();
+  }
+
+  function unbindThemeStartListeners() {
+    if (!sharedAudioState.boundStartTheme) return;
+
+    document.removeEventListener('pointerdown', sharedAudioState.boundStartTheme);
+    document.removeEventListener('keydown', sharedAudioState.boundStartTheme);
   }
 
   function playSound(name) {
@@ -295,13 +339,10 @@
 
   if (!sharedAudioState.listenersBound) {
     sharedAudioState.listenersBound = true;
+    sharedAudioState.boundStartTheme = () => startTheme();
 
-    document.addEventListener('DOMContentLoaded', () => {
-      window.setTimeout(startTheme, 120);
-    });
-
-    document.addEventListener('pointerdown', startTheme);
-    document.addEventListener('keydown', startTheme);
+    document.addEventListener('pointerdown', sharedAudioState.boundStartTheme);
+    document.addEventListener('keydown', sharedAudioState.boundStartTheme);
   }
 
   window.AgriReviseGame = {
