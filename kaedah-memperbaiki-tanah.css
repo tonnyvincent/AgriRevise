@@ -448,17 +448,19 @@ body.kmt-game-body {
 
 .kmt-plant {
   position: absolute;
-  z-index: 4;
-  bottom: 94px;
-  width: 13px;
-  height: 76px;
+  z-index: 9;
+  bottom: 66px;
+  width: 15px;
+  height: 84px;
   border-radius: 99px 99px 0 0;
-  background: #2f8f43;
-  opacity: calc(0.18 + var(--kmt-health-ratio) * 0.82);
-  transform: scaleY(calc(0.28 + var(--kmt-health-ratio) * 0.92));
+  background: linear-gradient(180deg, #58c95c, #1f7a34);
+  opacity: calc(0.72 + var(--kmt-health-ratio) * 0.28);
+  transform: scaleY(calc(0.52 + var(--kmt-health-ratio) * 0.72));
   transform-origin: bottom;
   transition: transform 0.5s ease, opacity 0.45s ease;
-  filter: drop-shadow(0 8px 8px rgba(30,90,40,0.24));
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,0.85))
+    drop-shadow(0 8px 8px rgba(30,90,40,0.28));
 }
 
 .kmt-plant span,
@@ -467,30 +469,31 @@ body.kmt-game-body {
   content: "";
   position: absolute;
   border-radius: 50% 50% 50% 0;
-  background: #43a047;
+  background: linear-gradient(135deg, #9be15d, #2e9e45);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.22);
 }
 
 .kmt-plant span {
-  left: 8px;
-  top: 16px;
-  width: 31px;
-  height: 17px;
+  left: 9px;
+  top: 13px;
+  width: 36px;
+  height: 20px;
   transform: rotate(-26deg);
 }
 
 .kmt-plant::before {
-  right: 7px;
+  right: 8px;
   top: 30px;
-  width: 29px;
-  height: 16px;
+  width: 34px;
+  height: 19px;
   transform: scaleX(-1) rotate(-28deg);
 }
 
 .kmt-plant::after {
-  left: 6px;
-  top: 44px;
-  width: 25px;
-  height: 14px;
+  left: 7px;
+  top: 48px;
+  width: 30px;
+  height: 17px;
   transform: rotate(-18deg);
 }
 

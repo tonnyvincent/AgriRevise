@@ -172,6 +172,7 @@ $('fasa1-next').addEventListener('click', () => {
 
 function handleFasa1Drop(chip, zone) {
   if (fasa1Checked) return;
+  setFasaNotice(1, '');
 
   // if target zone already has chip, move it back to bank
   const existingChip = zone.querySelector('.st-drag-chip');
@@ -186,8 +187,14 @@ function handleFasa1Drop(chip, zone) {
 
 function checkFasa1Answers() {
   let correct = 0;
+  const zones = Array.from(document.querySelectorAll('#fasa-1 .st-drop-zone'));
 
-  document.querySelectorAll('#fasa-1 .st-drop-zone').forEach(zone => {
+  if (zones.some(zone => !zone.querySelector('.st-drag-chip'))) {
+    setFasaNotice(1, 'Lengkapkan semua dulang dahulu sebelum menyemak jawapan.');
+    return;
+  }
+
+  zones.forEach(zone => {
     const chip = zone.querySelector('.st-drag-chip');
 
     zone.classList.remove('correct', 'wrong');
@@ -259,6 +266,7 @@ function initFasa2() {
 
 function handleFasa2Drop(chip, zone) {
   if (fasa2Checked) return;
+  setFasaNotice(2, '');
 
   const existingChip = zone.querySelector('.st-ciri-chip');
   if (existingChip) {
@@ -272,8 +280,14 @@ function handleFasa2Drop(chip, zone) {
 
 function checkFasa2Answers() {
   let correct = 0;
+  const zones = Array.from(document.querySelectorAll('#fasa-2 .st-match-drop'));
 
-  document.querySelectorAll('#fasa-2 .st-match-drop').forEach(zone => {
+  if (zones.some(zone => !zone.querySelector('.st-ciri-chip'))) {
+    setFasaNotice(2, 'Lengkapkan semua padanan dahulu sebelum menyemak jawapan.');
+    return;
+  }
+
+  zones.forEach(zone => {
     const chip = zone.querySelector('.st-ciri-chip');
 
     zone.classList.remove('correct', 'wrong');
@@ -343,26 +357,14 @@ function initFasa3() {
         fasa3Selected.add(val);
       }
 
-      updatePlantPreview();
-      $('fasa3-hint').textContent = '';
+      setPlant('neutral');
+      $('fasa3-hint').textContent = fasa3Selected.size
+        ? `${fasa3Selected.size}/${REQUIRED_SELECTIONS} pilihan dibuat. Tekan Semak Jawapan untuk menilai.`
+        : '';
     });
   });
 
   $('fasa3-submit').addEventListener('click', handleFasa3Submit);
-}
-
-function updatePlantPreview() {
-  const hasWrong = [...fasa3Selected].some(v => !FASA3_CORRECT.has(v));
-
-  if (fasa3Selected.size === 0) {
-    setPlant('neutral');
-  } else if (hasWrong) {
-    setPlant('sad');
-  } else if (fasa3Selected.size === REQUIRED_SELECTIONS) {
-    setPlant('happy');
-  } else {
-    setPlant('growing');
-  }
 }
 
 function setPlant(state) {
@@ -382,6 +384,22 @@ function setPlant(state) {
   status.textContent = s.s;
 }
 
+function setFasaNotice(fasa, message) {
+  const root = $(`fasa-${fasa}`);
+  if (!root) return;
+
+  let notice = root.querySelector('.st-fasa-notice');
+  if (!notice) {
+    notice = document.createElement('p');
+    notice.className = 'st-fasa-notice';
+    const button = root.querySelector('.st-next-btn');
+    root.insertBefore(notice, button || null);
+  }
+
+  notice.textContent = message;
+  notice.hidden = !message;
+}
+
 function configureFasa3Content() {
   const title = document.querySelector('#fasa-3 .st-fasa-title');
   const desc = document.querySelector('#fasa-3 .st-fasa-desc');
@@ -393,19 +411,15 @@ function configureFasa3Content() {
 
   grid.innerHTML = `
     <button class="st-option-btn" data-val="lapisan-air" data-correct="true">
-      <span class="st-option-icon">/</span>
       Lapisan nipis air mengisi liang halus dalam agregat
     </button>
     <button class="st-option-btn" data-val="ruang-kecil" data-correct="false">
-      <span class="st-option-icon">X</span>
       Ruang kecil antara agregat membenarkan resapan gas dan pengaliran air
     </button>
     <button class="st-option-btn" data-val="mudah-terhakis" data-correct="false">
-      <span class="st-option-icon">X</span>
       Mudah terhakis
     </button>
     <button class="st-option-btn" data-val="ruang-besar" data-correct="true">
-      <span class="st-option-icon">/</span>
       Ruang besar antara agregat membenarkan resapan gas dan pengaliran air
     </button>
   `;

@@ -117,7 +117,7 @@
             Stesen 2: Segi Tiga Tekstur Tanah<br>
             <span class="instruction-text">Rujuk imej Segi Tiga Tanah dan seret jenis tanah yang betul ke setiap sampel peratusan tekstur.</span>
           </div>
-          <a class="pyramid-ref-btn" href="../images/piramid-tanah.png" target="_blank" rel="noopener">Piramid</a>
+          <button class="pyramid-ref-btn" type="button" id="pyramid-ref-btn">Piramid</button>
 
           <!-- Drag options -->
           <div class="drag-options station-2-options">
@@ -239,6 +239,14 @@
         <div class="complete-actions">
           <button id="next-station-btn">Lanjut ke Stesen Seterusnya</button>
         </div>
+      </div>
+    </div>
+
+    <div id="pyramid-modal" class="pyramid-modal hidden" role="dialog" aria-modal="true" aria-labelledby="pyramid-modal-title">
+      <div class="pyramid-modal-card">
+        <button class="pyramid-close-btn" type="button" id="pyramid-close-btn" aria-label="Tutup rujukan piramid">&times;</button>
+        <h2 id="pyramid-modal-title">Piramid Tekstur Tanah</h2>
+        <img src="../images/piramid-tanah.png" alt="Piramid tekstur tanah" />
       </div>
     </div>
 

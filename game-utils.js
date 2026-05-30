@@ -8,43 +8,51 @@
     wrong: 'wrong-answer.mpeg'
   };
 
-  const audioCache = {};
-  let themeStarted = false;
+  const sharedAudioState = window.__AgriReviseAudioState || {
+    audioCache: {},
+    themeStarted: false,
+    themeStarting: false,
+    listenersBound: false
+  };
+  window.__AgriReviseAudioState = sharedAudioState;
 
   function getAudio(name) {
     if (!audioFiles[name]) return null;
 
-    if (!audioCache[name]) {
+    if (!sharedAudioState.audioCache[name]) {
       const audio = new Audio(new URL(`audio/${audioFiles[name]}`, scriptUrl).toString());
       audio.preload = 'auto';
       audio.volume = name === 'theme' ? 0.16 : 0.55;
-      audioCache[name] = audio;
+      sharedAudioState.audioCache[name] = audio;
     }
 
-    return audioCache[name];
+    return sharedAudioState.audioCache[name];
   }
 
   function startTheme() {
-    if (themeStarted) return;
-
     const audio = getAudio('theme');
     if (!audio) return;
+    if (sharedAudioState.themeStarted || sharedAudioState.themeStarting || !audio.paused) return;
 
+    sharedAudioState.themeStarting = true;
     audio.loop = true;
     const playPromise = audio.play();
 
     if (playPromise && typeof playPromise.then === 'function') {
       playPromise
         .then(() => {
-          themeStarted = true;
+          sharedAudioState.themeStarted = true;
+          sharedAudioState.themeStarting = false;
         })
         .catch(() => {
-          themeStarted = false;
+          sharedAudioState.themeStarted = false;
+          sharedAudioState.themeStarting = false;
         });
       return;
     }
 
-    themeStarted = true;
+    sharedAudioState.themeStarted = true;
+    sharedAudioState.themeStarting = false;
   }
 
   function playSound(name) {
@@ -285,12 +293,16 @@
     };
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    window.setTimeout(startTheme, 120);
-  });
+  if (!sharedAudioState.listenersBound) {
+    sharedAudioState.listenersBound = true;
 
-  document.addEventListener('pointerdown', startTheme, { once: true });
-  document.addEventListener('keydown', startTheme, { once: true });
+    document.addEventListener('DOMContentLoaded', () => {
+      window.setTimeout(startTheme, 120);
+    });
+
+    document.addEventListener('pointerdown', startTheme);
+    document.addEventListener('keydown', startTheme);
+  }
 
   window.AgriReviseGame = {
     initLives,

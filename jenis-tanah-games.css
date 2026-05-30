@@ -459,6 +459,65 @@ body.tdtp-game-body {
   font-weight: 900;
   line-height: 1;
   box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.tdtp-game-body .pyramid-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 18000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(20,35,20,0.58);
+  backdrop-filter: blur(8px);
+}
+
+.tdtp-game-body .pyramid-modal.hidden {
+  display: none;
+}
+
+.tdtp-game-body .pyramid-modal-card {
+  position: relative;
+  width: min(350px, 100%);
+  max-height: min(760px, calc(100svh - 36px));
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid rgba(46,125,50,0.25);
+  box-shadow: 0 18px 56px rgba(0,0,0,0.26);
+  overflow: auto;
+  text-align: center;
+}
+
+.tdtp-game-body .pyramid-modal-card h2 {
+  margin: 0 34px 10px;
+  color: #1b5e2f;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+}
+
+.tdtp-game-body .pyramid-modal-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.tdtp-game-body .pyramid-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: #1b5e2f;
+  color: #fff;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .tdtp-game-body .drag-options {

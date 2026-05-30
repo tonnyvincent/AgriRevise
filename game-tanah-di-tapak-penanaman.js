@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('.btn-restart-expedition').forEach(button => {
     button.addEventListener('click', resetExpedition);
   });
+  initializePyramidModal();
 });
 
 // Initialize drag and drop for all stations
@@ -525,6 +526,27 @@ function updateMissionStatus() {
   if (statusLabel) {
     statusLabel.textContent = `${expeditionState.currentStation} / ${TOTAL_EXPEDITION_STATIONS}`;
   }
+}
+
+function initializePyramidModal() {
+  const openBtn = document.getElementById('pyramid-ref-btn');
+  const modal = document.getElementById('pyramid-modal');
+  const closeBtn = document.getElementById('pyramid-close-btn');
+  if (!openBtn || !modal || !closeBtn) return;
+
+  const closeModal = () => modal.classList.add('hidden');
+
+  openBtn.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+  });
 }
 
 function resetExpedition() {
