@@ -267,6 +267,7 @@ body.tdtp-game-body {
   flex: 0 0 auto;
   min-height: 0;
   max-height: clamp(44px, 7.2svh, 60px);
+  padding: 2px 7px 4px;
   overflow: auto;
   color: #1b5e2f;
   font-size: clamp(0.72rem, 2.85vw, 0.84rem);
