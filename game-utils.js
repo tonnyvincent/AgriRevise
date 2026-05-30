@@ -7,15 +7,139 @@
     correct: 'right-answer.mpeg',
     wrong: 'wrong-answer.mpeg'
   };
+  const themeOwnerKey = 'agrirevise-theme-owner';
+  const themeChannelName = 'agrirevise-theme-audio';
 
   const sharedAudioState = window.__AgriReviseAudioState || {
     audioCache: {},
     themeStarted: false,
     themeStarting: false,
     listenersBound: false,
-    boundStartTheme: null
+    boundStartTheme: null,
+    themeCrossTabBound: false,
+    themeChannel: null,
+    themeTabId: null
   };
   window.__AgriReviseAudioState = sharedAudioState;
+
+  if (!sharedAudioState.themeTabId) {
+    sharedAudioState.themeTabId = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+
+  function getThemeAudioElement() {
+    return sharedAudioState.audioCache.theme || document.getElementById('ar-theme-audio');
+  }
+
+  function bindThemeStartListeners() {
+    if (sharedAudioState.listenersBound) return;
+
+    sharedAudioState.boundStartTheme = sharedAudioState.boundStartTheme || (() => startTheme());
+    document.addEventListener('pointerdown', sharedAudioState.boundStartTheme);
+    document.addEventListener('keydown', sharedAudioState.boundStartTheme);
+    sharedAudioState.listenersBound = true;
+  }
+
+  function unbindThemeStartListeners() {
+    if (!sharedAudioState.boundStartTheme || !sharedAudioState.listenersBound) return;
+
+    document.removeEventListener('pointerdown', sharedAudioState.boundStartTheme);
+    document.removeEventListener('keydown', sharedAudioState.boundStartTheme);
+    sharedAudioState.listenersBound = false;
+  }
+
+  function readThemeOwner() {
+    try {
+      return JSON.parse(window.localStorage.getItem(themeOwnerKey) || '{}');
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function isCurrentThemeOwner() {
+    const owner = readThemeOwner();
+    return !owner.id || owner.id === sharedAudioState.themeTabId;
+  }
+
+  function pauseThemeForExternalClaim() {
+    const audio = getThemeAudioElement();
+
+    if (audio) {
+      audio.pause();
+    }
+
+    sharedAudioState.themeStarted = false;
+    sharedAudioState.themeStarting = false;
+    bindThemeStartListeners();
+  }
+
+  function claimThemeOwner() {
+    const claim = {
+      type: 'theme-owner',
+      id: sharedAudioState.themeTabId,
+      at: Date.now()
+    };
+
+    try {
+      window.localStorage.setItem(themeOwnerKey, JSON.stringify(claim));
+    } catch (error) {
+      // localStorage may be unavailable in some browser privacy modes.
+    }
+
+    if (sharedAudioState.themeChannel) {
+      try {
+        sharedAudioState.themeChannel.postMessage(claim);
+      } catch (error) {
+        // BroadcastChannel can fail in restricted browsing contexts.
+      }
+    }
+  }
+
+  function releaseThemeOwner() {
+    const owner = readThemeOwner();
+
+    if (owner.id !== sharedAudioState.themeTabId) return;
+
+    try {
+      window.localStorage.removeItem(themeOwnerKey);
+    } catch (error) {
+      // Nothing else to clean up if localStorage is unavailable.
+    }
+  }
+
+  function setupCrossTabAudioGuard() {
+    if (sharedAudioState.themeCrossTabBound) return;
+
+    sharedAudioState.themeCrossTabBound = true;
+
+    if ('BroadcastChannel' in window) {
+      try {
+        sharedAudioState.themeChannel = new window.BroadcastChannel(themeChannelName);
+        sharedAudioState.themeChannel.onmessage = (event) => {
+          const data = event.data || {};
+          if (data.type === 'theme-owner' && data.id !== sharedAudioState.themeTabId) {
+            pauseThemeForExternalClaim();
+          }
+        };
+      } catch (error) {
+        sharedAudioState.themeChannel = null;
+      }
+    }
+
+    window.addEventListener('storage', (event) => {
+      if (event.key !== themeOwnerKey || !event.newValue) return;
+
+      try {
+        const data = JSON.parse(event.newValue);
+        if (data.id !== sharedAudioState.themeTabId) {
+          pauseThemeForExternalClaim();
+        }
+      } catch (error) {
+        // Ignore malformed storage payloads from other contexts.
+      }
+    });
+
+    window.addEventListener('pagehide', releaseThemeOwner);
+  }
 
   function getAudio(name) {
     if (!audioFiles[name]) return null;
@@ -69,6 +193,7 @@
     if (!audio) return;
     if (sharedAudioState.themeStarted || sharedAudioState.themeStarting || !audio.paused) return;
 
+    claimThemeOwner();
     sharedAudioState.themeStarting = true;
     audio.loop = true;
     const playPromise = audio.play();
@@ -76,11 +201,20 @@
     if (playPromise && typeof playPromise.then === 'function') {
       playPromise
         .then(() => {
+          if (!isCurrentThemeOwner()) {
+            pauseThemeForExternalClaim();
+            return;
+          }
+
           sharedAudioState.themeStarted = true;
           sharedAudioState.themeStarting = false;
           unbindThemeStartListeners();
         })
         .catch(() => {
+          if (isCurrentThemeOwner()) {
+            releaseThemeOwner();
+          }
+
           sharedAudioState.themeStarted = false;
           sharedAudioState.themeStarting = false;
         });
@@ -90,13 +224,6 @@
     sharedAudioState.themeStarted = true;
     sharedAudioState.themeStarting = false;
     unbindThemeStartListeners();
-  }
-
-  function unbindThemeStartListeners() {
-    if (!sharedAudioState.boundStartTheme) return;
-
-    document.removeEventListener('pointerdown', sharedAudioState.boundStartTheme);
-    document.removeEventListener('keydown', sharedAudioState.boundStartTheme);
   }
 
   function playSound(name) {
@@ -337,13 +464,8 @@
     };
   }
 
-  if (!sharedAudioState.listenersBound) {
-    sharedAudioState.listenersBound = true;
-    sharedAudioState.boundStartTheme = () => startTheme();
-
-    document.addEventListener('pointerdown', sharedAudioState.boundStartTheme);
-    document.addEventListener('keydown', sharedAudioState.boundStartTheme);
-  }
+  setupCrossTabAudioGuard();
+  bindThemeStartListeners();
 
   window.AgriReviseGame = {
     initLives,

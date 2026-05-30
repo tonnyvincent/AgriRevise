@@ -157,7 +157,7 @@ body.tdtp-game-body {
   max-width: none;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(238px, 49%) minmax(0, 1fr);
+  grid-template-rows: minmax(300px, 60%) minmax(0, 1fr);
   align-content: stretch;
   align-items: stretch;
   gap: 6px;
@@ -179,7 +179,7 @@ body.tdtp-game-body {
 .jdst-game-body .soil-profile-instruction {
   flex: 0 0 auto;
   border-radius: 12px;
-  padding: 8px 10px;
+  padding: 9px 10px;
   background: rgba(255,255,255,0.88);
   border: 1.5px solid rgba(160,200,100,0.32);
   color: #1b5e2f;
@@ -190,14 +190,14 @@ body.tdtp-game-body {
 .jdst-game-body .soil-profile-instruction strong {
   display: block;
   font-family: 'Fredoka One', cursive;
-  font-size: clamp(0.88rem, 3.35vw, 1.02rem);
+  font-size: clamp(1rem, 3.75vw, 1.15rem);
   line-height: 1.05;
 }
 
 .jdst-game-body .soil-profile-instruction span {
   display: block;
   margin-top: 2px;
-  font-size: clamp(0.62rem, 2.3vw, 0.72rem);
+  font-size: clamp(0.66rem, 2.55vw, 0.78rem);
   font-weight: 900;
   line-height: 1.08;
 }
@@ -234,7 +234,7 @@ body.tdtp-game-body {
   display: block;
   left: 10px;
   transform: translateY(-50%);
-  font-size: 0.56rem;
+  font-size: 0.62rem;
   text-align: left;
   white-space: nowrap;
   opacity: 0.95;
@@ -246,14 +246,18 @@ body.tdtp-game-body {
   min-width: 0;
   min-height: 0;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .jdst-game-body .question-card {
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   min-height: 0;
-  padding: clamp(10px, 1.7svh, 14px) 12px clamp(10px, 1.7svh, 14px);
-  gap: clamp(7px, 1.15svh, 10px);
-  overflow: hidden;
+  padding: clamp(8px, 1.3svh, 11px) 12px clamp(8px, 1.3svh, 11px);
+  gap: clamp(5px, 0.8svh, 8px);
+  overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -262,10 +266,10 @@ body.tdtp-game-body {
 .jdst-game-body .question-text {
   flex: 0 0 auto;
   min-height: 0;
-  max-height: clamp(54px, 8.5svh, 72px);
+  max-height: clamp(44px, 7.2svh, 60px);
   overflow: auto;
   color: #1b5e2f;
-  font-size: clamp(0.76rem, 3vw, 0.88rem);
+  font-size: clamp(0.72rem, 2.85vw, 0.84rem);
   font-weight: 900;
   line-height: 1.18;
   text-align: center;
@@ -277,8 +281,8 @@ body.tdtp-game-body {
 
 .jdst-game-body .options-grid {
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(2, minmax(50px, 60px));
-  gap: clamp(7px, 1.1svh, 9px) 8px;
+  grid-template-rows: repeat(2, minmax(42px, 52px));
+  gap: clamp(5px, 0.75svh, 7px) 8px;
   flex: 0 0 auto;
   min-height: 0;
 }
@@ -286,12 +290,12 @@ body.tdtp-game-body {
 .jdst-game-body .option-button {
   min-height: 0;
   height: 100%;
-  padding: 6px 7px;
-  border-radius: 11px;
+  padding: 4px 6px;
+  border-radius: 10px;
   border: 2px solid rgba(46,125,50,0.25);
   background: rgba(255,255,255,0.8);
   color: #1a2e1a;
-  font-size: clamp(0.66rem, 2.65vw, 0.76rem);
+  font-size: clamp(0.58rem, 2.35vw, 0.68rem);
   font-weight: 900;
   line-height: 1.16;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
@@ -742,14 +746,17 @@ body.tdtp-game-body {
 
 @media (max-width: 370px) {
   .jdst-game-body .game-container {
-    grid-template-rows: minmax(230px, 50%) minmax(0, 1fr);
+    grid-template-rows: minmax(286px, 58%) minmax(0, 1fr);
   }
 
   .jdst-game-body .game-profile {
     height: 100%;
   }
 
-  .jdst-game-body .option-button,
+  .jdst-game-body .option-button {
+    font-size: 0.56rem;
+  }
+
   .tdtp-game-body .zone-content {
     font-size: 0.5rem;
   }
