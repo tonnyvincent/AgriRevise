@@ -6,7 +6,8 @@ let expeditionState = {
   scores: {
     station1: null,
     station2: null,
-    station3: null
+    station3: null,
+    station4: null
   },
 
   sessionLog: [], // full attempt log
@@ -14,14 +15,19 @@ let expeditionState = {
   answers: {
     station1: {},
     station2: {},
-    station3: {}
-  }
+    station3: {},
+    station4: {}
+  },
+
+  lives: null
 };
 
-const TOTAL_EXPEDITION_QUESTIONS = 10;
+const TOTAL_EXPEDITION_STATIONS = 4;
+const TOTAL_EXPEDITION_QUESTIONS = 13;
 
 // Initialize game
 document.addEventListener('DOMContentLoaded', function() {
+  expeditionState.lives = window.AgriReviseGame?.initLives();
   initializeDragAndDrop();
   initializeStationCheckButtons();
   updateProgress();
@@ -243,6 +249,8 @@ function getDraggedValue(element, station) {
     return element.getAttribute('data-soil');
   } else if (station === 3) {
     return element.getAttribute('data-step');
+  } else if (station === 4) {
+    return element.getAttribute('data-crop');
   }
   return null;
 }
@@ -305,7 +313,7 @@ function updateStationCheckButton(station) {
 }
 
 function updateAllStationCheckButtons() {
-  for (let station = 1; station <= 3; station++) {
+  for (let station = 1; station <= TOTAL_EXPEDITION_STATIONS; station++) {
     updateStationCheckButton(station);
   }
 }
@@ -336,6 +344,8 @@ function validateStation(station) {
       droppedValue = droppedItem?.getAttribute('data-soil');
     } else if (station === 3) {
       droppedValue = droppedItem?.getAttribute('data-step');
+    } else if (station === 4) {
+      droppedValue = droppedItem?.getAttribute('data-crop');
     }
 
     const isCorrect = droppedValue === expectedAnswer;
@@ -371,6 +381,15 @@ function validateStation(station) {
   updateScoreDisplay();
   updateStationCheckButton(station);
 
+  const wrongCount = total - correctCount;
+  if (wrongCount > 0) {
+    window.AgriReviseGame?.playSound('wrong');
+    const livesLeft = expeditionState.lives ? expeditionState.lives.lose(wrongCount) : 1;
+    if (livesLeft <= 0) return;
+  } else {
+    window.AgriReviseGame?.playSound('correct');
+  }
+
   // 🔥 store full session log
   expeditionState.sessionLog.push(scoreData);
 
@@ -395,12 +414,14 @@ function printFinalResult() {
   const totalCorrect =
     expeditionState.scores.station1.correct +
     expeditionState.scores.station2.correct +
-    expeditionState.scores.station3.correct;
+    expeditionState.scores.station3.correct +
+    expeditionState.scores.station4.correct;
 
   const totalQuestions =
     expeditionState.scores.station1.total +
     expeditionState.scores.station2.total +
-    expeditionState.scores.station3.total;
+    expeditionState.scores.station3.total +
+    expeditionState.scores.station4.total;
 
   const finalPercent = Math.round((totalCorrect / totalQuestions) * 100);
 
@@ -428,7 +449,7 @@ function showStationModal(station) {
   // 🔥 IMPORTANT: remove old handlers
   nextBtn.onclick = null;
 
-  if (station === 3) {
+  if (station === TOTAL_EXPEDITION_STATIONS) {
     nextBtn.textContent = "Selesai";
 
     nextBtn.onclick = () => {
@@ -480,7 +501,7 @@ function goToStation(station) {
 
 function updateProgress() {
   document.getElementById('station-num').textContent = expeditionState.currentStation;
-  const progress = (expeditionState.currentStation / 3) * 100;
+  const progress = (expeditionState.currentStation / TOTAL_EXPEDITION_STATIONS) * 100;
   document.getElementById('progress-fill').style.width = progress + '%';
 }
 
@@ -502,25 +523,30 @@ function updateScoreDisplay() {
 function updateMissionStatus() {
   const statusLabel = document.getElementById('mission-status-label');
   if (statusLabel) {
-    statusLabel.textContent = `${expeditionState.currentStation} / 3`;
+    statusLabel.textContent = `${expeditionState.currentStation} / ${TOTAL_EXPEDITION_STATIONS}`;
   }
 }
 
 function resetExpedition() {
   expeditionState.currentStation = 1;
   expeditionState.stationsCompleted.clear();
+  expeditionState.sessionLog = [];
   expeditionState.answers = {
     station1: {},
     station2: {},
-    station3: {}
+    station3: {},
+    station4: {}
   };
   expeditionState.scores = {
     station1: null,
     station2: null,
-    station3: null
+    station3: null,
+    station4: null
   };
 
-  for (let station = 1; station <= 3; station++) {
+  expeditionState.lives?.reset();
+
+  for (let station = 1; station <= TOTAL_EXPEDITION_STATIONS; station++) {
     const stationEl = document.getElementById(`station-${station}`);
     if (stationEl) {
       stationEl.style.display = station === 1 ? 'block' : 'none';
@@ -557,9 +583,10 @@ function showFinalCompletion() {
   const s1 = expeditionState.scores.station1;
   const s2 = expeditionState.scores.station2;
   const s3 = expeditionState.scores.station3;
+  const s4 = expeditionState.scores.station4;
 
-  const totalCorrect = s1.correct + s2.correct + s3.correct;
-  const totalQuestions = s1.total + s2.total + s3.total;
+  const totalCorrect = s1.correct + s2.correct + s3.correct + s4.correct;
+  const totalQuestions = s1.total + s2.total + s3.total + s4.total;
 
   const percentage = Math.round((totalCorrect / totalQuestions) * 100);
   updateScoreDisplay();

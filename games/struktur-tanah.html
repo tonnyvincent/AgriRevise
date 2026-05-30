@@ -177,6 +177,7 @@
         <div class="st-matching-area">
           <!-- Ciri chips on left -->
           <div class="st-ciri-bank" id="ciri-bank">
+            <div class="st-ciri-chip" draggable="true" data-ciri="maksud">Susunan kumin tanah yang terdiri daripada pasir, kelodak dan liat yang membentuk agregat tanah</div>
             <div class="st-ciri-chip" draggable="true" data-ciri="liang">Mempunyai ruang liang paling banyak</div>
             <div class="st-ciri-chip" draggable="true" data-ciri="kubus">Berbentuk kubus yang tidak sekata</div>
             <div class="st-ciri-chip" draggable="true" data-ciri="tiang">Berbentuk seperti tiang dengan puncak yang berbentuk agak bulat</div>
@@ -184,6 +185,10 @@
 
           <!-- Drop targets on right -->
           <div class="st-match-targets">
+            <div class="st-match-target" data-answer="maksud">
+              <span class="st-match-label">Maksud Struktur Tanah</span>
+              <div class="st-match-drop" data-answer="maksud"><span class="st-drop-hint">Lepaskan di sini</span></div>
+            </div>
             <div class="st-match-target" data-answer="liang">
               <span class="st-match-label">Butir Rapuh</span>
               <div class="st-match-drop" data-answer="liang"><span class="st-drop-hint">Lepaskan di sini</span></div>
@@ -275,6 +280,7 @@
   </div>
 
   <script src="../score-api.js"></script>
+  <script src="../game-utils.js"></script>
   <script src="../script.js"></script>
   <script src="../struktur-tanah.js"></script>
 </body>

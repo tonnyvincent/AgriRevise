@@ -17,6 +17,7 @@ let players = [];
 let currentSort = sortSelect ? sortSelect.value : 'total';
 let currentPage = 1;
 const pageSize = 5;
+const topRankAwards = ['🏆', '🥈', '🥉', '🏅', '🏅'];
 
 function getGameMeta(gameKey) {
   return scoreApi?.games?.[gameKey] || null;
@@ -32,7 +33,7 @@ function getScore(player, sortKey = currentSort) {
 
 function getMaxScore(sortKey = currentSort) {
   if (sortKey === 'total') {
-    return scoreApi?.maxTotalScore || 82;
+    return scoreApi?.maxTotalScore || 101;
   }
 
   return getGameMeta(sortKey)?.maxScore || 0;
@@ -119,7 +120,13 @@ function renderLeaderboard() {
       const rankCell = document.createElement('div');
       const rankBadge = document.createElement('div');
       rankBadge.className = 'rank-badge';
-      rankBadge.textContent = rank;
+      if (rank <= topRankAwards.length) {
+        rankBadge.classList.add('rank-award', `rank-award-${rank}`);
+        rankBadge.textContent = `${topRankAwards[rank - 1]} ${rank}`;
+        rankBadge.title = rank === 1 ? 'Piala Top 1' : `Pingat Top ${rank}`;
+      } else {
+        rankBadge.textContent = rank;
+      }
       rankCell.appendChild(rankBadge);
 
       const name = document.createElement('div');
@@ -137,7 +144,7 @@ function renderLeaderboard() {
       if (currentSort !== 'total') {
         const totalScore = document.createElement('div');
         totalScore.className = 'player-score-sub';
-        totalScore.textContent = `Jumlah ${Number(player.total_score || 0)}/${scoreApi?.maxTotalScore || 82}`;
+        totalScore.textContent = `Jumlah ${Number(player.total_score || 0)}/${scoreApi?.maxTotalScore || 101}`;
         score.appendChild(totalScore);
       }
 

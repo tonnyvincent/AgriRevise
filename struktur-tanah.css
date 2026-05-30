@@ -228,11 +228,42 @@ body {
   border: 2px solid rgba(160,130,80,0.25);
   box-shadow: inset 0 2px 8px rgba(0,0,0,0.06);
   overflow: hidden;
+  position: relative;
 }
 
 .st-tray-visual svg {
   width: 80px;
   height: 80px;
+  display: none;
+}
+
+.st-tray-visual::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 12px;
+  background: center / contain no-repeat;
+  filter: drop-shadow(0 6px 10px rgba(80,55,25,0.18));
+}
+
+.st-tray[data-answer="KOLUMNAR"] .st-tray-visual::before {
+  background-image: url("images/kolumnar.png");
+}
+
+.st-tray[data-answer="PRISMATIK"] .st-tray-visual::before {
+  background-image: url("images/prismatik.png");
+}
+
+.st-tray[data-answer="BERBLOK"] .st-tray-visual::before {
+  background-image: url("images/berblok.png");
+}
+
+.st-tray[data-answer="BERLAPIS"] .st-tray-visual::before {
+  background-image: url("images/berlapis.png");
+}
+
+.st-tray[data-answer="BUTIR RAPUH"] .st-tray-visual::before {
+  background-image: url("images/butir-rapuh.png");
 }
 
 .st-drop-zone {

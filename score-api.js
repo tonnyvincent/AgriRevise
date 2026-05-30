@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const MAX_TOTAL_SCORE = 82;
+  const MAX_TOTAL_SCORE = 101;
   const PLAYER_NAME_KEY = 'playerName';
   const PLAYER_ID_KEY = 'playerId';
 
@@ -14,7 +14,7 @@
     },
     tanah_tapak_penanaman: {
       label: 'Tanah di Tapak Penanaman',
-      maxScore: 10,
+      maxScore: 13,
       scoreKey: 'tapakPenanamanScore',
       completedKey: 'tapakPenanamanCompleted'
     },
@@ -26,13 +26,13 @@
     },
     ph_tanah: {
       label: 'pH Tanah',
-      maxScore: 12,
+      maxScore: 18,
       scoreKey: 'phTanahScore',
       completedKey: 'phTanahCompleted'
     },
     kaedah_memperbaiki_tanah: {
       label: 'Kaedah Memperbaiki Tanah',
-      maxScore: 10,
+      maxScore: 15,
       scoreKey: 'kaedahMemperbaikiTanahScore',
       completedKey: 'kaedahMemperbaikiTanahCompleted'
     },
@@ -44,7 +44,7 @@
     },
     pengiraan_kos_baja: {
       label: 'Pengiraan Kos Baja',
-      maxScore: 10,
+      maxScore: 15,
       scoreKey: 'pengiraanKosBajaScore',
       completedKey: 'pengiraanKosBajaCompleted'
     }

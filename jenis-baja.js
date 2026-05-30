@@ -247,7 +247,8 @@
     completed: 0,
     score: 0,
     selected: '',
-    solved: false
+    solved: false,
+    lives: null
   };
 
   const $ = (selector) => document.querySelector(selector);
@@ -411,7 +412,11 @@
     const question = currentQuestion();
 
     if (correct) {
+      window.AgriReviseGame?.playSound('correct');
       state.score += 1;
+    } else {
+      window.AgriReviseGame?.playSound('wrong');
+      state.lives?.lose();
     }
 
     state.completed += 1;
@@ -434,6 +439,7 @@
       triggerWrongAnimation();
       const answer = question.options.find((option) => option.key === question.answer);
       setFeedback(`Salah. Jawapan betul: ${question.answer}. ${answer.text}.`);
+      if (state.lives?.isEmpty()) return;
     }
 
     if (state.index === TOTAL_QUESTIONS - 1) {
@@ -477,6 +483,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    state.lives = window.AgriReviseGame?.initLives();
     renderQuestion();
 
     $('#jbg-option-grid').addEventListener('click', (event) => {

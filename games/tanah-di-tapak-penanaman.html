@@ -56,13 +56,13 @@
           <a class="game-back-btn" href="../jenis-tanah.html">← Kembali</a>
 
           <div class="game-progress">
-            <div class="progress-text">Stesen <span id="station-num">1</span> / 3</div>
+            <div class="progress-text">Stesen <span id="station-num">1</span> / 4</div>
             <div class="progress-bar">
               <div class="progress-fill" id="progress-fill"></div>
             </div>
           </div>
 
-          <div class="game-score-pill"><span id="tdtp-score-display">0</span>/10</div>
+          <div class="game-score-pill"><span id="tdtp-score-display">0</span>/13</div>
         </div>
 
       </div>
@@ -117,6 +117,7 @@
             Stesen 2: Segi Tiga Tekstur Tanah<br>
             <span class="instruction-text">Rujuk imej Segi Tiga Tanah dan seret jenis tanah yang betul ke setiap sampel peratusan tekstur.</span>
           </div>
+          <a class="pyramid-ref-btn" href="../images/piramid-tanah.png" target="_blank" rel="noopener">Piramid</a>
 
           <!-- Drag options -->
           <div class="drag-options station-2-options">
@@ -185,6 +186,38 @@
         </div>
       </div>
 
+      <div class="game-station station-4" id="station-4" style="display: none;">
+        <div class="question-card">
+          <div class="question-text">
+            Stesen 4: Warna Tanah dan Tanaman<br>
+            <span class="instruction-text">Seret jenis tanaman yang sesuai ke dalam kotak warna tanah yang betul.</span>
+          </div>
+
+          <div class="drag-options station-4-options">
+            <div class="drag-item" draggable="true" data-crop="merah">Getah dan kelapa sawit</div>
+            <div class="drag-item" draggable="true" data-crop="kelabu">Padi</div>
+            <div class="drag-item" draggable="true" data-crop="kehitam-hitaman">Nenas dan sayuran</div>
+          </div>
+
+          <div class="drop-zones">
+            <div class="drop-zone" data-answer="kelabu">
+              <div class="zone-content"><span class="zone-label">Kelabu</span><br>Saliran kurang baik dan sesuai untuk tanaman yang tahan air.</div>
+              <div class="zone-slot"></div>
+            </div>
+            <div class="drop-zone" data-answer="kehitam-hitaman">
+              <div class="zone-content"><span class="zone-label">Kehitam-hitaman</span><br>Kaya bahan organik dan sesuai untuk tanaman makanan.</div>
+              <div class="zone-slot"></div>
+            </div>
+            <div class="drop-zone" data-answer="merah">
+              <div class="zone-content"><span class="zone-label">Merah</span><br>Mengandungi ferum oksida dan lazim di kawasan tanaman ladang.</div>
+              <div class="zone-slot"></div>
+            </div>
+          </div>
+
+          <button class="tdtp-check-btn" type="button" data-station="4" disabled>Semak Jawapan</button>
+        </div>
+      </div>
+
     </div>
     <!-- /.game-container -->
 
@@ -193,7 +226,7 @@
         <div class="game-completion-icon" aria-hidden="true">🏆</div>
         <h2 class="game-completion-title" id="tdtp-complete-title">Game Selesai</h2>
         <p class="game-completion-message">Anda telah menyelesaikan Tanah di Tapak Penanaman.</p>
-        <div class="game-completion-score">Skor:&nbsp;<span id="tdtp-final-score">0/10</span></div>
+        <div class="game-completion-score">Skor:&nbsp;<span id="tdtp-final-score">0/13</span></div>
         <a href="../latihan-pengukuhan.html" class="game-completion-home"><span aria-hidden="true">🏠</span> Kembali</a>
       </div>
     </div>
@@ -212,6 +245,7 @@
   </div><!-- /.page -->
 
   <script src="../score-api.js"></script>
+  <script src="../game-utils.js"></script>
   <script src="../game-tanah-di-tapak-penanaman.js"></script>
   <script src="../script.js"></script>
 </body>

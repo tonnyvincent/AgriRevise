@@ -1,7 +1,8 @@
 (function () {
-  const TOTAL_MISSIONS = 10;
-  const WEIGHT_FORMULA = 'Berat baja = (Keperluan nutrien / Peratus nutrien dalam baja) x 100';
-  const COST_FORMULA = 'Kos baja = (Berat baja diperlukan / 50 kg) x Harga 1 beg baja';
+  let TOTAL_MISSIONS = 0;
+  const NUTRIENT_FORMULA = 'Berat Nutrien = (Gred / 100) x Berat Baja';
+  const WEIGHT_FORMULA = 'Berat Baja = (100 / Gred) x Berat Nutrien';
+  const COST_FORMULA = 'Kos Baja = Berat Baja x (Harga Baja / Berat Satu Beg Baja)';
 
   const missions = [
     {
@@ -61,7 +62,7 @@
       title: 'Nutrien Dibekalkan',
       desc: 'Kira nutrien yang dibekalkan oleh baja.',
       type: 'Pesanan Kerja',
-      formula: 'Nutrien dibekalkan = Berat baja x Peratus nutrien dalam baja',
+      formula: NUTRIENT_FORMULA,
       question: 'Petani menggunakan 100 kg baja Urea yang mengandungi 46% Nitrogen (N). Berapakah kuantiti Nitrogen (N) yang dibekalkan oleh baja tersebut?',
       answer: 'B',
       answerText: '46 kg',
@@ -78,7 +79,7 @@
       title: 'Jumlah K2O',
       desc: 'Analisis jumlah nutrien daripada baja yang digunakan.',
       type: 'Pesanan Kerja',
-      formula: 'Nutrien dibekalkan = Berat baja x Peratus nutrien dalam baja',
+      formula: NUTRIENT_FORMULA,
       question: 'Sebuah kebun menggunakan 200 kg baja Muriate of Potash yang mengandungi 60% K2O. Berapakah jumlah K2O yang dibekalkan kepada tanaman?',
       answer: 'C',
       answerText: '120 kg',
@@ -156,13 +157,111 @@
     }
   ];
 
+  missions.splice(
+    5,
+    0,
+    {
+      mode: 'choice',
+      badge: 'Misi 6',
+      title: 'Hitung Berat Baja',
+      desc: 'Gunakan formula berat baja untuk baja Urea.',
+      type: 'Pesanan Kerja',
+      formula: WEIGHT_FORMULA,
+      question: 'Tanaman memerlukan 20 kg Nitrogen (N). Jika baja Urea mengandungi 46% N, berapakah berat baja Urea yang diperlukan?',
+      answer: 'B',
+      answerText: '43.48 kg',
+      options: [
+        { key: 'A', value: '33.48 kg', hint: 'Terlalu rendah' },
+        { key: 'B', value: '43.48 kg', hint: 'Tepat' },
+        { key: 'C', value: '53.48 kg', hint: 'Terlalu tinggi' },
+        { key: 'D', value: '63.48 kg', hint: 'Terlalu tinggi' }
+      ]
+    },
+    {
+      mode: 'choice',
+      badge: 'Misi 7',
+      title: 'Hitung Berat Baja',
+      desc: 'Tentukan kuantiti baja Urea yang diperlukan.',
+      type: 'Pesanan Kerja',
+      formula: WEIGHT_FORMULA,
+      question: 'Seorang petani memerlukan 25 kg Nitrogen (N). Jika baja Urea mengandungi 46% N, berapakah kuantiti baja yang diperlukan?',
+      answer: 'B',
+      answerText: '54.35 kg',
+      options: [
+        { key: 'A', value: '44.35 kg', hint: 'Terlalu rendah' },
+        { key: 'B', value: '54.35 kg', hint: 'Tepat' },
+        { key: 'C', value: '64.35 kg', hint: 'Terlalu tinggi' },
+        { key: 'D', value: '74.35 kg', hint: 'Terlalu tinggi' }
+      ]
+    },
+    {
+      mode: 'choice',
+      badge: 'Misi 8',
+      title: 'Hitung Berat Baja',
+      desc: 'Kira berat baja bagi keperluan Nitrogen.',
+      type: 'Pesanan Kerja',
+      formula: WEIGHT_FORMULA,
+      question: 'Sebuah kebun memerlukan 35 kg Nitrogen. Jika baja Urea mengandungi 46% N, hitungkan berat baja yang diperlukan.',
+      answer: 'B',
+      answerText: '76.09 kg',
+      options: [
+        { key: 'A', value: '66.09 kg', hint: 'Terlalu rendah' },
+        { key: 'B', value: '76.09 kg', hint: 'Tepat' },
+        { key: 'C', value: '86.09 kg', hint: 'Terlalu tinggi' },
+        { key: 'D', value: '96.09 kg', hint: 'Terlalu tinggi' }
+      ]
+    },
+    {
+      mode: 'choice',
+      badge: 'Misi 9',
+      title: 'Hitung Berat Baja',
+      desc: 'Bekalkan 50 kg Nitrogen menggunakan Urea.',
+      type: 'Pesanan Kerja',
+      formula: WEIGHT_FORMULA,
+      question: 'Seorang petani ingin membekalkan 50 kg Nitrogen menggunakan baja Urea 46% N. Berapakah jumlah baja yang perlu digunakan?',
+      answer: 'B',
+      answerText: '108.70 kg',
+      options: [
+        { key: 'A', value: '98.70 kg', hint: 'Terlalu rendah' },
+        { key: 'B', value: '108.70 kg', hint: 'Tepat' },
+        { key: 'C', value: '118.70 kg', hint: 'Terlalu tinggi' },
+        { key: 'D', value: '128.70 kg', hint: 'Terlalu tinggi' }
+      ]
+    },
+    {
+      mode: 'choice',
+      badge: 'Misi 10',
+      title: 'Hitung Berat Baja',
+      desc: 'Kira kuantiti baja untuk ladang.',
+      type: 'Pesanan Kerja',
+      formula: WEIGHT_FORMULA,
+      question: 'Sebuah ladang memerlukan 60 kg Nitrogen. Jika menggunakan baja Urea 46% N, berapakah kuantiti baja yang diperlukan?',
+      answer: 'B',
+      answerText: '130.43 kg',
+      options: [
+        { key: 'A', value: '120.43 kg', hint: 'Terlalu rendah' },
+        { key: 'B', value: '130.43 kg', hint: 'Tepat' },
+        { key: 'C', value: '140.43 kg', hint: 'Terlalu tinggi' },
+        { key: 'D', value: '150.43 kg', hint: 'Terlalu tinggi' }
+      ]
+    }
+  );
+
+  missions.forEach((mission, index) => {
+    mission.badge = `Misi ${index + 1}`;
+  });
+
+  TOTAL_MISSIONS = missions.length;
+
   const state = {
     index: 0,
     completed: 0,
     score: 0,
     selected: '',
     cashInput: '',
-    solved: false
+    solved: false,
+    lives: null,
+    wrongCount: 0
   };
 
   const $ = (selector) => document.querySelector(selector);
@@ -191,7 +290,7 @@
   }
 
   function updateField() {
-    const ratio = state.completed / TOTAL_MISSIONS;
+    const ratio = state.score / TOTAL_MISSIONS;
     const scene = $('#jb-scene');
     scene.style.setProperty('--jb-progress', ratio.toFixed(2));
     scene.style.setProperty('--jb-progress-percent', `${Math.round(ratio * 100)}%`);
@@ -254,7 +353,7 @@
       renderChoices(mission);
       $('#jb-submit-btn').textContent = 'Semak Jawapan';
     } else {
-      const cashMissionNumber = state.index - 4;
+      const cashMissionNumber = state.index - 9;
       setText('#jb-warehouse-item', mission.item);
       setText('#jb-warehouse-qty', mission.quantity);
       setText('#jb-po-item', mission.item);
@@ -312,7 +411,12 @@
     const mission = currentMission();
 
     if (correct) {
+      window.AgriReviseGame?.playSound('correct');
       state.score += 1;
+    } else {
+      window.AgriReviseGame?.playSound('wrong');
+      state.wrongCount += 1;
+      state.lives?.lose();
     }
 
     state.completed += 1;
@@ -326,6 +430,10 @@
     } else {
       triggerWrongAnimation();
       setFeedback(feedbackMessage);
+      if (state.wrongCount >= 3) {
+        $('#jb-scene').classList.add('jb-plant-wilt');
+      }
+      if (state.lives?.isEmpty()) return;
     }
 
     if (mission.mode === 'choice') {
@@ -447,6 +555,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    state.lives = window.AgriReviseGame?.initLives();
     renderMission();
 
     $('#jb-choice-grid').addEventListener('click', (event) => {

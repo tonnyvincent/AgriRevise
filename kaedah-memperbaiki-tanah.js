@@ -1,5 +1,5 @@
 (function () {
-  const TOTAL_QUESTIONS = 10;
+  let TOTAL_QUESTIONS = 0;
 
   const questions = [
     {
@@ -114,10 +114,70 @@
     }
   ];
 
+  questions.push(
+    {
+      station: 'Stesen 4',
+      title: 'Kepentingan Pembajaan',
+      desc: 'Pilih dua kepentingan pembajaan yang betul.',
+      method: 'Pembajaan',
+      methodChip: 'Nutrien dibekalkan',
+      effect: 'fertilizer',
+      text: 'Pilih 2 kepentingan pembajaan.',
+      answers: ['Membekal nutrien pada tanah', 'Membantu merangsang pertumbuhan dan kegiatan organisma tanah bagi menyuburkan tanah'],
+      options: ['Membekal nutrien pada tanah', 'Membantu merangsang pertumbuhan dan kegiatan organisma tanah bagi menyuburkan tanah', 'Menghalang perosak tanaman', 'Merosakkan tanaman']
+    },
+    {
+      station: 'Stesen 4',
+      title: 'Kaedah Memperbaiki Tanah',
+      desc: 'Pilih tiga kaedah yang sesuai untuk penanaman.',
+      method: 'Pemulihan Tanah',
+      methodChip: 'Tanah dibaiki',
+      effect: 'plow',
+      text: 'Nyatakan tiga kaedah memperbaiki tanah supaya sesuai untuk penanaman.',
+      answers: ['Pembajakan', 'Pengapuran', 'Penyaliran'],
+      options: ['Pembajakan', 'Pengapuran', 'Penyemburan', 'Penyaliran']
+    },
+    {
+      station: 'Stesen 4',
+      title: 'Bahan Kapur',
+      desc: 'Kenal pasti bahan kapur yang biasa digunakan.',
+      method: 'Pengapuran',
+      methodChip: 'Kapur ditabur',
+      effect: 'lime',
+      text: 'Nyatakan tiga jenis bahan kapur yang biasa digunakan.',
+      answers: ['Kapur dolomit', 'Kapur tohor', 'Kapur mati'],
+      options: ['Kapur dolomit', 'Kapur hidup', 'Kapur tohor', 'Kapur mati']
+    },
+    {
+      station: 'Stesen 4',
+      title: 'Sebelum Pengapuran',
+      desc: 'Pilih perkara yang perlu dipertimbangkan sebelum pengapuran.',
+      method: 'Pengapuran',
+      methodChip: 'pH disemak',
+      effect: 'lime',
+      text: 'Nyatakan 3 perkara yang perlu dipertimbangkan sebelum melakukan pengapuran dalam amalan membaiki tanah.',
+      answers: ['Jenis tanah', 'Jenis tanaman', 'Jenis kapur'],
+      options: ['Jenis tanah', 'Jenis tanaman', 'Kuantiti air', 'Jenis kapur']
+    },
+    {
+      station: 'Stesen 4',
+      title: 'Pemugaran Sekunder',
+      desc: 'Pilih dua alat/kaedah pemugaran sekunder.',
+      method: 'Pemugaran',
+      methodChip: 'Tanah digembur',
+      effect: 'plow',
+      text: 'Nyatakan 2 kaedah pemugaran sekunder.',
+      answers: ['Bajak putar', 'Bajak sikat'],
+      options: ['Bajak putar', 'Bajak piring', 'Bajak sikat', 'Bajak sepak']
+    }
+  );
+
+  TOTAL_QUESTIONS = questions.length;
+
   const state = {
     index: 0,
     score: 0,
-    selected: '',
+    selected: new Set(),
     answered: false
   };
 
@@ -146,7 +206,7 @@
 
   function renderQuestion() {
     const question = questions[state.index];
-    state.selected = '';
+    state.selected = new Set();
     state.answered = false;
 
     setText('#kmt-station-badge', question.station);
@@ -216,11 +276,13 @@
   function evaluateAnswer() {
     const question = questions[state.index];
     const optionButtons = [...document.querySelectorAll('.kmt-option-btn')];
-    const correct = state.selected === question.answer;
+    const correctAnswers = question.answers || [question.answer];
+    const correct = state.selected.size === correctAnswers.length &&
+      correctAnswers.every((answer) => state.selected.has(answer));
 
     optionButtons.forEach((button) => {
-      const isAnswer = button.dataset.kmtOption === question.answer;
-      const isSelected = button.dataset.kmtOption === state.selected;
+      const isAnswer = correctAnswers.includes(button.dataset.kmtOption);
+      const isSelected = state.selected.has(button.dataset.kmtOption);
 
       button.disabled = true;
       button.classList.toggle('kmt-correct', isAnswer);
@@ -228,15 +290,19 @@
     });
 
     if (correct) {
+      window.AgriReviseGame?.playSound('correct');
       state.score += 1;
       updateHealth();
       triggerAnimation(question.effect, true);
       $('#kmt-feedback').classList.add('kmt-good');
       setText('#kmt-feedback', 'Betul. Tanah semakin sihat.');
     } else {
+      window.AgriReviseGame?.playSound('wrong');
+      state.lives?.lose();
       triggerAnimation(question.effect, false);
       $('#kmt-feedback').classList.remove('kmt-good');
-      setText('#kmt-feedback', `Jawapan betul: ${question.answer}`);
+      setText('#kmt-feedback', `Jawapan betul: ${correctAnswers.join(', ')}`);
+      if (state.lives?.isEmpty()) return;
     }
 
     state.answered = true;
@@ -265,6 +331,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    state.lives = window.AgriReviseGame?.initLives();
     renderQuestion();
     updateHealth();
 
@@ -272,9 +339,24 @@
       const button = event.target.closest('.kmt-option-btn');
       if (!button || state.answered) return;
 
-      state.selected = button.dataset.kmtOption;
-      document.querySelectorAll('.kmt-option-btn').forEach((item) => item.classList.remove('kmt-selected'));
-      button.classList.add('kmt-selected');
+      const question = questions[state.index];
+      const isMulti = Array.isArray(question.answers);
+
+      if (isMulti) {
+        if (state.selected.has(button.dataset.kmtOption)) {
+          state.selected.delete(button.dataset.kmtOption);
+          button.classList.remove('kmt-selected');
+        } else {
+          state.selected.add(button.dataset.kmtOption);
+          button.classList.add('kmt-selected');
+        }
+      } else {
+        state.selected.clear();
+        state.selected.add(button.dataset.kmtOption);
+        document.querySelectorAll('.kmt-option-btn').forEach((item) => item.classList.remove('kmt-selected'));
+        button.classList.add('kmt-selected');
+      }
+
       $('#kmt-feedback').classList.remove('kmt-good');
       setText('#kmt-feedback', '');
     });
@@ -286,9 +368,9 @@
         return;
       }
 
-      if (!state.selected) {
+      if (state.selected.size === 0) {
         $('#kmt-feedback').classList.remove('kmt-good');
-        setText('#kmt-feedback', 'Pilih satu jawapan dahulu.');
+        setText('#kmt-feedback', 'Pilih jawapan dahulu.');
         return;
       }
 

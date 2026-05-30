@@ -97,16 +97,53 @@ const gameQuestions = [
   }
 ];
 
+Object.assign(gameQuestions[10], {
+  question: "Tanah A mempunyai saliran cepat manakala Tanah B mempunyai daya pegangan air yang tinggi. Apakah jenis tanah A dan Tanah B?",
+  options: ["Tanah liat dan tanah pasir", "Tanah pasir dan tanah liat", "Tanah loam dan tanah organik", "Tanah kelodak dan tanah loam"],
+  correct: 1,
+  isHtml: false
+});
+
+Object.assign(gameQuestions[11], {
+  question: "Seorang petani memilih tanah yang mempunyai keseimbangan saliran, pegangan air dan nutrien untuk menanam sayur. Apakah jenis tanah tersebut?",
+  options: ["Tanah pasir", "Tanah liat", "Tanah loam", "Tanah kelodak"],
+  correct: 2,
+  isHtml: false
+});
+
+Object.assign(gameQuestions[12], {
+  question: "Tanah A berwarna gelap dan kaya dengan bahan reput manakala Tanah B mempunyai saiz kumin besar dan cepat kering. Apakah jenis tanah A dan Tanah B?",
+  options: ["Tanah organik dan tanah pasir", "Tanah pasir dan tanah liat", "Tanah loam dan tanah kelodak", "Tanah liat dan tanah organik"],
+  correct: 0,
+  isHtml: false
+});
+
+Object.assign(gameQuestions[13], {
+  question: "Tanah A mempunyai rongga udara besar dan cepat kering manakala Tanah B mempunyai rongga udara kecil dan mudah menakung air. Apakah jenis tanah A dan Tanah B?",
+  options: ["Tanah liat dan tanah pasir", "Tanah loam dan tanah organik", "Tanah pasir dan tanah liat", "Tanah kelodak dan tanah loam"],
+  correct: 2,
+  isHtml: false
+});
+
+Object.assign(gameQuestions[14], {
+  question: "Antara berikut, yang manakah padanan jenis tanah dan sifat tanah yang betul?",
+  options: ["Tanah pasir - pegangan air tinggi", "Tanah liat - saliran sangat cepat", "Tanah loam - sesuai untuk kebanyakan tanaman", "Tanah organik - kandungan nutrien rendah"],
+  correct: 2,
+  isHtml: false
+});
+
 // Game state
 let gameState = {
   currentQuestion: 0,
   score: 0,
   answeredQuestions: new Set(),
-  unlockedLayers: new Set() // Start with bedrock visible
+  unlockedLayers: new Set(), // Start with bedrock visible
+  lives: null
 };
 
 // Initialize game
 document.addEventListener('DOMContentLoaded', function() {
+  gameState.lives = window.AgriReviseGame?.initLives();
   loadQuestion();
   updateProgress();
   updateScoreDisplay();
@@ -160,6 +197,7 @@ function selectOption(selectedIndex) {
   
   if (selectedIndex === question.correct) {
     // Correct answer
+    window.AgriReviseGame?.playSound('correct');
     gameState.score++;
     updateScoreDisplay();
     gameState.answeredQuestions.add(gameState.currentQuestion);
@@ -177,9 +215,16 @@ function selectOption(selectedIndex) {
     
   } else {
     // Wrong answer
+    window.AgriReviseGame?.playSound('wrong');
     feedback.innerHTML = '<div class="feedback-wrong">✗ Salah. Jawapan yang betul adalah: <strong>' + question.options[question.correct] + '</strong></div>';
     buttons[selectedIndex].classList.add('wrong');
     buttons[question.correct].classList.add('correct-highlight');
+
+    const livesLeft = gameState.lives ? gameState.lives.lose() : 1;
+    if (livesLeft <= 0) {
+      document.getElementById('btn-next').style.display = 'none';
+      return;
+    }
   }
   
   // Show continue button after a delay (for both correct and wrong answers)

@@ -73,6 +73,10 @@
 
       <!-- Left: Soil Profile Visualization -->
       <div class="game-profile">
+        <div class="soil-profile-instruction">
+          <strong>Bentuk Profil Tanah</strong>
+          <span>Pilih jawapan yang betul untuk membentuk profil tanah.</span>
+        </div>
         <div class="soil-profile">
           <!-- Plant Layer (Stage 5) - TOP -->
           <div class="soil-layer layer-plants" id="layer-5">
@@ -91,7 +95,7 @@
             <div class="layer-visual">
               <div class="humus-texture"></div>
             </div>
-            <span class="layer-label">Humus</span>
+            <span class="layer-label">Bahan Organik</span>
           </div>
 
           <!-- Topsoil Layer (Stage 3) -->
@@ -99,7 +103,7 @@
             <div class="layer-visual">
               <div class="topsoil-texture"></div>
             </div>
-            <span class="layer-label">Topsoil</span>
+            <span class="layer-label">Tanah Atas</span>
           </div>
 
           <!-- Subsoil Layer (Stage 2) -->
@@ -107,7 +111,7 @@
             <div class="layer-visual">
               <div class="subsoil-texture"></div>
             </div>
-            <span class="layer-label">Subsoil</span>
+            <span class="layer-label">Tanah Bawah</span>
           </div>
 
           <!-- Bedrock Layer (Stage 1) - BOTTOM -->
@@ -115,7 +119,7 @@
             <div class="layer-visual">
               <div class="bedrock-texture"></div>
             </div>
-            <span class="layer-label">Batuan Induk</span>
+            <span class="layer-label">Bahan Induk</span>
           </div>
         </div>
       </div>
@@ -154,6 +158,7 @@
   </div><!-- /.page -->
 
   <script src="../score-api.js"></script>
+  <script src="../game-utils.js"></script>
   <script src="../game-jenis-tanah.js"></script>
   <script src="../script.js"></script>
 </body>

@@ -477,6 +477,97 @@ body.pht-game-body {
   background: rgba(220,50,50,0.12);
 }
 
+.pht-check-grid {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.pht-case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  min-height: 0;
+}
+
+.pht-case-card {
+  border: 1.5px solid rgba(46,125,50,0.2);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(255,255,255,0.84);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.pht-case-card h2 {
+  margin: 0 0 5px;
+  color: #1b5e2f;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+}
+
+.pht-case-card p {
+  margin: 0 0 9px;
+  color: #365236;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.pht-case-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.pht-case-options button {
+  border: 1.5px solid rgba(46,125,50,0.24);
+  border-radius: 10px;
+  padding: 7px 8px;
+  background: rgba(255,255,255,0.9);
+  color: #1b5e2f;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.12;
+  cursor: pointer;
+}
+
+.pht-case-options button.pht-selected {
+  background: rgba(46,125,50,0.16);
+  border-color: #2e7d32;
+}
+
+.pht-case-options button.pht-correct,
+.pht-case-card.pht-correct {
+  border-color: #2e7d32;
+  background: rgba(46,125,50,0.14);
+}
+
+.pht-case-options button.pht-wrong,
+.pht-case-card.pht-wrong {
+  border-color: #e53935;
+  background: rgba(229,57,53,0.1);
+}
+
+#pht-station-5 .pht-case-grid {
+  overflow: auto;
+  padding-right: 3px;
+}
+
+@media (max-width: 760px) {
+  .pht-case-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pht-case-card {
+    padding: 9px;
+  }
+
+  .pht-case-card p,
+  .pht-case-options button {
+    font-size: 0.64rem;
+  }
+}
+
 .pht-effect-targets {
   display: grid;
   grid-template-columns: 1fr 1fr;

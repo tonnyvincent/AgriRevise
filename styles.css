@@ -1900,6 +1900,29 @@ body.game-page .hero-body {
     inset 0 1px 4px rgba(255,255,255,0.2);
 }
 
+.rank-badge.rank-award {
+  width: auto;
+  min-width: 42px;
+  padding: 0 8px;
+  border-radius: 999px;
+  gap: 3px;
+  font-size: 0.78rem;
+}
+
+.rank-badge.rank-award-1 {
+  background: linear-gradient(135deg, #ffb300, #ff7043);
+  box-shadow:
+    0 6px 18px rgba(255,179,0,0.38),
+    inset 0 1px 5px rgba(255,255,255,0.32);
+}
+
+.rank-badge.rank-award-2,
+.rank-badge.rank-award-3,
+.rank-badge.rank-award-4,
+.rank-badge.rank-award-5 {
+  background: linear-gradient(135deg, #6fbf73, #2e7d32);
+}
+
 .player-name {
   font-weight: 800;
   font-size: 0.9rem;

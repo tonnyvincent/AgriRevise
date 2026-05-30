@@ -1,6 +1,6 @@
 (function () {
-  const TOTAL_SCORE = 12;
-  const TOTAL_STATIONS = 3;
+  const TOTAL_SCORE = 18;
+  const TOTAL_STATIONS = 5;
 
   const state = {
     score: 0,
@@ -15,7 +15,10 @@
       1: false,
       2: false,
       3: false,
+      4: false,
+      5: false,
     },
+    lives: null,
   };
 
   const $ = (selector, root = document) => root.querySelector(selector);
@@ -49,6 +52,17 @@
   function updateScore(points) {
     state.score += points;
     $('#pht-score-display').textContent = state.score;
+  }
+
+  function handleMistakes(mistakeCount) {
+    if (mistakeCount > 0) {
+      window.AgriReviseGame?.playSound('wrong');
+      const livesLeft = state.lives ? state.lives.lose(mistakeCount) : 1;
+      return livesLeft > 0;
+    }
+
+    window.AgriReviseGame?.playSound('correct');
+    return true;
   }
 
   function showResultModal(title, message, nextAction, buttonText = 'Seterusnya') {
@@ -327,6 +341,7 @@
       lockChips($('#pht-station-1'));
       state.stationChecked[1] = true;
       setFeedback('#pht-station-1-feedback', `${result.correct}/${result.total} label betul.`, result.correct === result.total);
+      if (!handleMistakes(result.total - result.correct)) return;
 
       showResultModal(
         'Stesen 1 Selesai',
@@ -398,6 +413,7 @@
       lockChips($('#pht-station-2'));
       state.stationChecked[2] = true;
       setFeedback('#pht-station-2-feedback', `${stationScore}/5 jawapan betul.`, stationScore === 5);
+      if (!handleMistakes(5 - stationScore)) return;
 
       showResultModal(
         'Stesen 2 Selesai',
@@ -433,8 +449,8 @@
         showResultModal(
           'Stesen 3 Selesai',
           'Keputusan stesen ini telah disemak.',
-          finishGame,
-          'Makmal Selesai'
+          () => showStation(4),
+          'Seterusnya'
         );
         return;
       }
@@ -458,11 +474,12 @@
 
       const button = $('#pht-station-3-submit');
       const openFinalModal = () => {
+        if (!handleMistakes(result.total - result.correct)) return;
         showResultModal(
           'Stesen 3 Selesai',
           `Anda mendapat ${result.correct}/${result.total} betul.`,
-          finishGame,
-          'Makmal Selesai'
+          () => showStation(4),
+          'Seterusnya'
         );
       };
 
@@ -481,6 +498,123 @@
     });
   }
 
+  function initStation4() {
+    const cards = $$('#pht-station-4 .pht-check-card');
+
+    cards.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (state.stationChecked[4]) return;
+
+        const selected = $$('#pht-station-4 .pht-check-card.pht-stamped').length;
+        if (!button.classList.contains('pht-stamped') && selected >= 2) {
+          setFeedback('#pht-station-4-feedback', 'Pilih tepat 2 pernyataan benar sahaja.');
+          return;
+        }
+
+        button.classList.toggle('pht-stamped');
+        setFeedback('#pht-station-4-feedback', '');
+      });
+    });
+
+    $('#pht-station-4-submit').addEventListener('click', () => {
+      if (state.stationChecked[4]) {
+        showStation(5);
+        return;
+      }
+
+      const selected = $$('#pht-station-4 .pht-check-card.pht-stamped');
+      if (selected.length !== 2) {
+        setFeedback('#pht-station-4-feedback', 'Tandakan tepat 2 pernyataan benar dahulu.');
+        return;
+      }
+
+      let correct = 0;
+      let selectedWrong = 0;
+      let missedCorrect = 0;
+
+      cards.forEach((button) => {
+        const isCorrect = button.dataset.phtCorrect === 'true';
+        const isSelected = button.classList.contains('pht-stamped');
+
+        button.disabled = true;
+        button.classList.toggle('pht-correct', isCorrect);
+        button.classList.toggle('pht-wrong', isSelected && !isCorrect);
+
+        if (isSelected && isCorrect) correct += 1;
+        if (isSelected && !isCorrect) selectedWrong += 1;
+        if (!isSelected && isCorrect) missedCorrect += 1;
+      });
+
+      updateScore(correct);
+      state.stationChecked[4] = true;
+      setFeedback('#pht-station-4-feedback', `${correct}/2 pernyataan benar dipilih.`, correct === 2);
+      if (!handleMistakes(selectedWrong + missedCorrect)) return;
+
+      showResultModal(
+        'Stesen 4 Selesai',
+        `Anda mendapat ${correct}/2 betul.`,
+        () => showStation(5)
+      );
+    });
+  }
+
+  function initStation5() {
+    $$('#pht-case-grid .pht-case-options button').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (state.stationChecked[5]) return;
+
+        const card = button.closest('.pht-case-card');
+        $$('.pht-case-options button', card).forEach((item) => item.classList.remove('pht-selected'));
+        button.classList.add('pht-selected');
+        card.dataset.phtSelected = button.dataset.phtValue;
+        setFeedback('#pht-station-5-feedback', '');
+      });
+    });
+
+    $('#pht-station-5-submit').addEventListener('click', () => {
+      if (state.stationChecked[5]) {
+        finishGame();
+        return;
+      }
+
+      const cards = $$('#pht-case-grid .pht-case-card');
+      const answered = cards.filter((card) => card.dataset.phtSelected);
+      if (answered.length < cards.length) {
+        setFeedback('#pht-station-5-feedback', 'Jawab semua 4 sampel tanah dahulu.');
+        return;
+      }
+
+      let correct = 0;
+      cards.forEach((card) => {
+        const selected = card.dataset.phtSelected;
+        const answer = card.dataset.phtAnswer;
+        const isCorrect = selected === answer;
+
+        card.classList.toggle('pht-correct', isCorrect);
+        card.classList.toggle('pht-wrong', !isCorrect);
+        if (isCorrect) correct += 1;
+
+        $$('.pht-case-options button', card).forEach((button) => {
+          button.disabled = true;
+          button.classList.toggle('pht-correct', button.dataset.phtValue === answer);
+          button.classList.toggle('pht-wrong', button.dataset.phtValue === selected && !isCorrect);
+        });
+      });
+
+      updateScore(correct);
+      state.stationChecked[5] = true;
+      setFeedback('#pht-station-5-feedback', `${correct}/4 rawatan betul.`, correct === 4);
+      if (!handleMistakes(cards.length - correct)) return;
+
+      showResultModal(
+        'Stesen 5 Selesai',
+        `Anda mendapat ${correct}/4 betul.`,
+        finishGame,
+        'Makmal Selesai'
+      );
+    });
+  }
+
   function finishGame() {
     const finalText = `${state.score}/${TOTAL_SCORE}`;
     $('#pht-final-score').textContent = finalText;
@@ -493,10 +627,13 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
+    state.lives = window.AgriReviseGame?.initLives();
     setProgress(1);
     initDragAndDrop();
     initStation1();
     initStation2();
     initStation3();
+    initStation4();
+    initStation5();
   });
 })();

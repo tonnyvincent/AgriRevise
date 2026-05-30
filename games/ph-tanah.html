@@ -51,9 +51,9 @@
           <div class="pht-progress-track">
             <div class="pht-progress-fill" id="pht-progress-fill"></div>
           </div>
-          <span class="pht-step-label" id="pht-step-label">Stesen 1 / 3</span>
+          <span class="pht-step-label" id="pht-step-label">Stesen 1 / 5</span>
         </div>
-        <div class="pht-score-pill"><span id="pht-score-display">0</span>/12</div>
+        <div class="pht-score-pill"><span id="pht-score-display">0</span>/18</div>
       </div>
 
       <section class="pht-station" id="pht-station-1">
@@ -217,12 +217,84 @@
         <button class="pht-next-btn" id="pht-station-3-submit" type="button">Semak Jawapan</button>
       </section>
 
+      <section class="pht-station pht-hidden" id="pht-station-4">
+        <div class="pht-station-header">
+          <div class="pht-station-badge">Stesen 4</div>
+          <h1 class="pht-station-title">Semak Kesan pH Rendah</h1>
+          <p class="pht-station-desc">Tandakan 2 pernyataan yang benar tentang pH tanah.</p>
+        </div>
+
+        <div class="pht-factor-grid pht-check-grid" id="pht-station-4-grid">
+          <button class="pht-factor-card pht-check-card" type="button" data-pht-correct="true">Ion fosfat kurang tersedia pada pH yang rendah</button>
+          <button class="pht-factor-card pht-check-card" type="button" data-pht-correct="false">Aktiviti patogen terencat pada pH yang rendah</button>
+          <button class="pht-factor-card pht-check-card" type="button" data-pht-correct="false">Proses penitratan akan terjejas pada pH 6 hingga pH 7</button>
+          <button class="pht-factor-card pht-check-card" type="button" data-pht-correct="true">pH yang sesuai bagi kebanyakan tanaman ialah pH 5.5 hingga pH 6.5</button>
+        </div>
+
+        <p class="pht-feedback" id="pht-station-4-feedback"></p>
+        <button class="pht-next-btn" id="pht-station-4-submit" type="button">Semak Jawapan</button>
+      </section>
+
+      <section class="pht-station pht-hidden" id="pht-station-5">
+        <div class="pht-station-header">
+          <div class="pht-station-badge">Stesen 5</div>
+          <h1 class="pht-station-title">Rawatan Sampel Tanah</h1>
+          <p class="pht-station-desc">Pilih bahan atau tindakan yang sesuai bagi setiap sampel tanah.</p>
+        </div>
+
+        <div class="pht-case-grid" id="pht-case-grid">
+          <article class="pht-case-card" data-pht-case="B" data-pht-answer="B">
+            <h2>Tanah B</h2>
+            <p>Tanah organik, pH 3.5. Pilih bahan yang sesuai untuk meningkatkan pH tanah.</p>
+            <div class="pht-case-options">
+              <button type="button" data-pht-value="A">Kompos</button>
+              <button type="button" data-pht-value="B">Kapur Dolomit</button>
+              <button type="button" data-pht-value="C">Sulfur</button>
+              <button type="button" data-pht-value="D">Air suling</button>
+            </div>
+          </article>
+          <article class="pht-case-card" data-pht-case="C" data-pht-answer="C">
+            <h2>Tanah C</h2>
+            <p>Tanah loam, pH 6.5. Apakah tindakan terbaik?</p>
+            <div class="pht-case-options">
+              <button type="button" data-pht-value="A">Tambah sulfur</button>
+              <button type="button" data-pht-value="B">Tambah kapur hidup</button>
+              <button type="button" data-pht-value="C">Kekalkan keadaan tanah</button>
+              <button type="button" data-pht-value="D">Tambah asid</button>
+            </div>
+          </article>
+          <article class="pht-case-card" data-pht-case="D" data-pht-answer="C">
+            <h2>Tanah D</h2>
+            <p>Tanah pasir, pH 7.5. Apakah bahan sesuai untuk menurunkan pH?</p>
+            <div class="pht-case-options">
+              <button type="button" data-pht-value="A">Kapur Dolomit</button>
+              <button type="button" data-pht-value="B">Kapur mati</button>
+              <button type="button" data-pht-value="C">Sulfur</button>
+              <button type="button" data-pht-value="D">Baja organik</button>
+            </div>
+          </article>
+          <article class="pht-case-card" data-pht-case="E" data-pht-answer="D">
+            <h2>Tanah E</h2>
+            <p>Tanah kelodak, pH 4.8. Mengapakah kapur digunakan?</p>
+            <div class="pht-case-options">
+              <button type="button" data-pht-value="A">Menjadikan tanah lebih berasid</button>
+              <button type="button" data-pht-value="B">Mengeringkan tanah</button>
+              <button type="button" data-pht-value="C">Menambah patogen</button>
+              <button type="button" data-pht-value="D">Meneutralkan tanah berasid</button>
+            </div>
+          </article>
+        </div>
+
+        <p class="pht-feedback" id="pht-station-5-feedback"></p>
+        <button class="pht-next-btn" id="pht-station-5-submit" type="button">Semak Jawapan</button>
+      </section>
+
       <section class="game-completion-modal pht-hidden" id="pht-station-complete" role="dialog" aria-modal="true" aria-labelledby="pht-complete-title">
         <div class="game-completion-card">
           <div class="game-completion-icon" aria-hidden="true">🏆</div>
           <h1 class="game-completion-title" id="pht-complete-title">Game Selesai</h1>
           <p class="game-completion-message">Anda telah menyelesaikan PH Tanah.</p>
-          <div class="game-completion-score">Skor:&nbsp;<span id="pht-final-score">0/12</span></div>
+          <div class="game-completion-score">Skor:&nbsp;<span id="pht-final-score">0/18</span></div>
           <a class="game-completion-home" href="../pemuliharaan-tanah.html"><span aria-hidden="true">🏠</span> Kembali</a>
         </div>
       </section>
@@ -238,6 +310,7 @@
   </div>
 
   <script src="../score-api.js"></script>
+  <script src="../game-utils.js"></script>
   <script src="../script.js"></script>
   <script src="../ph-tanah.js"></script>
 </body>

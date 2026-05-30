@@ -5,6 +5,7 @@
 
 let totalScore = 0;
 let currentFasa = 1;
+let lives = null;
 
 // ── Phase tracking ──
 const TOTAL_FASA = 3;
@@ -210,6 +211,15 @@ function checkFasa1Answers() {
   totalScore += correct;
   updateScoreDisplay();
 
+  const wrongCount = FASA1_TOTAL - correct;
+  if (wrongCount > 0) {
+    window.AgriReviseGame?.playSound('wrong');
+    const livesLeft = lives ? lives.lose(wrongCount) : 1;
+    if (livesLeft <= 0) return;
+  } else {
+    window.AgriReviseGame?.playSound('correct');
+  }
+
   $('fasa1-next').textContent = 'Seterusnya →';
   fasa1Checked = true;
 
@@ -223,7 +233,7 @@ showFasaResultModal(1, correct, FASA1_TOTAL, () => {
 // =============================================
 
 let fasa2Checked = false;
-const FASA2_TOTAL = 3;
+const FASA2_TOTAL = 4;
 
 function initFasa2() {
   document.querySelectorAll('#fasa-2 .st-ciri-chip').forEach(chip => {
@@ -287,6 +297,15 @@ function checkFasa2Answers() {
   totalScore += correct;
   updateScoreDisplay();
 
+  const wrongCount = FASA2_TOTAL - correct;
+  if (wrongCount > 0) {
+    window.AgriReviseGame?.playSound('wrong');
+    const livesLeft = lives ? lives.lose(wrongCount) : 1;
+    if (livesLeft <= 0) return;
+  } else {
+    window.AgriReviseGame?.playSound('correct');
+  }
+
   $('fasa2-next').textContent = 'Seterusnya →';
   fasa2Checked = true;
 
@@ -300,10 +319,11 @@ showFasaResultModal(2, correct, FASA2_TOTAL, () => {
 // =============================================
 
 let fasa3Selected = new Set();
-const FASA3_CORRECT = new Set(['pengudaraan', 'kepadatan', 'pegangan']);
-const REQUIRED_SELECTIONS = 3;
+const FASA3_CORRECT = new Set(['lapisan-air', 'ruang-besar']);
+const REQUIRED_SELECTIONS = 2;
 
 function initFasa3() {
+  configureFasa3Content();
   fasa3Selected.clear();
   $('fasa3-hint').textContent = '';
   setPlant('neutral');
@@ -362,6 +382,35 @@ function setPlant(state) {
   status.textContent = s.s;
 }
 
+function configureFasa3Content() {
+  const title = document.querySelector('#fasa-3 .st-fasa-title');
+  const desc = document.querySelector('#fasa-3 .st-fasa-desc');
+  const grid = $('options-grid');
+
+  if (title) title.textContent = 'Pernyataan Benar - Ciri Struktur Tanah Baik';
+  if (desc) desc.innerHTML = 'Pilih <strong>2 pernyataan benar</strong> tentang ciri-ciri struktur tanah yang baik.';
+  if (!grid) return;
+
+  grid.innerHTML = `
+    <button class="st-option-btn" data-val="lapisan-air" data-correct="true">
+      <span class="st-option-icon">/</span>
+      Lapisan nipis air mengisi liang halus dalam agregat
+    </button>
+    <button class="st-option-btn" data-val="ruang-kecil" data-correct="false">
+      <span class="st-option-icon">X</span>
+      Ruang kecil antara agregat membenarkan resapan gas dan pengaliran air
+    </button>
+    <button class="st-option-btn" data-val="mudah-terhakis" data-correct="false">
+      <span class="st-option-icon">X</span>
+      Mudah terhakis
+    </button>
+    <button class="st-option-btn" data-val="ruang-besar" data-correct="true">
+      <span class="st-option-icon">/</span>
+      Ruang besar antara agregat membenarkan resapan gas dan pengaliran air
+    </button>
+  `;
+}
+
 function handleFasa3Submit() {
   if (fasa3Selected.size < REQUIRED_SELECTIONS) {
     $('fasa3-hint').textContent = `Pilih tepat ${REQUIRED_SELECTIONS} jawapan.`;
@@ -384,6 +433,16 @@ function handleFasa3Submit() {
 
   totalScore += correctCount;
   updateScoreDisplay();
+
+  const missedCount = Math.max(0, REQUIRED_SELECTIONS - correctCount);
+  const mistakeCount = wrongCount + missedCount;
+  if (mistakeCount > 0) {
+    window.AgriReviseGame?.playSound('wrong');
+    const livesLeft = lives ? lives.lose(mistakeCount) : 1;
+    if (livesLeft <= 0) return;
+  } else {
+    window.AgriReviseGame?.playSound('correct');
+  }
 
   if (wrongCount === 0 && correctCount === REQUIRED_SELECTIONS) {
     setPlant('great');
@@ -426,6 +485,9 @@ function restartGame() {
   totalScore  = 0;
   updateScoreDisplay();
   currentFasa = 1;
+  fasa1Checked = false;
+  fasa2Checked = false;
+  lives?.reset();
 
   // Reset fasa 1 chips
   const bank1 = $('drag-bank-1');
@@ -445,7 +507,6 @@ function restartGame() {
     }
   });
   $('fasa1-next').disabled = true;
-  fasa1Correct = 0;
 
   // Reset fasa 2 chips
   const bank2 = $('ciri-bank');
@@ -465,7 +526,6 @@ function restartGame() {
     }
   });
   $('fasa2-next').disabled = true;
-  fasa2Correct = 0;
 
   // Reset fasa 3
   fasa3Selected.clear();
@@ -486,6 +546,7 @@ function restartGame() {
 // =============================================
 
 document.addEventListener('DOMContentLoaded', () => {
+  lives = window.AgriReviseGame?.initLives();
   setProgress(1);
   updateScoreDisplay();
   initFasa1();
