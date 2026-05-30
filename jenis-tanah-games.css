@@ -157,11 +157,11 @@ body.tdtp-game-body {
   max-width: none;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: minmax(300px, 60%) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
   align-content: stretch;
   align-items: stretch;
-  gap: 6px;
-  padding: 5px 7px 7px;
+  gap: clamp(8px, 1.25svh, 10px);
+  padding: clamp(8px, 1.35svh, 10px) 7px clamp(8px, 1.35svh, 10px);
   overflow: hidden;
 }
 
@@ -245,10 +245,10 @@ body.tdtp-game-body {
   max-width: none;
   min-width: 0;
   min-height: 0;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .jdst-game-body .question-card {
@@ -327,6 +327,10 @@ body.tdtp-game-body {
   min-height: clamp(22px, 3svh, 28px);
   font-size: clamp(0.66rem, 2.6vw, 0.76rem);
   line-height: 1.12;
+}
+
+.jdst-game-body .feedback:empty {
+  min-height: 0;
 }
 
 .jdst-soil-particle {
@@ -746,7 +750,10 @@ body.tdtp-game-body {
 
 @media (max-width: 370px) {
   .jdst-game-body .game-container {
-    grid-template-rows: minmax(286px, 58%) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   .jdst-game-body .game-profile {
