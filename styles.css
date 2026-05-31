@@ -328,10 +328,9 @@ body.game-page .hero-body {
 }
 
 .formula-home-card .lp-card-img img {
-  top: -4px;
-  width: 82%;
-  height: 84%;
-  border-radius: 12px;
+  top: -12px;
+  width: 90%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -2597,6 +2596,7 @@ body.formula-page .page {
 
 .formula-title-bar {
   padding: 0;
+  margin-bottom: 4px;
 }
 
 .formula-slider {
@@ -2725,8 +2725,17 @@ body.formula-page .page {
 
 @media (max-width: 480px) {
   .formula-wrapper {
-    gap: 8px;
-    padding: 8px 0 14px;
+    gap: 7px;
+    padding: 12px 0 16px;
+  }
+
+  .formula-page .lp-title-pill {
+    padding: 8px 16px;
+    font-size: clamp(0.92rem, 4vw, 1.05rem);
+  }
+
+  .formula-title-bar {
+    margin-bottom: 8px;
   }
 
   .formula-slider {
@@ -2741,8 +2750,8 @@ body.formula-page .page {
 
   .formula-frame {
     grid-area: frame;
-    width: 100%;
-    height: min(54svh, 460px);
+    width: min(100%, 310px);
+    height: clamp(290px, 42svh, 360px);
     padding: 7px;
     border-radius: 14px;
   }
