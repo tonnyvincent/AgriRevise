@@ -56,22 +56,8 @@
         </div>
 
         <button class="formula-arrow" id="formula-next" type="button" aria-label="Imej seterusnya">&#8250;</button>
-      </section>
-
-      <div class="formula-controls" aria-label="Kawalan slideshow">
         <span class="formula-counter" id="formula-counter">1 / 3</span>
-        <div class="formula-thumbs" aria-label="Pilih imej">
-          <button class="formula-thumb active" type="button" data-slide="0" aria-label="Papar imej 1">
-            <img src="images/formula-pintar-baja-1.jpeg" alt="" />
-          </button>
-          <button class="formula-thumb" type="button" data-slide="1" aria-label="Papar imej 2">
-            <img src="images/formula-pintar-baja-2.jpeg" alt="" />
-          </button>
-          <button class="formula-thumb" type="button" data-slide="2" aria-label="Papar imej 3">
-            <img src="images/formula-pintar-baja-3.jpeg" alt="" />
-          </button>
-        </div>
-      </div>
+      </section>
     </main>
 
   </div>
@@ -89,7 +75,6 @@
       const counter = document.getElementById('formula-counter');
       const prev = document.getElementById('formula-prev');
       const next = document.getElementById('formula-next');
-      const thumbs = document.querySelectorAll('.formula-thumb');
       let currentSlide = 0;
 
       function showSlide(index) {
@@ -97,21 +82,10 @@
         image.src = slides[currentSlide].src;
         image.alt = slides[currentSlide].alt;
         counter.textContent = `${currentSlide + 1} / ${slides.length}`;
-
-        thumbs.forEach((thumb, thumbIndex) => {
-          thumb.classList.toggle('active', thumbIndex === currentSlide);
-          thumb.setAttribute('aria-current', thumbIndex === currentSlide ? 'true' : 'false');
-        });
       }
 
       prev.addEventListener('click', () => showSlide(currentSlide - 1));
       next.addEventListener('click', () => showSlide(currentSlide + 1));
-
-      thumbs.forEach((thumb) => {
-        thumb.addEventListener('click', () => {
-          showSlide(Number(thumb.dataset.slide));
-        });
-      });
 
       document.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowLeft') {

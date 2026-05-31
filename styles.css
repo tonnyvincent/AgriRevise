@@ -2571,71 +2571,73 @@ body.manual-page .bg-overlay {
 
 html.formula-page-root,
 body.formula-page {
-  overflow: auto;
-  height: auto;
+  overflow: hidden;
+  height: 100%;
 }
 
 body.formula-page .page {
-  min-height: var(--ar-viewport-height);
-  height: auto;
-  overflow: visible;
+  min-height: 0;
+  height: var(--ar-viewport-height);
+  overflow: hidden;
 }
 
 .formula-wrapper {
   position: relative;
   z-index: 5;
-  width: min(1080px, calc(100% - 28px));
+  width: min(1180px, 100%);
   margin: 0 auto;
-  padding: clamp(10px, 2svh, 20px) 0 clamp(16px, 3svh, 28px);
-  flex: 1;
+  padding: clamp(8px, 1.5svh, 16px) clamp(8px, 1.4vw, 16px) clamp(8px, 1.8svh, 16px);
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(10px, 2svh, 18px);
+  gap: clamp(8px, 1.4svh, 14px);
 }
 
 .formula-title-bar {
   padding: 0;
-  margin-bottom: 4px;
+  margin-bottom: 0;
+  flex: 0 0 auto;
 }
 
 .formula-slider {
+  position: relative;
   width: 100%;
+  flex: 1 1 auto;
   min-height: 0;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: clamp(10px, 2vw, 18px);
-}
-
-.formula-frame {
-  min-width: 0;
-  height: min(64svh, 700px);
-  padding: clamp(8px, 1.3vw, 14px);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid rgba(46, 125, 50, 0.24);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.84);
-  box-shadow: 0 14px 36px rgba(18, 38, 28, 0.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+}
+
+.formula-frame {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .formula-slide {
   max-width: 100%;
   max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   display: block;
   object-fit: contain;
   border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 8px 24px rgba(18, 38, 28, 0.18);
+  background: transparent;
+  filter: drop-shadow(0 8px 18px rgba(18, 38, 28, 0.18));
 }
 
 .formula-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
   width: clamp(42px, 4.8vw, 58px);
   height: clamp(42px, 4.8vw, 58px);
   border: 2px solid rgba(46, 125, 50, 0.32);
@@ -2647,25 +2649,30 @@ body.formula-page .page {
   line-height: 1;
   cursor: pointer;
   box-shadow: 0 8px 22px rgba(18, 38, 28, 0.16);
+  transform: translateY(-50%);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .formula-arrow:hover,
 .formula-arrow:focus-visible {
-  transform: translateY(-2px);
+  transform: translateY(-50%) scale(1.04);
   box-shadow: 0 12px 28px rgba(18, 38, 28, 0.22);
   outline: none;
 }
 
-.formula-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(10px, 2vw, 18px);
-  flex-wrap: wrap;
+#formula-prev {
+  left: clamp(4px, 1.2vw, 16px);
+}
+
+#formula-next {
+  right: clamp(4px, 1.2vw, 16px);
 }
 
 .formula-counter {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(6px, 1.4svh, 16px);
+  z-index: 4;
   min-width: 70px;
   padding: 8px 14px;
   border-radius: 999px;
@@ -2675,58 +2682,19 @@ body.formula-page .page {
   font-weight: 900;
   text-align: center;
   box-shadow: 0 6px 16px rgba(18, 38, 28, 0.12);
-}
-
-.formula-thumbs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.formula-thumb {
-  width: 46px;
-  height: 62px;
-  padding: 3px;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: 0 5px 14px rgba(18, 38, 28, 0.12);
-  transition: transform 0.18s ease, border-color 0.18s ease;
-}
-
-.formula-thumb img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  border-radius: 7px;
-}
-
-.formula-thumb.active,
-.formula-thumb:hover,
-.formula-thumb:focus-visible {
-  border-color: #ff9500;
-  transform: translateY(-2px);
-  outline: none;
+  transform: translateX(-50%);
 }
 
 @media (max-width: 768px) {
   .formula-wrapper {
-    width: min(calc(100% - 18px), 720px);
-  }
-
-  .formula-frame {
-    height: min(60svh, 560px);
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
   .formula-wrapper {
-    gap: 7px;
-    padding: 12px 0 16px;
+    gap: 8px;
+    padding: 10px 6px 8px;
   }
 
   .formula-page .lp-title-pill {
@@ -2735,25 +2703,19 @@ body.formula-page .page {
   }
 
   .formula-title-bar {
-    margin-bottom: 8px;
+    margin-bottom: 0;
   }
 
   .formula-slider {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "frame frame"
-      "prev next";
-    gap: 8px 12px;
-    justify-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .formula-frame {
-    grid-area: frame;
-    width: min(100%, 310px);
-    height: clamp(290px, 42svh, 360px);
-    padding: 7px;
-    border-radius: 14px;
+    width: 100%;
+    height: 100%;
+    padding: 0;
   }
 
   .formula-slide {
@@ -2761,21 +2723,13 @@ body.formula-page .page {
   }
 
   .formula-arrow {
-    position: static;
-    width: 38px;
-    height: 38px;
+    position: absolute;
+    top: auto;
+    bottom: 4px;
+    width: 40px;
+    height: 40px;
     font-size: 2rem;
     transform: none;
-  }
-
-  #formula-prev {
-    grid-area: prev;
-    justify-self: end;
-  }
-
-  #formula-next {
-    grid-area: next;
-    justify-self: start;
   }
 
   .formula-arrow:hover,
@@ -2783,14 +2737,19 @@ body.formula-page .page {
     transform: scale(1.04);
   }
 
-  .formula-counter {
-    padding: 6px 12px;
-    font-size: 0.78rem;
+  #formula-prev {
+    left: calc(50% - 89px);
   }
 
-  .formula-thumb {
-    width: 38px;
-    height: 52px;
+  #formula-next {
+    right: auto;
+    left: calc(50% + 49px);
+  }
+
+  .formula-counter {
+    bottom: 4px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
   }
 }
 
