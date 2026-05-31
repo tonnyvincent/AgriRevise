@@ -2602,7 +2602,6 @@ body.formula-page .page {
 }
 
 .formula-slider {
-  position: relative;
   width: 100%;
   flex: 1 1 auto;
   min-height: 0;
@@ -2635,9 +2634,6 @@ body.formula-page .page {
 }
 
 .formula-arrow {
-  position: absolute;
-  top: 50%;
-  z-index: 4;
   width: clamp(42px, 4.8vw, 58px);
   height: clamp(42px, 4.8vw, 58px);
   border: 2px solid rgba(46, 125, 50, 0.32);
@@ -2649,30 +2645,26 @@ body.formula-page .page {
   line-height: 1;
   cursor: pointer;
   box-shadow: 0 8px 22px rgba(18, 38, 28, 0.16);
-  transform: translateY(-50%);
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .formula-arrow:hover,
 .formula-arrow:focus-visible {
-  transform: translateY(-50%) scale(1.04);
+  transform: translateY(-2px) scale(1.04);
   box-shadow: 0 12px 28px rgba(18, 38, 28, 0.22);
   outline: none;
 }
 
-#formula-prev {
-  left: clamp(4px, 1.2vw, 16px);
-}
-
-#formula-next {
-  right: clamp(4px, 1.2vw, 16px);
+.formula-controls {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 2.2vw, 22px);
+  width: 100%;
 }
 
 .formula-counter {
-  position: absolute;
-  left: 50%;
-  bottom: clamp(6px, 1.4svh, 16px);
-  z-index: 4;
   min-width: 70px;
   padding: 8px 14px;
   border-radius: 999px;
@@ -2682,7 +2674,6 @@ body.formula-page .page {
   font-weight: 900;
   text-align: center;
   box-shadow: 0 6px 16px rgba(18, 38, 28, 0.12);
-  transform: translateX(-50%);
 }
 
 @media (max-width: 768px) {
@@ -2723,31 +2714,17 @@ body.formula-page .page {
   }
 
   .formula-arrow {
-    position: absolute;
-    top: auto;
-    bottom: 4px;
     width: 40px;
     height: 40px;
     font-size: 2rem;
-    transform: none;
   }
 
   .formula-arrow:hover,
   .formula-arrow:focus-visible {
-    transform: scale(1.04);
-  }
-
-  #formula-prev {
-    left: calc(50% - 89px);
-  }
-
-  #formula-next {
-    right: auto;
-    left: calc(50% + 49px);
+    transform: translateY(-1px) scale(1.04);
   }
 
   .formula-counter {
-    bottom: 4px;
     padding: 6px 12px;
     font-size: 0.78rem;
   }
