@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ms" class="formula-page-root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formula Pintar Baja - +AgriRevise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="formula-page">
+
+  <div class="page">
+
+    <img src="images/background-latihan-pengukuhan.png" alt="Farm" class="bg-img desktop-bg" />
+    <img src="images/background-latihan-pengukuhan-mobile.png" alt="Farm Mobile" class="bg-img mobile-bg" />
+    <div class="bg-overlay"></div>
+
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <img src="images/agrirevise-logo.png" alt="AgriRevise" class="nav-logo-img" />
+        <span class="nav-logo-text">
+          <span class="logo-agri">+Agri</span><span class="logo-revise">Revise</span>
+        </span>
+      </a>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="manual-penggunaan.html">Manual Penggunaan</a></li>
+          <li><a href="latihan-pengukuhan.html">Latihan Pengukuhan</a></li>
+          <li><a href="papan-prestasi.html">Papan Prestasi</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="index.html" class="nav-cta">Laman Utama</a>
+          <button class="nav-toggle" id="nav-toggle">&#9776;</button>
+
+          <div class="nav-dropdown" id="nav-dropdown">
+            <a href="manual-penggunaan.html">Manual Penggunaan</a>
+            <a href="latihan-pengukuhan.html">Latihan Pengukuhan</a>
+            <a href="papan-prestasi.html">Papan Prestasi</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="formula-wrapper">
+      <div class="lp-title-bar formula-title-bar">
+        <div class="lp-title-pill"><span class="ar-page-icon ar-icon-calculator" aria-hidden="true"><span></span></span>Formula Pintar Baja</div>
+      </div>
+
+      <section class="formula-slider" aria-label="Slideshow Formula Pintar Baja">
+        <button class="formula-arrow" id="formula-prev" type="button" aria-label="Imej sebelumnya">&#8249;</button>
+
+        <div class="formula-frame">
+          <img id="formula-slide" class="formula-slide" src="images/formula-pintar-baja-1.jpeg" alt="Formula Pintar Baja 1" />
+        </div>
+
+        <button class="formula-arrow" id="formula-next" type="button" aria-label="Imej seterusnya">&#8250;</button>
+      </section>
+
+      <div class="formula-controls" aria-label="Kawalan slideshow">
+        <span class="formula-counter" id="formula-counter">1 / 3</span>
+        <div class="formula-thumbs" aria-label="Pilih imej">
+          <button class="formula-thumb active" type="button" data-slide="0" aria-label="Papar imej 1">
+            <img src="images/formula-pintar-baja-1.jpeg" alt="" />
+          </button>
+          <button class="formula-thumb" type="button" data-slide="1" aria-label="Papar imej 2">
+            <img src="images/formula-pintar-baja-2.jpeg" alt="" />
+          </button>
+          <button class="formula-thumb" type="button" data-slide="2" aria-label="Papar imej 3">
+            <img src="images/formula-pintar-baja-3.jpeg" alt="" />
+          </button>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    (() => {
+      const slides = [
+        { src: 'images/formula-pintar-baja-1.jpeg', alt: 'Formula Pintar Baja 1' },
+        { src: 'images/formula-pintar-baja-2.jpeg', alt: 'Formula Pintar Baja 2' },
+        { src: 'images/formula-pintar-baja-3.jpeg', alt: 'Formula Pintar Baja 3' }
+      ];
+
+      const image = document.getElementById('formula-slide');
+      const counter = document.getElementById('formula-counter');
+      const prev = document.getElementById('formula-prev');
+      const next = document.getElementById('formula-next');
+      const thumbs = document.querySelectorAll('.formula-thumb');
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+        image.src = slides[currentSlide].src;
+        image.alt = slides[currentSlide].alt;
+        counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+
+        thumbs.forEach((thumb, thumbIndex) => {
+          thumb.classList.toggle('active', thumbIndex === currentSlide);
+          thumb.setAttribute('aria-current', thumbIndex === currentSlide ? 'true' : 'false');
+        });
+      }
+
+      prev.addEventListener('click', () => showSlide(currentSlide - 1));
+      next.addEventListener('click', () => showSlide(currentSlide + 1));
+
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          showSlide(Number(thumb.dataset.slide));
+        });
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          showSlide(currentSlide - 1);
+        }
+
+        if (event.key === 'ArrowRight') {
+          showSlide(currentSlide + 1);
+        }
+      });
+
+      showSlide(0);
+    })();
+  </script>
+</body>
+</html>
