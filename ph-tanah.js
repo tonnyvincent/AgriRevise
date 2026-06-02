@@ -352,7 +352,7 @@
   }
 
   function initStation2() {
-    const factors = $$('.pht-factor-card');
+    const factors = $$('#pht-factor-grid .pht-factor-card');
 
     factors.forEach((button) => {
       button.addEventListener('click', () => {

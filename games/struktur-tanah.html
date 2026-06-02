@@ -53,9 +53,9 @@
           <div class="st-progress-track">
             <div class="st-progress-fill" id="progress-fill"></div>
           </div>
-          <span class="st-step-label" id="step-label">Fasa 1 / 3</span>
+          <span class="st-step-label" id="step-label">Fasa 1 / 4</span>
         </div>
-        <div class="st-score-pill"><span id="score-display">0</span>/12</div>
+        <div class="st-score-pill"><span id="score-display">0</span>/14</div>
       </div>
 
       <!-- ═══════════════════════════════════════
@@ -214,8 +214,8 @@
       <div class="st-fasa hidden" id="fasa-3">
         <div class="st-fasa-header">
           <div class="st-fasa-badge">Fasa 3</div>
-          <h2 class="st-fasa-title">Simulasi Kesan — Kepentingan Struktur Tanah</h2>
-          <p class="st-fasa-desc">Pilih <strong>3 kepentingan</strong> struktur tanah yang betul untuk pokok tumbuh sihat.</p>
+          <h2 class="st-fasa-title">Pernyataan Benar — Ciri Struktur Tanah Baik</h2>
+          <p class="st-fasa-desc">Pilih <strong>2 pernyataan benar</strong> tentang ciri-ciri struktur tanah yang baik.</p>
         </div>
 
         <div class="st-sim-area">
@@ -226,7 +226,44 @@
           </div>
 
           <!-- Options -->
-          <div class="st-options-grid" id="options-grid">
+          <div class="st-options-grid" id="fasa3-options-grid">
+            <button class="st-option-btn" data-val="lapisan-air" data-correct="true">
+              Lapisan nipis air mengisi liang halus dalam agregat
+            </button>
+            <button class="st-option-btn" data-val="ruang-kecil" data-correct="false">
+              Ruang kecil antara agregat membenarkan resapan gas dan pengaliran air
+            </button>
+            <button class="st-option-btn" data-val="mudah-terhakis" data-correct="false">
+              Mudah terhakis
+            </button>
+            <button class="st-option-btn" data-val="ruang-besar" data-correct="true">
+              Ruang besar antara agregat membenarkan resapan gas dan pengaliran air
+            </button>
+          </div>
+
+          <p class="st-fasa3-hint" id="fasa3-hint"></p>
+        </div>
+
+        <button class="st-next-btn" id="fasa3-submit">Semak Jawapan</button>
+      </div><!-- /#fasa-3 -->
+
+      <!-- ═══════════════════════════════════════
+           FASA 4 — Simulasi Kesan (MCQ Checkboxes)
+      ════════════════════════════════════════════ -->
+      <div class="st-fasa hidden" id="fasa-4">
+        <div class="st-fasa-header">
+          <div class="st-fasa-badge">Fasa 4</div>
+          <h2 class="st-fasa-title">Simulasi Kesan — Kepentingan Struktur Tanah</h2>
+          <p class="st-fasa-desc">Pilih <strong>3 kepentingan</strong> struktur tanah yang betul untuk pokok tumbuh sihat.</p>
+        </div>
+
+        <div class="st-sim-area">
+          <div class="st-plant-display">
+            <div class="st-plant-emoji">🌱</div>
+            <p class="st-plant-status">Pilih jawapan yang betul…</p>
+          </div>
+
+          <div class="st-options-grid" id="fasa4-options-grid">
             <button class="st-option-btn" data-val="pengudaraan" data-correct="true">
               Memperbaiki pengudaraan tanah
             </button>
@@ -241,11 +278,11 @@
             </button>
           </div>
 
-          <p class="st-fasa3-hint" id="fasa3-hint"></p>
+          <p class="st-fasa3-hint" id="fasa4-hint"></p>
         </div>
 
-        <button class="st-next-btn" id="fasa3-submit">Semak Jawapan</button>
-      </div><!-- /#fasa-3 -->
+        <button class="st-next-btn" id="fasa4-submit">Semak Jawapan</button>
+      </div><!-- /#fasa-4 -->
 
       <!-- ═══════════════════════════════════════
            COMPLETE SCREEN
@@ -255,7 +292,7 @@
           <div class="game-completion-icon" aria-hidden="true">🏆</div>
           <h2 class="game-completion-title" id="st-complete-title">Game Selesai</h2>
           <p class="game-completion-message">Anda telah menyelesaikan Struktur Tanah.</p>
-          <div class="game-completion-score">Skor:&nbsp;<span id="final-score-display">0/12</span></div>
+          <div class="game-completion-score">Skor:&nbsp;<span id="final-score-display">0/14</span></div>
           <a href="../pemuliharaan-tanah.html" class="game-completion-home"><span aria-hidden="true">🏠</span> Kembali</a>
         </div>
       </div>

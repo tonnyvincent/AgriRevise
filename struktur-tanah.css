@@ -866,48 +866,58 @@ body {
      FASA 3 SMALLER
   ========================= */
 
-  #fasa-3 .st-fasa {
+  #fasa-3 .st-fasa,
+  #fasa-4 .st-fasa {
     padding: 10px 10px 12px;
   }
 
-  #fasa-3 .st-fasa-title {
+  #fasa-3 .st-fasa-title,
+  #fasa-4 .st-fasa-title {
     font-size: 0.78rem;
     line-height: 1.1;
   }
 
-  #fasa-3 .st-fasa-desc {
+  #fasa-3 .st-fasa-desc,
+  #fasa-4 .st-fasa-desc {
     font-size: 0.62rem;
     line-height: 1.15;
   }
 
-  #fasa-3 .st-fasa-header {
+  #fasa-3 .st-fasa-header,
+  #fasa-4 .st-fasa-header {
     margin-bottom: 8px;
     gap: 2px;
   }
 
-  #fasa-3 .st-sim-area {
+  #fasa-3 .st-sim-area,
+  #fasa-4 .st-sim-area {
     gap: 10px;
   }
 
-  #fasa-3 .st-plant-display {
+  #fasa-3 .st-plant-display,
+  #fasa-4 .st-plant-display {
     padding: 10px 14px;
     border-radius: 16px;
     gap: 4px;
   }
 
-  #fasa-3 .st-plant-emoji {
+  #fasa-3 .st-plant-emoji,
+  #fasa-4 .st-plant-emoji {
     font-size: 2.2rem;
   }
 
-  #fasa-3 .st-plant-status {
+  #fasa-3 .st-plant-status,
+  #fasa-4 .st-plant-status {
     font-size: 0.65rem;
   }
 
-  #fasa-3 .st-options-grid {
+  #fasa-3 .st-options-grid,
+  #fasa-4 .st-options-grid {
     gap: 8px;
   }
 
-  #fasa-3 .st-option-btn {
+  #fasa-3 .st-option-btn,
+  #fasa-4 .st-option-btn {
     font-size: 0.62rem;
     padding: 10px 8px;
     border-radius: 12px;
@@ -916,17 +926,20 @@ body {
     min-height: 72px;
   }
 
-  #fasa-3 .st-option-icon {
+  #fasa-3 .st-option-icon,
+  #fasa-4 .st-option-icon {
     font-size: 0.9rem;
   }
 
-  #fasa-3 .st-next-btn {
+  #fasa-3 .st-next-btn,
+  #fasa-4 .st-next-btn {
     margin-top: 8px;
     font-size: 0.72rem;
     padding: 8px 18px;
   }
 
-  #fasa-3 .st-fasa3-hint {
+  #fasa-3 .st-fasa3-hint,
+  #fasa-4 .st-fasa3-hint {
     font-size: 0.6rem;
   }
 }

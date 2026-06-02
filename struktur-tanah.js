@@ -8,8 +8,8 @@ let currentFasa = 1;
 let lives = null;
 
 // ── Phase tracking ──
-const TOTAL_FASA = 3;
-const TOTAL_QUESTIONS = 12;
+const TOTAL_FASA = 4;
+const TOTAL_QUESTIONS = 14;
 const POINTS = {
   fasa1PerDrop : 10,   // per correct drop in fasa 1
   fasa2PerDrop : 15,   // per correct drop in fasa 2
@@ -333,43 +333,60 @@ showFasaResultModal(2, correct, FASA2_TOTAL, () => {
 // =============================================
 
 let fasa3Selected = new Set();
-const FASA3_CORRECT = new Set(['pengudaraan', 'kepadatan', 'pegangan']);
-const REQUIRED_SELECTIONS = FASA3_CORRECT.size;
+let fasa4Selected = new Set();
+const FASA3_CORRECT = new Set(['lapisan-air', 'ruang-besar']);
+const FASA4_CORRECT = new Set(['pengudaraan', 'kepadatan', 'pegangan']);
+const FASA3_REQUIRED_SELECTIONS = FASA3_CORRECT.size;
+const FASA4_REQUIRED_SELECTIONS = FASA4_CORRECT.size;
 
 function initFasa3() {
   configureFasa3Content();
-  fasa3Selected.clear();
-  $('fasa3-hint').textContent = '';
-  setPlant('neutral');
+  setupOptionPhase(3, fasa3Selected, FASA3_REQUIRED_SELECTIONS);
+  $('fasa3-submit').onclick = handleFasa3Submit;
+}
 
-  $$('#fasa-3 .st-option-btn').forEach(btn => {
+function initFasa4() {
+  configureFasa4Content();
+  setupOptionPhase(4, fasa4Selected, FASA4_REQUIRED_SELECTIONS);
+  $('fasa4-submit').onclick = handleFasa4Submit;
+}
+
+function setupOptionPhase(fasa, selectedSet, requiredSelections) {
+  const hint = $(`fasa${fasa}-hint`);
+  selectedSet.clear();
+  if (hint) hint.textContent = '';
+  setPlant(fasa, 'neutral');
+
+  $$(`#fasa-${fasa} .st-option-btn`).forEach(btn => {
     btn.disabled = false;
     btn.classList.remove('selected', 'correct-reveal', 'wrong-reveal');
 
-    btn.addEventListener('click', () => {
+    btn.onclick = () => {
       const val = btn.dataset.val;
 
       if (btn.classList.contains('selected')) {
         btn.classList.remove('selected');
-        fasa3Selected.delete(val);
+        selectedSet.delete(val);
       } else {
         btn.classList.add('selected');
-        fasa3Selected.add(val);
+        selectedSet.add(val);
       }
 
-      setPlant('neutral');
-      $('fasa3-hint').textContent = fasa3Selected.size
-        ? `${fasa3Selected.size}/${REQUIRED_SELECTIONS} pilihan dibuat. Tekan Semak Jawapan untuk menilai.`
-        : '';
-    });
+      setPlant(fasa, 'neutral');
+      if (hint) {
+        hint.textContent = selectedSet.size
+          ? `${selectedSet.size}/${requiredSelections} pilihan dibuat. Tekan Semak Jawapan untuk menilai.`
+          : '';
+      }
+    };
   });
-
-  $('fasa3-submit').addEventListener('click', handleFasa3Submit);
 }
 
-function setPlant(state) {
-  const emoji  = $('plant-emoji');
-  const status = $('plant-status');
+function setPlant(fasa, state) {
+  const root = $(`fasa-${fasa}`);
+  const emoji  = root?.querySelector('.st-plant-emoji');
+  const status = root?.querySelector('.st-plant-status');
+  if (!emoji || !status) return;
 
   const states = {
     neutral : { e: '🌱', s: 'Pilih jawapan yang betul…' },
@@ -403,7 +420,32 @@ function setFasaNotice(fasa, message) {
 function configureFasa3Content() {
   const title = document.querySelector('#fasa-3 .st-fasa-title');
   const desc = document.querySelector('#fasa-3 .st-fasa-desc');
-  const grid = $('options-grid');
+  const grid = $('fasa3-options-grid');
+
+  if (title) title.textContent = 'Pernyataan Benar - Ciri Struktur Tanah Baik';
+  if (desc) desc.innerHTML = 'Pilih <strong>2 pernyataan benar</strong> tentang ciri-ciri struktur tanah yang baik.';
+  if (!grid) return;
+
+  grid.innerHTML = `
+    <button class="st-option-btn" data-val="lapisan-air" data-correct="true">
+      Lapisan nipis air mengisi liang halus dalam agregat
+    </button>
+    <button class="st-option-btn" data-val="ruang-kecil" data-correct="false">
+      Ruang kecil antara agregat membenarkan resapan gas dan pengaliran air
+    </button>
+    <button class="st-option-btn" data-val="mudah-terhakis" data-correct="false">
+      Mudah terhakis
+    </button>
+    <button class="st-option-btn" data-val="ruang-besar" data-correct="true">
+      Ruang besar antara agregat membenarkan resapan gas dan pengaliran air
+    </button>
+  `;
+}
+
+function configureFasa4Content() {
+  const title = document.querySelector('#fasa-4 .st-fasa-title');
+  const desc = document.querySelector('#fasa-4 .st-fasa-desc');
+  const grid = $('fasa4-options-grid');
 
   if (title) title.textContent = 'Simulasi Kesan - Kepentingan Struktur Tanah';
   if (desc) desc.innerHTML = 'Pilih <strong>3 kepentingan</strong> struktur tanah yang betul untuk pokok tumbuh sihat.';
@@ -426,19 +468,46 @@ function configureFasa3Content() {
 }
 
 function handleFasa3Submit() {
-  if (fasa3Selected.size !== REQUIRED_SELECTIONS) {
-    $('fasa3-hint').textContent = `Pilih tepat ${REQUIRED_SELECTIONS} jawapan.`;
+  checkOptionPhase({
+    fasa: 3,
+    selectedSet: fasa3Selected,
+    correctAnswers: FASA3_CORRECT,
+    requiredSelections: FASA3_REQUIRED_SELECTIONS,
+    nextAction: () => {
+      showFasa(4);
+      initFasa4();
+    },
+  });
+}
+
+function handleFasa4Submit() {
+  checkOptionPhase({
+    fasa: 4,
+    selectedSet: fasa4Selected,
+    correctAnswers: FASA4_CORRECT,
+    requiredSelections: FASA4_REQUIRED_SELECTIONS,
+    nextAction: finishGame,
+    buttonText: 'Makmal Selesai',
+  });
+}
+
+function checkOptionPhase({ fasa, selectedSet, correctAnswers, requiredSelections, nextAction, buttonText = 'Seterusnya' }) {
+  const hint = $(`fasa${fasa}-hint`);
+  const submitBtn = $(`fasa${fasa}-submit`);
+
+  if (selectedSet.size !== requiredSelections) {
+    if (hint) hint.textContent = `Pilih tepat ${requiredSelections} jawapan.`;
     return;
   }
 
   let correctCount = 0;
   let wrongCount   = 0;
 
-  $$('#fasa-3 .st-option-btn').forEach(btn => {
+  $$(`#fasa-${fasa} .st-option-btn`).forEach(btn => {
     btn.disabled = true;
     const val       = btn.dataset.val;
-    const isCorrect = FASA3_CORRECT.has(val);
-    const wasSelected = fasa3Selected.has(val);
+    const isCorrect = correctAnswers.has(val);
+    const wasSelected = selectedSet.has(val);
 
     if (wasSelected && isCorrect)  { btn.classList.add('correct-reveal'); correctCount++; }
     if (wasSelected && !isCorrect) { btn.classList.add('wrong-reveal');   wrongCount++;   }
@@ -448,7 +517,7 @@ function handleFasa3Submit() {
   totalScore += correctCount;
   updateScoreDisplay();
 
-  const missedCount = Math.max(0, REQUIRED_SELECTIONS - correctCount);
+  const missedCount = Math.max(0, requiredSelections - correctCount);
   const mistakeCount = wrongCount + missedCount;
   if (mistakeCount > 0) {
     window.AgriReviseGame?.playSound('wrong');
@@ -458,19 +527,19 @@ function handleFasa3Submit() {
     window.AgriReviseGame?.playSound('correct');
   }
 
-  if (wrongCount === 0 && correctCount === REQUIRED_SELECTIONS) {
-    setPlant('great');
+  if (wrongCount === 0 && correctCount === requiredSelections) {
+    setPlant(fasa, 'great');
   } else if (wrongCount > 0) {
-    setPlant('sad');
-    $('fasa3-hint').textContent = `${correctCount} betul, ${wrongCount} salah.`;
+    setPlant(fasa, 'sad');
+    if (hint) hint.textContent = `${correctCount} betul, ${wrongCount} salah.`;
   } else {
-    setPlant('happy');
+    setPlant(fasa, 'happy');
   }
 
-  $('fasa3-submit').textContent = 'Selesai';
-  $('fasa3-submit').disabled = true;
+  submitBtn.textContent = 'Selesai';
+  submitBtn.disabled = true;
 
-  showFasaResultModal(3, correctCount, REQUIRED_SELECTIONS, finishGame, 'Makmal Selesai');
+  showFasaResultModal(fasa, correctCount, requiredSelections, nextAction, buttonText);
 }
 
 // =============================================
@@ -541,15 +610,23 @@ function restartGame() {
   });
   $('fasa2-next').disabled = true;
 
-  // Reset fasa 3
+  // Reset fasa 3 and 4
   fasa3Selected.clear();
-  $$('#fasa-3 .st-option-btn').forEach(btn => {
-    btn.disabled = false;
-    btn.classList.remove('selected', 'correct-reveal', 'wrong-reveal');
+  fasa4Selected.clear();
+  [3, 4].forEach(fasa => {
+    $$(`#fasa-${fasa} .st-option-btn`).forEach(btn => {
+      btn.disabled = false;
+      btn.classList.remove('selected', 'correct-reveal', 'wrong-reveal');
+    });
+    const submitBtn = $(`fasa${fasa}-submit`);
+    const hint = $(`fasa${fasa}-hint`);
+    if (submitBtn) {
+      submitBtn.textContent = 'Semak Jawapan';
+      submitBtn.disabled = false;
+    }
+    if (hint) hint.textContent = '';
+    setPlant(fasa, 'neutral');
   });
-  $('fasa3-submit').textContent = 'Semak Jawapan';
-  $('fasa3-hint').textContent = '';
-  setPlant('neutral');
 
   setProgress(1);
   showFasa(1);
