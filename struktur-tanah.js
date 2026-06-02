@@ -9,7 +9,7 @@ let lives = null;
 
 // ── Phase tracking ──
 const TOTAL_FASA = 3;
-const TOTAL_QUESTIONS = 11;
+const TOTAL_QUESTIONS = 12;
 const POINTS = {
   fasa1PerDrop : 10,   // per correct drop in fasa 1
   fasa2PerDrop : 15,   // per correct drop in fasa 2
@@ -333,8 +333,8 @@ showFasaResultModal(2, correct, FASA2_TOTAL, () => {
 // =============================================
 
 let fasa3Selected = new Set();
-const FASA3_CORRECT = new Set(['lapisan-air', 'ruang-besar']);
-const REQUIRED_SELECTIONS = 2;
+const FASA3_CORRECT = new Set(['pengudaraan', 'kepadatan', 'pegangan']);
+const REQUIRED_SELECTIONS = FASA3_CORRECT.size;
 
 function initFasa3() {
   configureFasa3Content();
@@ -405,28 +405,28 @@ function configureFasa3Content() {
   const desc = document.querySelector('#fasa-3 .st-fasa-desc');
   const grid = $('options-grid');
 
-  if (title) title.textContent = 'Pernyataan Benar - Ciri Struktur Tanah Baik';
-  if (desc) desc.innerHTML = 'Pilih <strong>2 pernyataan benar</strong> tentang ciri-ciri struktur tanah yang baik.';
+  if (title) title.textContent = 'Simulasi Kesan - Kepentingan Struktur Tanah';
+  if (desc) desc.innerHTML = 'Pilih <strong>3 kepentingan</strong> struktur tanah yang betul untuk pokok tumbuh sihat.';
   if (!grid) return;
 
   grid.innerHTML = `
-    <button class="st-option-btn" data-val="lapisan-air" data-correct="true">
-      Lapisan nipis air mengisi liang halus dalam agregat
+    <button class="st-option-btn" data-val="pengudaraan" data-correct="true">
+      Memperbaiki pengudaraan tanah
     </button>
-    <button class="st-option-btn" data-val="ruang-kecil" data-correct="false">
-      Ruang kecil antara agregat membenarkan resapan gas dan pengaliran air
+    <button class="st-option-btn" data-val="kepadatan" data-correct="true">
+      Mencegah kepadatan tanah
     </button>
-    <button class="st-option-btn" data-val="mudah-terhakis" data-correct="false">
-      Mudah terhakis
+    <button class="st-option-btn" data-val="penyaliran" data-correct="false">
+      Menghalang penyaliran air
     </button>
-    <button class="st-option-btn" data-val="ruang-besar" data-correct="true">
-      Ruang besar antara agregat membenarkan resapan gas dan pengaliran air
+    <button class="st-option-btn" data-val="pegangan" data-correct="true">
+      Mengekalkan daya pegangan air tanah
     </button>
   `;
 }
 
 function handleFasa3Submit() {
-  if (fasa3Selected.size < REQUIRED_SELECTIONS) {
+  if (fasa3Selected.size !== REQUIRED_SELECTIONS) {
     $('fasa3-hint').textContent = `Pilih tepat ${REQUIRED_SELECTIONS} jawapan.`;
     return;
   }
@@ -437,7 +437,7 @@ function handleFasa3Submit() {
   $$('#fasa-3 .st-option-btn').forEach(btn => {
     btn.disabled = true;
     const val       = btn.dataset.val;
-    const isCorrect = btn.dataset.correct === 'true';
+    const isCorrect = FASA3_CORRECT.has(val);
     const wasSelected = fasa3Selected.has(val);
 
     if (wasSelected && isCorrect)  { btn.classList.add('correct-reveal'); correctCount++; }
